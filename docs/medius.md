@@ -46,29 +46,31 @@ All Medius products benefit from centralized expertise:
 
 ## **Portfolio**
 
-### **1. Smart School Meals Platform** *(In Development)*
+### **1. School Meal Delivery Platform** *(In Development)*
 
-A mobile platform modernizing meal ordering and delivery for schools in Egypt.
+A mobile platform for school meal ordering in **Egypt**. Each school is linked to exactly one assigned supplier—no marketplace, no complexity.
 
 **The Problem**
-School meal logistics are fragmented—parents lack visibility, schools juggle coordination, and suppliers operate inefficiently.
+- Parents lack time to prep healthy meals; kids resort to junk food
+- Schools have no visibility on what students eat
+- Suppliers can't predict daily demand
 
 **The Solution**
-A unified platform connecting **parents**, **schools**, and **suppliers** with a simple model: each school partners with one dedicated supplier.
+- Parents order from their school's designated supplier
+- Supplier prepares meals in batch and delivers to the school
+- School distributes to students and confirms delivery
+- Payment is released only after confirmation
 
-**How It Works**
-- Parents browse menus, place same-day orders, and track fulfillment
-- Schools monitor incoming orders and coordinate delivery
-- Suppliers receive real-time requests and deliver directly to schools
+**The Flow**
+1. Parent orders before morning cutoff
+2. Supplier receives aggregated orders, prepares, delivers to school
+3. Floor admin distributes and confirms delivery
+4. Payment auto-released to supplier
 
-**Why This Model**
-- Consistent food quality
-- Predictable delivery flows
-- Simplified operations
-- Trustworthy experience for parents
-
-**Market**
-Initial launch targets the **Egyptian school ecosystem**, where demand for convenience, safety, and reliable meal quality is growing.
+**Why It Works**
+- **Parents**: Trusted menu, reliable process, no vendor confusion
+- **Schools**: One supplier, commission revenue, quality control
+- **Suppliers**: Predictable demand, batch efficiency, exclusive relationship
 
 ---
 
