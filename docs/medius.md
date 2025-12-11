@@ -1,37 +1,83 @@
+# **Medius**
 
-## **Medius — Digital products, built to scale.**
+## **Digital products, built to scale.**
 
-Medius is a technology company dedicated to designing, building, and managing high-impact software solutions that help organizations operate smarter and scale faster. We combine product thinking, modern engineering, and a deep focus on usability to deliver digital platforms that are reliable, intuitive, and built for long-term growth.
-
-Our mission is simple: **enable businesses to unlock efficiency and create seamless digital experiences.** From concept to continuous improvement, Medius serves as a full-stack partner—turning ideas into scalable products that make a measurable difference.
-
----
-
-## **Our First Product: Smart School Meals Platform**
-
-Medius is currently developing its first flagship product: a mobile platform that modernizes meal ordering and delivery for schools across Egypt.
-
-### **Product Overview**
-
-The platform connects three key stakeholders—**parents**, **schools**, and the school’s **assigned food supplier**—to streamline the daily process of selecting, ordering, preparing, and delivering meals to students.
-
-Unlike open marketplaces that introduce complexity and logistical uncertainty, each school on our platform is partnered with **one dedicated supplier**. This ensures:
-
-* **Consistent food quality**
-* **Predictable, controlled delivery flows**
-* **Simplified operations for schools and vendors**
-* **A trustworthy, hassle-free ordering experience for parents**
-
-### **How It Works**
-
-* Parents browse menus, place same-day orders, and track fulfillment directly from their mobile app.
-* Schools monitor incoming orders and coordinate with their assigned supplier.
-* Suppliers receive real-time requests, prepare meals, and deliver directly inside the school.
-
-The result is a reliable ecosystem where every stakeholder benefits from clarity, efficiency, and convenience.
+Medius is a product lab that builds, operates, and scales software companies. We identify high-impact opportunities, develop purpose-built platforms, and grow them into standalone businesses.
 
 ---
 
-### **Market Focus**
+## **Mission**
 
-Our initial launch targets the **Egyptian school ecosystem**, where rising demand for convenience, safety, and reliable meal quality presents a strong opportunity for digital transformation. With schools increasingly looking to modernize operations, Medius provides the infrastructure to streamline one of the most essential daily services: student meals.
+Enable organizations to operate smarter through technology—by creating digital products that solve real operational problems at scale.
+
+---
+
+## **What We Do**
+
+Medius operates as a **parent company** for a portfolio of software products. Each product is:
+
+- **Wholly owned** by Medius
+- **Independently operated** with dedicated teams
+- **Built on shared infrastructure** for engineering, design, and operations
+
+We don't build for clients. We build products we own and operate.
+
+---
+
+## **Our Approach**
+
+1. **Identify** — Find sectors with operational inefficiencies and underserved digital needs
+2. **Build** — Develop focused platforms that solve specific problems well
+3. **Scale** — Grow products through disciplined execution and reinvestment
+4. **Operate** — Run products as long-term businesses, not flip-and-exit ventures
+
+---
+
+## **Shared Capabilities**
+
+All Medius products benefit from centralized expertise:
+
+- **Product & Design** — User research, UX/UI, product strategy
+- **Engineering** — Shared technical standards, infrastructure, and tooling
+- **Operations** — Finance, legal, HR, compliance
+- **Growth** — Go-to-market strategy, partnerships, expansion playbooks
+
+---
+
+## **Portfolio**
+
+### **1. Smart School Meals Platform** *(In Development)*
+
+A mobile platform modernizing meal ordering and delivery for schools in Egypt.
+
+**The Problem**
+School meal logistics are fragmented—parents lack visibility, schools juggle coordination, and suppliers operate inefficiently.
+
+**The Solution**
+A unified platform connecting **parents**, **schools**, and **suppliers** with a simple model: each school partners with one dedicated supplier.
+
+**How It Works**
+- Parents browse menus, place same-day orders, and track fulfillment
+- Schools monitor incoming orders and coordinate delivery
+- Suppliers receive real-time requests and deliver directly to schools
+
+**Why This Model**
+- Consistent food quality
+- Predictable delivery flows
+- Simplified operations
+- Trustworthy experience for parents
+
+**Market**
+Initial launch targets the **Egyptian school ecosystem**, where demand for convenience, safety, and reliable meal quality is growing.
+
+---
+
+## **What's Next**
+
+*[Pipeline and future product areas to be defined]*
+
+---
+
+## **Company Details**
+
+*[To be added: Founding team, location, funding status, contact information]*
