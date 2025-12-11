@@ -38,7 +38,7 @@ export default function Home() {
             {[
               { value: "1", label: "Active Product" },
               { value: "Egypt", label: "Target Market" },
-              { value: "2024", label: "Founded" },
+              { value: "2025", label: "Founded" },
               { value: "B2B2C", label: "Business Model" },
             ].map((stat) => (
               <div key={stat.label}>
