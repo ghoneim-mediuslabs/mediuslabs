@@ -34,7 +34,7 @@ export default function PortfolioPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
+      <section className="mx-auto max-w-6xl px-6 py-16">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
           Portfolio
         </h1>
@@ -46,8 +46,8 @@ export default function PortfolioPage() {
 
       {/* Products Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <div className="space-y-16">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <div className="space-y-10">
             {products.map((product) => (
               <div key={product.name} className="border border-border rounded-lg p-8">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -126,7 +126,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* Coming Soon */}
-          <div className="mt-16 pt-16 border-t border-border">
+          <div className="mt-10 pt-10 border-t border-border">
             <h2 className="text-xl font-semibold text-muted">Coming Soon</h2>
             <p className="mt-2 text-sm text-muted">
               More products in the pipeline. Stay tuned.

@@ -37,7 +37,7 @@ export default function ContactPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
+      <section className="mx-auto max-w-6xl px-6 py-16">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
           Contact Us
         </h1>
@@ -49,8 +49,8 @@ export default function ContactPage() {
 
       {/* Contact Form Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
-          <div className="grid md:grid-cols-2 gap-16">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <div className="grid md:grid-cols-2 gap-12">
             {/* Form */}
             <div>
               <h2 className="text-2xl font-semibold">Send a Message</h2>
