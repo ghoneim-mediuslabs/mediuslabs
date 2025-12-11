@@ -10,7 +10,7 @@ export default function Home() {
         <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-32 md:py-40">
+        <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-24">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
             Building the future of digital products
@@ -34,7 +34,7 @@ export default function Home() {
           </div>
 
           {/* Stats */}
-          <div className="mt-20 pt-12 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="mt-12 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { value: "1", label: "Active Product" },
               { value: "Egypt", label: "Target Market" },
@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* What We Do Section */}
       <section className="bg-foreground/[0.02]">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-semibold">How We Work</h2>
             <p className="mt-6 text-lg text-muted">
@@ -127,7 +127,7 @@ export default function Home() {
 
       {/* Capabilities Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-semibold">
@@ -179,7 +179,7 @@ export default function Home() {
 
       {/* Portfolio Preview Section */}
       <section className="bg-foreground/[0.02]">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <div>
               <h2 className="text-3xl md:text-4xl font-semibold">Our Portfolio</h2>
@@ -239,7 +239,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/20 rounded-full blur-3xl" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32 text-center">
+        <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold max-w-2xl mx-auto">
             Ready to build something great together?
           </h2>

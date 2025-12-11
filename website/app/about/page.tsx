@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight max-w-2xl">
           We build products that matter
         </h1>
@@ -24,7 +24,7 @@ export default function AboutPage() {
 
       {/* Mission Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="mx-auto max-w-6xl px-6 py-12">
           <div className="grid md:grid-cols-2 gap-12">
             <h2 className="text-2xl font-semibold">Our Mission</h2>
             <p className="text-lg text-muted">
@@ -38,13 +38,13 @@ export default function AboutPage() {
 
       {/* How We Work Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="mx-auto max-w-6xl px-6 py-12">
           <h2 className="text-2xl font-semibold">How We Work</h2>
           <p className="mt-4 text-muted max-w-xl">
             We operate as a parent company for a portfolio of software products.
           </p>
 
-          <div className="mt-12 grid md:grid-cols-3 gap-8">
+          <div className="mt-8 grid md:grid-cols-3 gap-8">
             {[
               {
                 title: "Wholly Owned",
@@ -70,10 +70,10 @@ export default function AboutPage() {
 
       {/* Process Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="mx-auto max-w-6xl px-6 py-12">
           <h2 className="text-2xl font-semibold">Our Process</h2>
 
-          <div className="mt-12 grid md:grid-cols-4 gap-8">
+          <div className="mt-8 grid md:grid-cols-4 gap-8">
             {[
               { step: "01", title: "Identify", description: "Find sectors with operational inefficiencies" },
               { step: "02", title: "Build", description: "Develop focused platforms that solve problems well" },
@@ -92,7 +92,7 @@ export default function AboutPage() {
 
       {/* CTA Section */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-24">
+        <div className="mx-auto max-w-6xl px-6 py-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <h2 className="text-2xl font-semibold">Want to learn more?</h2>
