@@ -176,10 +176,10 @@ export default function ContactPage() {
                   </h3>
                   <p className="mt-2">
                     <a
-                      href="mailto:hello@medius.io"
+                      href="mailto:hello@mediuslabs.io"
                       className="hover:underline"
                     >
-                      hello@medius.io
+                      hello@mediuslabs.io
                     </a>
                   </p>
                 </div>
