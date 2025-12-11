@@ -22,7 +22,7 @@ export default function AboutPage() {
         </p>
       </section>
 
-      {/* Mission Section */}
+      {/* Mission & Vision Section */}
       <section className="border-t border-border">
         <div className="mx-auto max-w-6xl px-6 py-12">
           <div className="grid md:grid-cols-2 gap-12">
@@ -31,6 +31,12 @@ export default function AboutPage() {
               Enable organizations to operate smarter through technology—by
               creating digital products that solve real operational problems at
               scale.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12 mt-12 pt-12 border-t border-border">
+            <h2 className="text-2xl font-semibold">Our Vision</h2>
+            <p className="text-lg text-muted">
+              To be the company behind the products that transform industries.
             </p>
           </div>
         </div>
