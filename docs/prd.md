@@ -4,6 +4,8 @@
 
 A marketing website for Medius that communicates who we are, what we build, and establishes credibility as a product lab.
 
+**Tagline**: Digital products, built to scale.
+
 ---
 
 ## Goals
