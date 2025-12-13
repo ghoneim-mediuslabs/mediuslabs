@@ -1,46 +1,43 @@
 import { Metadata } from "next";
-import ProductCard from "@/components/ProductCard";
+import { getTranslations, type Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "Explore the products built and operated by Medius.",
 };
 
-const products = [
-  {
-    name: "School Meal Delivery Platform",
-    description:
-      "A mobile platform for school meal ordering in Egypt. Each school is linked to exactly one assigned supplier—no marketplace, no complexity. Parents order, suppliers prepare in batch, schools distribute and confirm delivery.",
-    status: "In Development" as const,
-    details: {
-      problem: [
-        "Parents lack time to prep healthy meals; kids resort to junk food",
-        "Schools have no visibility on what students eat",
-        "Suppliers can't predict daily demand",
-      ],
-      solution: [
-        "Parents order from their school's designated supplier",
-        "Supplier prepares meals in batch and delivers to the school",
-        "School distributes to students and confirms delivery",
-        "Payment is released only after confirmation",
-      ],
-      stakeholders: ["Parents", "Schools", "Suppliers", "Floor Admins"],
-      market: "Egypt",
-    },
-  },
-];
+export default async function PortfolioPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = getTranslations(locale as Locale);
 
-export default function PortfolioPage() {
+  const products = [
+    {
+      name: t.portfolio.schoolMeal.name,
+      description: t.portfolio.schoolMeal.description,
+      status: "In Development" as const,
+      statusLabel: t.portfolio.status.inDevelopment,
+      details: {
+        problem: t.portfolio.schoolMeal.problem,
+        solution: t.portfolio.schoolMeal.solution,
+        stakeholders: t.portfolio.schoolMeal.stakeholdersList,
+        market: t.portfolio.schoolMeal.marketValue,
+      },
+    },
+  ];
+
   return (
     <div>
       {/* Hero Section */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-          Portfolio
+          {t.portfolio.title}
         </h1>
         <p className="mt-6 text-lg text-muted max-w-2xl">
-          Products built and operated by Medius. Each product is wholly owned,
-          independently operated, and built on shared infrastructure.
+          {t.portfolio.subtitle}
         </p>
       </section>
 
@@ -61,7 +58,7 @@ export default function PortfolioPage() {
                         : "bg-blue-100 text-blue-800"
                     }`}
                   >
-                    {product.status}
+                    {product.statusLabel}
                   </span>
                 </div>
 
@@ -70,7 +67,7 @@ export default function PortfolioPage() {
                 <div className="mt-8 grid md:grid-cols-2 gap-8">
                   <div>
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                      The Problem
+                      {t.portfolio.theProblem}
                     </h3>
                     <ul className="mt-3 space-y-2">
                       {product.details.problem.map((item, i) => (
@@ -84,7 +81,7 @@ export default function PortfolioPage() {
 
                   <div>
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                      The Solution
+                      {t.portfolio.theSolution}
                     </h3>
                     <ul className="mt-3 space-y-2">
                       {product.details.solution.map((item, i) => (
@@ -100,7 +97,7 @@ export default function PortfolioPage() {
                 <div className="mt-8 pt-8 border-t border-border flex flex-wrap gap-8">
                   <div>
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                      Stakeholders
+                      {t.portfolio.stakeholders}
                     </h3>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {product.details.stakeholders.map((s) => (
@@ -116,7 +113,7 @@ export default function PortfolioPage() {
 
                   <div>
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                      Market
+                      {t.portfolio.market}
                     </h3>
                     <p className="mt-2 text-sm">{product.details.market}</p>
                   </div>
@@ -127,9 +124,9 @@ export default function PortfolioPage() {
 
           {/* Coming Soon */}
           <div className="mt-10 pt-10 border-t border-border">
-            <h2 className="text-xl font-semibold text-muted">Coming Soon</h2>
+            <h2 className="text-xl font-semibold text-muted">{t.portfolio.comingSoon.title}</h2>
             <p className="mt-2 text-sm text-muted">
-              More products in the pipeline. Stay tuned.
+              {t.portfolio.comingSoon.subtitle}
             </p>
           </div>
         </div>

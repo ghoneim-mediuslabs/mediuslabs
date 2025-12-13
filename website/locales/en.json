@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "title": "Medius — Digital products, built to scale.",
+    "description": "Medius is a product lab that builds, operates, and scales software companies."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "header": {
+    "toggleMenu": "Toggle menu"
+  },
+  "footer": {
+    "tagline": "Digital products, built to scale.",
+    "copyright": "Medius. All rights reserved."
+  },
+  "home": {
+    "badge": "Building the future of digital products",
+    "title": "Digital products,",
+    "titleHighlight": "built to scale.",
+    "subtitle": "Medius is a product lab that builds, operates, and scales software companies. We turn high-impact opportunities into standalone businesses.",
+    "viewPortfolio": "View Portfolio",
+    "getInTouch": "Get in Touch",
+    "stats": {
+      "activeProduct": "Active Product",
+      "targetMarket": "Target Market",
+      "founded": "Founded",
+      "businessModel": "Business Model"
+    },
+    "howWeWork": {
+      "title": "How We Work",
+      "subtitle": "We operate as a parent company for a portfolio of software products. Each product is wholly owned, independently operated, and built on shared infrastructure.",
+      "identify": {
+        "title": "Identify",
+        "description": "Find sectors with operational inefficiencies and underserved digital needs"
+      },
+      "build": {
+        "title": "Build",
+        "description": "Develop focused platforms that solve specific problems well"
+      },
+      "scale": {
+        "title": "Scale",
+        "description": "Grow products through disciplined execution and reinvestment"
+      },
+      "operate": {
+        "title": "Operate",
+        "description": "Run products as long-term businesses, not flip-and-exit ventures"
+      }
+    },
+    "capabilities": {
+      "title": "Shared capabilities across all products",
+      "subtitle": "Every Medius product benefits from centralized expertise in product development, engineering, operations, and growth.",
+      "productDesign": {
+        "title": "Product & Design",
+        "desc": "User research, UX/UI, product strategy"
+      },
+      "engineering": {
+        "title": "Engineering",
+        "desc": "Shared standards, infrastructure, tooling"
+      },
+      "operations": {
+        "title": "Operations",
+        "desc": "Finance, legal, HR, compliance"
+      },
+      "growth": {
+        "title": "Growth",
+        "desc": "Go-to-market, partnerships, expansion"
+      },
+      "cards": {
+        "owned": {
+          "value": "100%",
+          "label": "Owned Products",
+          "sublabel": "No client work"
+        },
+        "focus": {
+          "value": "Long-term",
+          "label": "Focus",
+          "sublabel": "Build to last"
+        },
+        "infrastructure": {
+          "value": "Shared",
+          "label": "Infrastructure",
+          "sublabel": "Efficiency at scale"
+        },
+        "operations": {
+          "value": "Independent",
+          "label": "Operations",
+          "sublabel": "Dedicated teams"
+        }
+      }
+    },
+    "portfolio": {
+      "title": "Our Portfolio",
+      "subtitle": "Products we're building and operating. Each one solves real problems for real people.",
+      "viewAll": "View All Products",
+      "inDevelopment": "In Development",
+      "schoolMeal": {
+        "title": "School Meal Delivery Platform",
+        "description": "A mobile platform for school meal ordering in Egypt. Connecting parents, schools, and suppliers with a streamlined B2B2C model.",
+        "market": "Market",
+        "marketValue": "Egypt",
+        "stakeholders": "Stakeholders",
+        "stakeholdersValue": "Parents, Schools, Suppliers",
+        "model": "Model",
+        "modelValue": "B2B2C with escrow payments"
+      },
+      "learnMore": "Learn More"
+    },
+    "cta": {
+      "title": "Ready to build something great together?",
+      "subtitle": "Whether you're a potential partner, investor, or looking to join our team—we'd love to hear from you.",
+      "contact": "Get in Touch",
+      "about": "Learn About Us"
+    }
+  },
+  "about": {
+    "title": "We build products that matter",
+    "subtitle": "Medius is a product lab that builds, operates, and scales software companies. We don't chase trends—we find inefficiencies and build solutions that last.",
+    "mission": {
+      "title": "Our Mission",
+      "content": "Enable organizations to operate smarter through technology—by creating digital products that solve real operational problems at scale."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "content": "To be the company behind the products that transform industries."
+    },
+    "howWeWork": {
+      "title": "How We Work",
+      "subtitle": "We operate as a parent company for a portfolio of software products.",
+      "whollyOwned": {
+        "title": "Wholly Owned",
+        "description": "We build products we own and operate—no client work."
+      },
+      "independentlyOperated": {
+        "title": "Independently Operated",
+        "description": "Each product has dedicated teams focused on its success."
+      },
+      "sharedInfrastructure": {
+        "title": "Shared Infrastructure",
+        "description": "Centralized engineering, design, and operations."
+      }
+    },
+    "process": {
+      "title": "Our Process",
+      "identify": {
+        "step": "01",
+        "title": "Identify",
+        "description": "Find sectors with operational inefficiencies"
+      },
+      "build": {
+        "step": "02",
+        "title": "Build",
+        "description": "Develop focused platforms that solve problems well"
+      },
+      "scale": {
+        "step": "03",
+        "title": "Scale",
+        "description": "Grow through disciplined execution"
+      },
+      "operate": {
+        "step": "04",
+        "title": "Operate",
+        "description": "Run as long-term businesses"
+      }
+    },
+    "cta": {
+      "title": "Want to learn more?",
+      "subtitle": "Check out our portfolio or get in touch.",
+      "portfolio": "Portfolio",
+      "contact": "Contact"
+    }
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Products built and operated by Medius. Each product is wholly owned, independently operated, and built on shared infrastructure.",
+    "status": {
+      "inDevelopment": "In Development",
+      "live": "Live",
+      "comingSoon": "Coming Soon"
+    },
+    "theProblem": "The Problem",
+    "theSolution": "The Solution",
+    "stakeholders": "Stakeholders",
+    "market": "Market",
+    "comingSoon": {
+      "title": "Coming Soon",
+      "subtitle": "More products in the pipeline. Stay tuned."
+    },
+    "schoolMeal": {
+      "name": "School Meal Delivery Platform",
+      "description": "A mobile platform for school meal ordering in Egypt. Each school is linked to exactly one assigned supplier—no marketplace, no complexity. Parents order, suppliers prepare in batch, schools distribute and confirm delivery.",
+      "problem": [
+        "Parents lack time to prep healthy meals; kids resort to junk food",
+        "Schools have no visibility on what students eat",
+        "Suppliers can't predict daily demand"
+      ],
+      "solution": [
+        "Parents order from their school's designated supplier",
+        "Supplier prepares meals in batch and delivers to the school",
+        "School distributes to students and confirms delivery",
+        "Payment is released only after confirmation"
+      ],
+      "stakeholdersList": ["Parents", "Schools", "Suppliers", "Floor Admins"],
+      "marketValue": "Egypt"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Whether you're a potential partner, investor, or looking to join our team, we'd love to hear from you.",
+    "form": {
+      "title": "Send a Message",
+      "name": "Name",
+      "email": "Email",
+      "reason": "Reason for Contact",
+      "reasonPlaceholder": "Select a reason",
+      "message": "Message",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": {
+        "title": "Message sent successfully!",
+        "subtitle": "We'll get back to you as soon as possible."
+      },
+      "error": "Something went wrong. Please try again."
+    },
+    "reasons": {
+      "partnership": "Partnership Inquiry",
+      "investment": "Investment",
+      "joinTeam": "Join Our Team",
+      "general": "General Question",
+      "other": "Other"
+    },
+    "info": {
+      "title": "Get in Touch",
+      "email": "Email",
+      "location": "Location",
+      "locationValue": "Cairo, Egypt"
+    }
+  }
+}

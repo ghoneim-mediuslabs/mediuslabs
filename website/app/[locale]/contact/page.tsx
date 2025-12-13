@@ -1,16 +1,14 @@
 "use client";
 
 import { useState } from "react";
-
-const reasons = [
-  "Partnership Inquiry",
-  "Investment",
-  "Join Our Team",
-  "General Question",
-  "Other",
-];
+import { useParams } from "next/navigation";
+import { getTranslations, type Locale } from "@/lib/i18n";
 
 export default function ContactPage() {
+  const params = useParams();
+  const locale = params.locale as Locale;
+  const t = getTranslations(locale);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,12 +17,18 @@ export default function ContactPage() {
   });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
+  const reasons = [
+    { value: "partnership", label: t.contact.reasons.partnership },
+    { value: "investment", label: t.contact.reasons.investment },
+    { value: "joinTeam", label: t.contact.reasons.joinTeam },
+    { value: "general", label: t.contact.reasons.general },
+    { value: "other", label: t.contact.reasons.other },
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
 
-    // For now, just simulate a submission
-    // Replace with actual form submission (Formspree, API route, etc.)
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setStatus("success");
@@ -39,11 +43,10 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-          Contact Us
+          {t.contact.title}
         </h1>
         <p className="mt-6 text-lg text-muted max-w-2xl">
-          Whether you&apos;re a potential partner, investor, or looking to join
-          our team, we&apos;d love to hear from you.
+          {t.contact.subtitle}
         </p>
       </section>
 
@@ -53,15 +56,15 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Form */}
             <div>
-              <h2 className="text-2xl font-semibold">Send a Message</h2>
+              <h2 className="text-2xl font-semibold">{t.contact.form.title}</h2>
 
               {status === "success" ? (
                 <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
                   <p className="text-green-800 font-medium">
-                    Message sent successfully!
+                    {t.contact.form.success.title}
                   </p>
                   <p className="mt-2 text-sm text-green-700">
-                    We&apos;ll get back to you as soon as possible.
+                    {t.contact.form.success.subtitle}
                   </p>
                 </div>
               ) : (
@@ -71,7 +74,7 @@ export default function ContactPage() {
                       htmlFor="name"
                       className="block text-sm font-medium mb-2"
                     >
-                      Name
+                      {t.contact.form.name}
                     </label>
                     <input
                       type="text"
@@ -90,7 +93,7 @@ export default function ContactPage() {
                       htmlFor="email"
                       className="block text-sm font-medium mb-2"
                     >
-                      Email
+                      {t.contact.form.email}
                     </label>
                     <input
                       type="email"
@@ -109,7 +112,7 @@ export default function ContactPage() {
                       htmlFor="reason"
                       className="block text-sm font-medium mb-2"
                     >
-                      Reason for Contact
+                      {t.contact.form.reason}
                     </label>
                     <select
                       id="reason"
@@ -120,10 +123,10 @@ export default function ContactPage() {
                       }
                       className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground/20 bg-background"
                     >
-                      <option value="">Select a reason</option>
+                      <option value="">{t.contact.form.reasonPlaceholder}</option>
                       {reasons.map((reason) => (
-                        <option key={reason} value={reason}>
-                          {reason}
+                        <option key={reason.value} value={reason.value}>
+                          {reason.label}
                         </option>
                       ))}
                     </select>
@@ -134,7 +137,7 @@ export default function ContactPage() {
                       htmlFor="message"
                       className="block text-sm font-medium mb-2"
                     >
-                      Message
+                      {t.contact.form.message}
                     </label>
                     <textarea
                       id="message"
@@ -153,12 +156,12 @@ export default function ContactPage() {
                     disabled={status === "submitting"}
                     className="w-full px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {status === "submitting" ? "Sending..." : "Send Message"}
+                    {status === "submitting" ? t.contact.form.submitting : t.contact.form.submit}
                   </button>
 
                   {status === "error" && (
                     <p className="text-red-600 text-sm">
-                      Something went wrong. Please try again.
+                      {t.contact.form.error}
                     </p>
                   )}
                 </form>
@@ -167,12 +170,12 @@ export default function ContactPage() {
 
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-semibold">Get in Touch</h2>
+              <h2 className="text-2xl font-semibold">{t.contact.info.title}</h2>
 
               <div className="mt-8 space-y-8">
                 <div>
                   <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                    Email
+                    {t.contact.info.email}
                   </h3>
                   <p className="mt-2">
                     <a
@@ -186,9 +189,9 @@ export default function ContactPage() {
 
                 <div>
                   <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
-                    Location
+                    {t.contact.info.location}
                   </h3>
-                  <p className="mt-2">Cairo, Egypt</p>
+                  <p className="mt-2">{t.contact.info.locationValue}</p>
                 </div>
               </div>
             </div>

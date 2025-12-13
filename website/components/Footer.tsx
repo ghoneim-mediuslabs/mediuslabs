@@ -1,23 +1,29 @@
 import Link from "next/link";
+import { type Locale, type Translations } from "@/lib/i18n";
 
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Contact", href: "/contact" },
-];
+interface FooterProps {
+  locale: Locale;
+  translations: Translations;
+}
 
-export default function Footer() {
+export default function Footer({ locale, translations: t }: FooterProps) {
+  const navigation = [
+    { name: t.nav.home, href: `/${locale}` },
+    { name: t.nav.about, href: `/${locale}/about` },
+    { name: t.nav.portfolio, href: `/${locale}/portfolio` },
+    { name: t.nav.contact, href: `/${locale}/contact` },
+  ];
+
   return (
     <footer className="border-t border-border mt-auto">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <Link href="/" className="text-lg font-semibold">
+            <Link href={`/${locale}`} className="text-lg font-semibold">
               Medius
             </Link>
             <p className="mt-2 text-sm text-muted">
-              Digital products, built to scale.
+              {t.footer.tagline}
             </p>
           </div>
 
@@ -36,7 +42,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t border-border">
           <p className="text-sm text-muted">
-            &copy; {new Date().getFullYear()} Medius. All rights reserved.
+            &copy; {new Date().getFullYear()} {t.footer.copyright}
           </p>
         </div>
       </div>

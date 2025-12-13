@@ -1,28 +1,41 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { type Locale, type Translations } from "@/lib/i18n";
 
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Contact", href: "/contact" },
-];
+interface HeaderProps {
+  locale: Locale;
+  translations: Translations;
+}
 
-export default function Header() {
+export default function Header({ locale, translations: t }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navigation = [
+    { name: t.nav.home, href: `/${locale}` },
+    { name: t.nav.about, href: `/${locale}/about` },
+    { name: t.nav.portfolio, href: `/${locale}/portfolio` },
+    { name: t.nav.contact, href: `/${locale}/contact` },
+  ];
+
+  // Get the path without the locale prefix for language switching
+  const pathnameWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
+  const otherLocale = locale === "en" ? "ar" : "en";
+  const switchUrl = `/${otherLocale}${pathnameWithoutLocale === "/" ? "" : pathnameWithoutLocale}`;
 
   return (
     <header className="border-b border-border">
       <nav className="mx-auto max-w-6xl px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold tracking-tight">
+          <Link href={`/${locale}`} className="text-xl font-semibold tracking-tight">
             Medius
           </Link>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex md:gap-8">
+          <div className="hidden md:flex md:items-center md:gap-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -32,45 +45,63 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
+
+            {/* Language Switcher */}
+            <Link
+              href={switchUrl}
+              className="px-3 py-1.5 text-sm font-medium border border-border rounded-lg hover:bg-foreground/5 transition-colors"
+            >
+              {locale === "en" ? "العربية" : "English"}
+            </Link>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            type="button"
-            className="md:hidden p-2 -m-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <span className="sr-only">Toggle menu</span>
-            {mobileMenuOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-            )}
-          </button>
+          <div className="flex items-center gap-4 md:hidden">
+            {/* Mobile Language Switcher */}
+            <Link
+              href={switchUrl}
+              className="px-2 py-1 text-xs font-medium border border-border rounded hover:bg-foreground/5 transition-colors"
+            >
+              {locale === "en" ? "AR" : "EN"}
+            </Link>
+
+            <button
+              type="button"
+              className="p-2 -m-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <span className="sr-only">{t.header.toggleMenu}</span>
+              {mobileMenuOpen ? (
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile navigation */}
