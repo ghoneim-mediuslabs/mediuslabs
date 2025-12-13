@@ -33,7 +33,7 @@ export default function Header({ locale, translations: t }: HeaderProps) {
         <div className="flex items-center justify-between">
           <Link href={`/${locale}`} className="flex items-center gap-1 text-xl font-semibold tracking-tight">
             <Image src="/logo.svg" alt="Medius" width={32} height={32} />
-            <span>Medius</span>
+            <span className="-mt-1">Medius</span>
           </Link>
 
           {/* Desktop navigation */}

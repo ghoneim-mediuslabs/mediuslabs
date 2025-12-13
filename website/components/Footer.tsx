@@ -22,7 +22,7 @@ export default function Footer({ locale, translations: t }: FooterProps) {
           <div>
             <Link href={`/${locale}`} className="flex items-center gap-1 text-lg font-semibold">
               <Image src="/logo.svg" alt="Medius" width={28} height={28} />
-              <span>Medius</span>
+              <span className="-mt-1">Medius</span>
             </Link>
             <p className="mt-2 text-sm text-muted">
               {t.footer.tagline}
