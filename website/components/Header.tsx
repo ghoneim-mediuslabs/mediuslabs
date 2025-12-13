@@ -32,8 +32,8 @@ export default function Header({ locale, translations: t }: HeaderProps) {
       <nav className="mx-auto max-w-6xl px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href={`/${locale}`} className="flex items-center gap-1 text-xl font-semibold tracking-tight">
-            <Image src="/logo.svg" alt="Medius" width={32} height={32} />
-            <span className="-mt-1">Medius</span>
+            <Image src="/logo.svg" alt="Medius" width={32} height={32} className="order-1 rtl:order-2" />
+            <span className="-mt-1 order-2 rtl:order-1">Medius</span>
           </Link>
 
           {/* Desktop navigation */}

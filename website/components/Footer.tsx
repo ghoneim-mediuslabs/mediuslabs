@@ -21,8 +21,8 @@ export default function Footer({ locale, translations: t }: FooterProps) {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <Link href={`/${locale}`} className="flex items-center gap-1 text-lg font-semibold">
-              <Image src="/logo.svg" alt="Medius" width={28} height={28} />
-              <span className="-mt-1">Medius</span>
+              <Image src="/logo.svg" alt="Medius" width={28} height={28} className="order-1 rtl:order-2" />
+              <span className="-mt-1 order-2 rtl:order-1">Medius</span>
             </Link>
             <p className="mt-2 text-sm text-muted">
               {t.footer.tagline}
