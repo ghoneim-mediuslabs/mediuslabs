@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { type Locale, type Translations } from "@/lib/i18n";
 
 interface FooterProps {
@@ -19,8 +20,9 @@ export default function Footer({ locale, translations: t }: FooterProps) {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <Link href={`/${locale}`} className="text-lg font-semibold">
-              Medius
+            <Link href={`/${locale}`} className="flex items-center gap-2 text-lg font-semibold">
+              <Image src="/logo.svg" alt="Medius" width={28} height={28} />
+              <span>Medius</span>
             </Link>
             <p className="mt-2 text-sm text-muted">
               {t.footer.tagline}

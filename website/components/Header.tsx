@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { type Locale, type Translations } from "@/lib/i18n";
@@ -30,8 +31,9 @@ export default function Header({ locale, translations: t }: HeaderProps) {
     <header className="border-b border-border">
       <nav className="mx-auto max-w-6xl px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href={`/${locale}`} className="text-xl font-semibold tracking-tight">
-            Medius
+          <Link href={`/${locale}`} className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+            <Image src="/logo.svg" alt="Medius" width={32} height={32} />
+            <span>Medius</span>
           </Link>
 
           {/* Desktop navigation */}
