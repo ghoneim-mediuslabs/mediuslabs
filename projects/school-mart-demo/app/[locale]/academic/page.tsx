@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { BookOpen, Clock, Check } from 'lucide-react'
+import { BookOpen, Clock, Check, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { extraLessons, educationalMaterials, wallet } from '@/lib/mock-data'
+import { extraLessons, educationalMaterials, wallet, children } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function AcademicPage({ params }: { params: { locale: string } }) {
@@ -11,6 +11,8 @@ export default function AcademicPage({ params }: { params: { locale: string } })
   const isAr = locale === 'ar'
   const [bookedLessons, setBookedLessons] = useState<string[]>([])
   const [cart, setCart] = useState<string[]>([])
+
+  const child = children[0]
 
   const t = {
     title: isAr ? 'الخدمات الأكاديمية' : 'Academic Services',
@@ -44,6 +46,22 @@ export default function AcademicPage({ params }: { params: { locale: string } })
         showBack
         backHref={`/${locale}`}
       />
+
+      {/* Student Profile Card */}
+      <div className="px-4 pt-4">
+        <div className="bg-blue-50 rounded-xl p-3 flex items-center gap-3">
+          <div className="w-8 h-8 bg-blue-200 rounded-full flex items-center justify-center">
+            <User size={16} className="text-blue-700" />
+          </div>
+          <div>
+            <span className="font-semibold text-gray-800">
+              {isAr ? child.name : child.nameEn}
+            </span>
+            <span className="text-gray-500 mx-2">-</span>
+            <span className="text-gray-600">{isAr ? child.grade : child.gradeEn}</span>
+          </div>
+        </div>
+      </div>
 
       {/* Extra Lessons */}
       <div className="px-4 py-4">

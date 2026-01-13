@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Clock, Check, FileCheck } from 'lucide-react'
+import { Clock, Check, FileCheck, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { events, wallet } from '@/lib/mock-data'
+import { events, wallet, children } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function EventsPage({ params }: { params: { locale: string } }) {
@@ -11,6 +11,8 @@ export default function EventsPage({ params }: { params: { locale: string } }) {
   const isAr = locale === 'ar'
   const [registered, setRegistered] = useState<string[]>([])
   const [consented, setConsented] = useState<string[]>([])
+
+  const child = children[0]
 
   const t = {
     title: isAr ? 'الفعاليات والرحلات' : 'Events & Trips',
@@ -46,6 +48,22 @@ export default function EventsPage({ params }: { params: { locale: string } }) {
         showBack
         backHref={`/${locale}`}
       />
+
+      {/* Student Profile Card */}
+      <div className="px-4 pt-4">
+        <div className="bg-teal-50 rounded-xl p-3 flex items-center gap-3">
+          <div className="w-8 h-8 bg-teal-200 rounded-full flex items-center justify-center">
+            <User size={16} className="text-teal-700" />
+          </div>
+          <div>
+            <span className="font-semibold text-gray-800">
+              {isAr ? child.name : child.nameEn}
+            </span>
+            <span className="text-gray-500 mx-2">-</span>
+            <span className="text-gray-600">{isAr ? child.grade : child.gradeEn}</span>
+          </div>
+        </div>
+      </div>
 
       {/* Events List */}
       <div className="px-4 py-4 pb-24">

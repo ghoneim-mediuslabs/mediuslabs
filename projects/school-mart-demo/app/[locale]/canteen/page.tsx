@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Wallet, Plus, Minus, ShoppingBag } from 'lucide-react'
+import { Wallet, Plus, Minus, ShoppingBag, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { canteenMenu, wallet } from '@/lib/mock-data'
+import { canteenMenu, wallet, children } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function CanteenPage({ params }: { params: { locale: string } }) {
@@ -11,6 +11,8 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
   const isAr = locale === 'ar'
   const [quantities, setQuantities] = useState<Record<string, number>>({})
   const [orderConfirmed, setOrderConfirmed] = useState(false)
+
+  const child = children[0]
 
   const t = {
     title: isAr ? 'الكانتين الذكي' : 'Smart Canteen',
@@ -91,6 +93,22 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
         showBack
         backHref={`/${locale}`}
       />
+
+      {/* Student Profile Card */}
+      <div className="px-4 pt-4">
+        <div className="bg-orange-50 rounded-xl p-3 flex items-center gap-3">
+          <div className="w-8 h-8 bg-orange-200 rounded-full flex items-center justify-center">
+            <User size={16} className="text-orange-700" />
+          </div>
+          <div>
+            <span className="font-semibold text-gray-800">
+              {isAr ? child.name : child.nameEn}
+            </span>
+            <span className="text-gray-500 mx-2">-</span>
+            <span className="text-gray-600">{isAr ? child.grade : child.gradeEn}</span>
+          </div>
+        </div>
+      </div>
 
       {/* Wallet Balance */}
       <div className="px-4 py-4">
