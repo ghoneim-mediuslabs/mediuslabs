@@ -1,0 +1,56 @@
+{
+  "common": {
+    "home": "الرئيسية",
+    "academic": "الأكاديمية",
+    "uniforms": "الزي",
+    "canteen": "الكانتين",
+    "events": "الفعاليات",
+    "back": "رجوع",
+    "book": "احجز",
+    "addToCart": "أضف للسلة",
+    "confirm": "تأكيد",
+    "total": "الإجمالي",
+    "wallet": "المحفظة",
+    "register": "سجّل",
+    "consent": "موافقة"
+  },
+  "home": {
+    "welcome": "مرحباً",
+    "selectChild": "اختر الطالب",
+    "walletBalance": "رصيد المحفظة",
+    "quickActions": "إجراءات سريعة",
+    "recentActivity": "النشاط الأخير"
+  },
+  "academic": {
+    "title": "الخدمات الأكاديمية",
+    "extraLessons": "الدروس الإضافية",
+    "materials": "المواد التعليمية",
+    "bookNow": "احجز الآن",
+    "perMonth": "/شهرياً"
+  },
+  "uniforms": {
+    "title": "الزي والمستلزمات",
+    "schoolUniform": "الزي المدرسي",
+    "supplies": "الأدوات المدرسية",
+    "size": "المقاس",
+    "addToCart": "أضف للسلة"
+  },
+  "canteen": {
+    "title": "الكانتين الذكي",
+    "tomorrowOrder": "طلب الغد",
+    "walletBalance": "رصيد المحفظة",
+    "topUp": "شحن الرصيد",
+    "confirmOrder": "تأكيد الطلب",
+    "orderHistory": "سجل الطلبات"
+  },
+  "events": {
+    "title": "الفعاليات والرحلات",
+    "upcoming": "الفعاليات القادمة",
+    "seatsLeft": "مقعد متبقي",
+    "registerNow": "سجّل الآن",
+    "sendConsent": "إرسال الموافقة",
+    "consentRequired": "موافقة مطلوبة",
+    "free": "مجاني",
+    "details": "التفاصيل"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "common": {
+    "home": "Home",
+    "academic": "Academic",
+    "uniforms": "Uniforms",
+    "canteen": "Canteen",
+    "events": "Events",
+    "back": "Back",
+    "book": "Book",
+    "addToCart": "Add to Cart",
+    "confirm": "Confirm",
+    "total": "Total",
+    "wallet": "Wallet",
+    "register": "Register",
+    "consent": "Consent"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "selectChild": "Select Child",
+    "walletBalance": "Wallet Balance",
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity"
+  },
+  "academic": {
+    "title": "Academic Services",
+    "extraLessons": "Extra Lessons",
+    "materials": "Educational Materials",
+    "bookNow": "Book Now",
+    "perMonth": "/month"
+  },
+  "uniforms": {
+    "title": "Uniforms & Supplies",
+    "schoolUniform": "School Uniform",
+    "supplies": "School Supplies",
+    "size": "Size",
+    "addToCart": "Add to Cart"
+  },
+  "canteen": {
+    "title": "Smart Canteen",
+    "tomorrowOrder": "Tomorrow's Order",
+    "walletBalance": "Wallet Balance",
+    "topUp": "Top Up",
+    "confirmOrder": "Confirm Order",
+    "orderHistory": "Order History"
+  },
+  "events": {
+    "title": "Events & Trips",
+    "upcoming": "Upcoming Events",
+    "seatsLeft": "seats left",
+    "registerNow": "Register Now",
+    "sendConsent": "Send Consent",
+    "consentRequired": "Consent Required",
+    "free": "Free",
+    "details": "Details"
+  }
+}
