@@ -11,7 +11,7 @@
 1. [نظرة عامة على المنتج](#1-نظرة-عامة-على-المنتج)
 2. [مسار الطلب](#2-مسار-الطلب)
 3. [تطبيق ولي الأمر](#3-تطبيق-ولي-الأمر)
-4. [لوحة تحكم المورد](#4-لوحة-تحكم-المورد)
+4. [تطبيق المورد](#4-تطبيق-المورد)
 5. [تطبيق مشرف الدور](#5-تطبيق-مشرف-الدور)
 6. [لوحة تحكم إدارة المدرسة](#6-لوحة-تحكم-إدارة-المدرسة)
 7. [المواصفات التقنية](#7-المواصفات-التقنية)
@@ -382,55 +382,158 @@
 
 ---
 
-## 4. لوحة تحكم المورد
+## 4. تطبيق المورد
 
-لوحة تحكم ويب لموردي الطعام لإدارة القوائم وعرض الطلبات وتتبع المدفوعات.
+تطبيق موبايل لموردي الطعام لإدارة القوائم وعرض الطلبات وتتبع المدفوعات.
 
-<div style="background: #1a1a1a; border-radius: 16px; padding: 12px; margin: 25px 0; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
-<div style="background: #fff; border-radius: 10px; overflow: hidden;">
-<div style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
-<div style="font-size: 16px; font-weight: 600;">🍳 لوحة تحكم المورد</div>
-<div style="display: flex; align-items: center; gap: 8px; font-size: 13px;">
-<span>مطعم الشيف أحمد</span>
+<div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin: 30px 0;">
+
+<!-- الرئيسية -->
+<div style="text-align: center;">
+<div style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #333;">الشاشة الرئيسية</div>
+<div style="width: 260px; height: 520px; background: #1a1a1a; border-radius: 30px; padding: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+<div style="width: 100%; height: 100%; background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column;">
+<div style="padding: 6px 12px; font-size: 11px; color: #333; display: flex; justify-content: space-between;"><span>9:41</span><span>100%</span></div>
+<div style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div><div style="font-size: 11px; opacity: 0.9;">صباح الخير</div><div style="font-size: 14px; font-weight: 600;">مطعم الشيف أحمد</div></div>
 <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">👨‍🍳</div>
 </div>
 </div>
-<div style="padding: 20px;">
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px;">
-<div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-top: 3px solid #4CAF50;"><div style="font-size: 22px; font-weight: 700;">127</div><div style="font-size: 10px; color: #888;">إجمالي الطلبات</div></div>
-<div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-top: 3px solid #2196F3;"><div style="font-size: 22px; font-weight: 700;">3</div><div style="font-size: 10px; color: #888;">المدارس</div></div>
-<div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-top: 3px solid #FF9800;"><div style="font-size: 22px; font-weight: 700;">4,250</div><div style="font-size: 10px; color: #888;">إيرادات اليوم (ج.م)</div></div>
-<div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border-top: 3px solid #9C27B0;"><div style="font-size: 22px; font-weight: 700;">89%</div><div style="font-size: 10px; color: #888;">معدل التسليم</div></div>
+<div style="flex: 1; padding: 12px; background: #f8f9fa; overflow-y: auto;">
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px;">
+<div style="background: white; padding: 10px; border-radius: 8px; border-top: 3px solid #4CAF50;"><div style="font-size: 24px; font-weight: 700;">127</div><div style="font-size: 9px; color: #888;">طلبات اليوم</div></div>
+<div style="background: white; padding: 10px; border-radius: 8px; border-top: 3px solid #2196F3;"><div style="font-size: 24px; font-weight: 700;">3</div><div style="font-size: 9px; color: #888;">المدارس</div></div>
+<div style="background: white; padding: 10px; border-radius: 8px; border-top: 3px solid #FF9800;"><div style="font-size: 24px; font-weight: 700;">4,250</div><div style="font-size: 9px; color: #888;">إيرادات (ج.م)</div></div>
+<div style="background: white; padding: 10px; border-radius: 8px; border-top: 3px solid #9C27B0;"><div style="font-size: 24px; font-weight: 700;">89%</div><div style="font-size: 9px; color: #888;">معدل التسليم</div></div>
 </div>
-<div style="font-weight: 600; margin-bottom: 12px;">طلبات حسب المدرسة</div>
-<table style="width: 100%; border-collapse: collapse; font-size: 11px;">
-<tr style="background: #f8f9fa;">
-<th style="padding: 10px; text-align: right; font-weight: 600;">المدرسة</th>
-<th style="padding: 10px; text-align: right; font-weight: 600;">الطلبات</th>
-<th style="padding: 10px; text-align: right; font-weight: 600;">الإجمالي</th>
-<th style="padding: 10px; text-align: right; font-weight: 600;">الحالة</th>
-</tr>
-<tr style="border-bottom: 1px solid #eee;">
-<td style="padding: 10px;">مدرسة النيل الدولية</td>
-<td style="padding: 10px;">52</td>
-<td style="padding: 10px;">1,850 ج.م</td>
-<td style="padding: 10px;"><span style="padding: 3px 8px; background: #E3F2FD; color: #1565C0; border-radius: 10px; font-size: 9px;">جاري التحضير</span></td>
-</tr>
-<tr style="border-bottom: 1px solid #eee;">
-<td style="padding: 10px;">مدرسة الأورمان</td>
-<td style="padding: 10px;">45</td>
-<td style="padding: 10px;">1,520 ج.م</td>
-<td style="padding: 10px;"><span style="padding: 3px 8px; background: #FFF3E0; color: #E65100; border-radius: 10px; font-size: 9px;">في الانتظار</span></td>
-</tr>
-<tr>
-<td style="padding: 10px;">مدرسة المستقبل</td>
-<td style="padding: 10px;">30</td>
-<td style="padding: 10px;">880 ج.م</td>
-<td style="padding: 10px;"><span style="padding: 3px 8px; background: #E8F5E9; color: #2E7D32; border-radius: 10px; font-size: 9px;">تم التوصيل</span></td>
-</tr>
-</table>
+<div style="font-weight: 600; font-size: 12px; margin-bottom: 8px;">طلبات المدارس</div>
+<div style="background: white; border-radius: 10px; padding: 10px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div><div style="font-weight: 600; font-size: 12px;">مدرسة النيل الدولية</div><div style="font-size: 10px; color: #888;">52 طلب • 1,850 ج.م</div></div>
+<span style="padding: 3px 8px; background: #E3F2FD; color: #1565C0; border-radius: 10px; font-size: 9px;">جاري التحضير</span>
 </div>
 </div>
+<div style="background: white; border-radius: 10px; padding: 10px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div><div style="font-weight: 600; font-size: 12px;">مدرسة الأورمان الخاصة</div><div style="font-size: 10px; color: #888;">45 طلب • 1,520 ج.م</div></div>
+<span style="padding: 3px 8px; background: #FFF3E0; color: #E65100; border-radius: 10px; font-size: 9px;">في الانتظار</span>
+</div>
+</div>
+<div style="background: white; border-radius: 10px; padding: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div><div style="font-weight: 600; font-size: 12px;">مدرسة المستقبل</div><div style="font-size: 10px; color: #888;">30 طلب • 880 ج.م</div></div>
+<span style="padding: 3px 8px; background: #E8F5E9; color: #2E7D32; border-radius: 10px; font-size: 9px;">تم التوصيل</span>
+</div>
+</div>
+</div>
+<div style="display: flex; border-top: 1px solid #eee; background: white;">
+<div style="flex: 1; padding: 10px; text-align: center; color: #FF9800;"><div style="font-size: 18px;">🏠</div><div style="font-size: 9px;">الرئيسية</div></div>
+<div style="flex: 1; padding: 10px; text-align: center; color: #888;"><div style="font-size: 18px;">📋</div><div style="font-size: 9px;">الطلبات</div></div>
+<div style="flex: 1; padding: 10px; text-align: center; color: #888;"><div style="font-size: 18px;">🍽️</div><div style="font-size: 9px;">القائمة</div></div>
+<div style="flex: 1; padding: 10px; text-align: center; color: #888;"><div style="font-size: 18px;">💰</div><div style="font-size: 9px;">المدفوعات</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- تفاصيل طلبات المدرسة -->
+<div style="text-align: center;">
+<div style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #333;">تفاصيل الطلبات</div>
+<div style="width: 260px; height: 520px; background: #1a1a1a; border-radius: 30px; padding: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+<div style="width: 100%; height: 100%; background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column;">
+<div style="padding: 6px 12px; font-size: 11px; color: #333; display: flex; justify-content: space-between;"><span>9:41</span><span>100%</span></div>
+<div style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 12px;">
+<div style="display: flex; align-items: center; gap: 8px;"><span>←</span><span style="font-size: 14px; font-weight: 600;">مدرسة النيل الدولية</span></div>
+</div>
+<div style="flex: 1; padding: 12px; background: #f8f9fa; overflow-y: auto;">
+<div style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border-radius: 10px; padding: 10px; margin-bottom: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div><div style="font-size: 10px; color: #1565C0;">حالة الطلب</div><div style="font-size: 13px; font-weight: 700; color: #1565C0;">جاري التحضير</div></div>
+<div style="font-size: 24px;">👨‍🍳</div>
+</div>
+</div>
+<div style="font-weight: 600; font-size: 12px; margin-bottom: 8px;">ملخص الوجبات</div>
+<div style="background: white; border-radius: 10px; padding: 10px; margin-bottom: 10px;">
+<div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 6px;">
+<span style="font-size: 11px;">ساندويتش فراخ مشوية</span><span style="font-weight: 600;">30</span>
+</div>
+<div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 6px;">
+<span style="font-size: 11px;">ساندويتش جبنة</span><span style="font-weight: 600;">15</span>
+</div>
+<div style="display: flex; justify-content: space-between;">
+<span style="font-size: 11px;">وجبة صحية</span><span style="font-weight: 600;">7</span>
+</div>
+</div>
+<div style="background: white; border-radius: 10px; padding: 10px; margin-bottom: 12px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+<span style="font-size: 10px; color: #888;">إجمالي الطلبات</span><span style="font-weight: 600;">52</span>
+</div>
+<div style="display: flex; justify-content: space-between;">
+<span style="font-size: 10px; color: #888;">الإجمالي</span><span style="font-weight: 600; color: #4CAF50;">1,850 ج.م</span>
+</div>
+</div>
+<button style="width: 100%; padding: 12px; background: linear-gradient(135deg, #4CAF50, #45a049); color: white; border: none; border-radius: 8px; font-size: 12px; font-weight: 600;">✓ تم التجهيز - جاهز للتوصيل</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- إدارة القائمة -->
+<div style="text-align: center;">
+<div style="font-size: 13px; font-weight: 600; margin-bottom: 12px; color: #333;">قائمة الطعام</div>
+<div style="width: 260px; height: 520px; background: #1a1a1a; border-radius: 30px; padding: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+<div style="width: 100%; height: 100%; background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column;">
+<div style="padding: 6px 12px; font-size: 11px; color: #333; display: flex; justify-content: space-between;"><span>9:41</span><span>100%</span></div>
+<div style="background: linear-gradient(135deg, #FF9800, #F57C00); color: white; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+<div style="font-size: 14px; font-weight: 600;">قائمة الطعام</div>
+<button style="padding: 5px 10px; background: rgba(255,255,255,0.2); border: none; border-radius: 5px; color: white; font-size: 10px;">+ إضافة</button>
+</div>
+<div style="flex: 1; padding: 12px; background: #f8f9fa; overflow-y: auto;">
+<div style="background: white; border-radius: 10px; padding: 10px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+<div style="display: flex; gap: 10px;">
+<div style="width: 50px; height: 50px; background: #FFF3E0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🍗</div>
+<div style="flex: 1;">
+<div style="font-weight: 600; font-size: 11px;">ساندويتش فراخ مشوية</div>
+<div style="font-size: 9px; color: #888;">فراخ مشوية، خس، طماطم</div>
+<div style="font-size: 11px; font-weight: 600; color: #4CAF50; margin-top: 3px;">35 ج.م</div>
+</div>
+<div style="font-size: 16px; color: #888;">✏️</div>
+</div>
+</div>
+<div style="background: white; border-radius: 10px; padding: 10px; margin-bottom: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+<div style="display: flex; gap: 10px;">
+<div style="width: 50px; height: 50px; background: #FFF8E1; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🧀</div>
+<div style="flex: 1;">
+<div style="font-weight: 600; font-size: 11px;">ساندويتش جبنة</div>
+<div style="font-size: 9px; color: #888;">جبنة رومي، خيار</div>
+<div style="font-size: 11px; font-weight: 600; color: #4CAF50; margin-top: 3px;">25 ج.م</div>
+</div>
+<div style="font-size: 16px; color: #888;">✏️</div>
+</div>
+</div>
+<div style="background: white; border-radius: 10px; padding: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+<div style="display: flex; gap: 10px;">
+<div style="width: 50px; height: 50px; background: #E8F5E9; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🥗</div>
+<div style="flex: 1;">
+<div style="font-weight: 600; font-size: 11px;">وجبة صحية</div>
+<div style="font-size: 9px; color: #888;">سلطة، فواكه، عصير</div>
+<div style="font-size: 11px; font-weight: 600; color: #4CAF50; margin-top: 3px;">45 ج.م</div>
+</div>
+<div style="font-size: 16px; color: #888;">✏️</div>
+</div>
+</div>
+</div>
+<div style="display: flex; border-top: 1px solid #eee; background: white;">
+<div style="flex: 1; padding: 10px; text-align: center; color: #888;"><div style="font-size: 18px;">🏠</div><div style="font-size: 9px;">الرئيسية</div></div>
+<div style="flex: 1; padding: 10px; text-align: center; color: #888;"><div style="font-size: 18px;">📋</div><div style="font-size: 9px;">الطلبات</div></div>
+<div style="flex: 1; padding: 10px; text-align: center; color: #FF9800;"><div style="font-size: 18px;">🍽️</div><div style="font-size: 9px;">القائمة</div></div>
+<div style="flex: 1; padding: 10px; text-align: center; color: #888;"><div style="font-size: 18px;">💰</div><div style="font-size: 9px;">المدفوعات</div></div>
+</div>
+</div>
+</div>
+</div>
+
 </div>
 
 ---
@@ -556,7 +659,7 @@
 | الطبقة | التقنية | ملاحظات |
 |--------|---------|---------|
 | تطبيقات الموبايل | React Native / Flutter | منصة متعددة لـ iOS و Android |
-| لوحات التحكم | React / Next.js | تصميم متجاوب للتابلت والديسكتوب |
+| لوحة تحكم المدرسة | React / Next.js | لوحة تحكم إدارة المدرسة للتابلت والديسكتوب |
 | واجهة برمجة التطبيقات | Node.js / Python (FastAPI) | RESTful API مع WebSocket للتحديث الفوري |
 | قاعدة البيانات | PostgreSQL + Redis | التخزين الأساسي + التخزين المؤقت |
 | المدفوعات | PayMob / Fawry | تكامل بوابات الدفع المصرية |
@@ -597,7 +700,7 @@
 | الدفع بالبطاقة والمحفظة الإلكترونية | في النطاق |
 | تتبع الطلب الأساسي | في النطاق |
 | تأكيد تسليم مشرف الدور | في النطاق |
-| قائمة طلبات المورد ولوحة التحكم | في النطاق |
+| تطبيق المورد مع قائمة الطلبات والإدارة | في النطاق |
 
 ### المرحلة 2: ميزات محسنة
 
