@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ArrowLeft, ArrowRight, Globe } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 
@@ -19,9 +20,13 @@ export default function AppHeader({
   showBack = false,
   backHref,
 }: AppHeaderProps) {
+  const pathname = usePathname()
   const isRtl = locale === 'ar'
   const BackArrow = isRtl ? ArrowRight : ArrowLeft
   const otherLocale = locale === 'ar' ? 'en' : 'ar'
+
+  // Replace current locale with other locale in path
+  const switchedPath = pathname.replace(`/${locale}`, `/${otherLocale}`)
 
   return (
     <header className={`${color} text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40`}>
@@ -34,7 +39,7 @@ export default function AppHeader({
         <h1 className="font-semibold text-lg">{title}</h1>
       </div>
       <Link
-        href={`/${otherLocale}${typeof window !== 'undefined' ? window.location.pathname.replace(`/${locale}`, '') : ''}`}
+        href={switchedPath}
         className="p-2 -m-2 hover:opacity-80 transition-opacity flex items-center gap-1 text-sm"
       >
         <Globe size={16} />
