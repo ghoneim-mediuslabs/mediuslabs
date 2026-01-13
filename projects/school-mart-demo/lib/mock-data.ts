@@ -3,6 +3,7 @@
 export const children = [
   { id: '1', name: 'أحمد علي', nameEn: 'Ahmed Ali', grade: 'الصف الخامس', gradeEn: 'Grade 5' },
   { id: '2', name: 'سارة علي', nameEn: 'Sara Ali', grade: 'الصف الثالث', gradeEn: 'Grade 3' },
+  { id: '3', name: 'منى علي', nameEn: 'Mona Ali', grade: 'الصف الأول', gradeEn: 'Grade 1' },
 ]
 
 export const wallet = {
