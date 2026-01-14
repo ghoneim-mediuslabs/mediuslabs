@@ -52,7 +52,6 @@ export default function AppHeader({
   const BackArrow = isRtl ? ArrowRight : ArrowLeft
   const otherLocale = locale === 'ar' ? 'en' : 'ar'
   const [showDropdown, setShowDropdown] = useState(false)
-  const [showLangMenu, setShowLangMenu] = useState(false)
 
   // Replace current locale with other locale in path
   const switchedPath = pathname.replace(`/${locale}`, `/${otherLocale}`)
@@ -85,29 +84,13 @@ export default function AppHeader({
     return (
       <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 sticky top-0 z-40">
         {/* Language Switcher - Left side */}
-        <div className="relative">
-          <button
-            onClick={() => setShowLangMenu(!showLangMenu)}
-            className="h-9 w-9 rounded-full bg-blue-50 flex items-center justify-center hover:bg-blue-100 transition-colors"
-          >
-            <span className="text-sm font-bold text-blue-600">
-              {locale === 'ar' ? 'En' : 'ع'}
-            </span>
-          </button>
-
-          {showLangMenu && (
-            <div className="absolute top-full start-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden min-w-[120px] z-50">
-              <Link
-                href={switchedPath}
-                className="flex items-center gap-2 px-3 py-2.5 hover:bg-gray-50 transition-colors text-gray-800 text-sm"
-                onClick={() => setShowLangMenu(false)}
-              >
-                <Globe size={16} className="text-gray-500" />
-                <span>{locale === 'ar' ? 'English' : 'العربية'}</span>
-              </Link>
-            </div>
-          )}
-        </div>
+        <Link
+          href={switchedPath}
+          className="flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 transition-colors px-3 py-1.5 rounded-full text-sm text-gray-700"
+        >
+          <Globe size={14} />
+          <span>{locale === 'ar' ? 'En' : 'ع'}</span>
+        </Link>
 
         {/* Child & School Selector - Center/Right */}
         <div className="relative">
