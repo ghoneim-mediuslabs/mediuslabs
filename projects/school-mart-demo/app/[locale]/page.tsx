@@ -36,6 +36,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         selectedChild={selectedChild}
         onSelectChild={setSelectedChild}
         school={selectedSchool}
+        schools={schools}
       />
 
       {/* School Card - Centered */}

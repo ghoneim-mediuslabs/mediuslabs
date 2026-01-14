@@ -32,6 +32,7 @@ interface AppHeaderProps {
   selectedChild?: Child
   onSelectChild?: (child: Child) => void
   school?: School
+  schools?: School[]
 }
 
 export default function AppHeader({
@@ -44,6 +45,7 @@ export default function AppHeader({
   selectedChild,
   onSelectChild,
   school,
+  schools = [],
 }: AppHeaderProps) {
   const pathname = usePathname()
   const isRtl = locale === 'ar'
@@ -67,6 +69,10 @@ export default function AppHeader({
   const getSchoolName = () => {
     if (!school) return ''
     return locale === 'ar' ? school.name : school.nameEn
+  }
+
+  const getSchoolForChild = (child: Child) => {
+    return schools.find(s => s.id === child.schoolId)
   }
 
   const handleSelectChild = (child: Child) => {
@@ -126,28 +132,36 @@ export default function AppHeader({
           </button>
 
           {showDropdown && (
-            <div className="absolute top-full end-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden min-w-[200px] z-50">
-              {childrenList.map((child) => (
-                <button
-                  key={child.id}
-                  onClick={() => handleSelectChild(child)}
-                  className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors text-right border-b last:border-b-0"
-                >
-                  <div>
-                    {selectedChild.id === child.id && (
-                      <Check size={18} className="text-emerald-600" />
+            <div className="absolute top-full end-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden min-w-[240px] z-50">
+              {childrenList.map((child) => {
+                const childSchool = getSchoolForChild(child)
+                return (
+                  <button
+                    key={child.id}
+                    onClick={() => handleSelectChild(child)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors text-right border-b last:border-b-0 ${
+                      selectedChild.id === child.id ? 'bg-blue-50' : ''
+                    }`}
+                  >
+                    <div className="w-5 flex justify-center">
+                      {selectedChild.id === child.id && (
+                        <Check size={18} className="text-emerald-600" />
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className={`text-sm ${selectedChild.id === child.id ? 'font-semibold text-gray-900' : 'text-gray-700'}`}>
+                        {locale === 'ar' ? child.name : child.nameEn}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {locale === 'ar' ? child.grade : child.gradeEn}
+                      </p>
+                    </div>
+                    {childSchool?.logo && (
+                      <img src={childSchool.logo} alt="" className="h-8 w-8 rounded-full object-cover" />
                     )}
-                  </div>
-                  <div>
-                    <p className={`text-sm ${selectedChild.id === child.id ? 'font-semibold text-gray-900' : 'text-gray-700'}`}>
-                      {locale === 'ar' ? child.name : child.nameEn}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {locale === 'ar' ? child.grade : child.gradeEn}
-                    </p>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                )
+              })}
             </div>
           )}
         </div>
