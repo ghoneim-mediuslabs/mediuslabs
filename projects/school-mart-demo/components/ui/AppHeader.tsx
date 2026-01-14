@@ -116,9 +116,13 @@ export default function AppHeader({
                 {getChildName(selectedChild)} - {getChildGrade(selectedChild)}
               </p>
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
-              <School className="h-5 w-5 text-white" />
-            </div>
+            {school?.logo ? (
+              <img src={school.logo} alt="" className="h-10 w-10 rounded-full object-cover" />
+            ) : (
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
+                <School className="h-5 w-5 text-white" />
+              </div>
+            )}
           </button>
 
           {showDropdown && (
