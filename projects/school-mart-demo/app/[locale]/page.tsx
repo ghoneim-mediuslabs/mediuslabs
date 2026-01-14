@@ -40,9 +40,9 @@ export default function HomePage({ params }: { params: { locale: string } }) {
       />
 
       {/* Welcome Message */}
-      <div className="px-4 pt-4 pb-2">
+      <div className="px-4 pt-4 pb-4 bg-gradient-to-b from-blue-50 to-gray-50">
         <p className="text-gray-500">
-          {isAr ? 'مرحباً بك' : 'Welcome'}
+          {isAr ? 'مرحباً بك' : 'Welcome'} 👋
         </p>
         <h1 className="text-xl font-bold text-gray-800">
           {isAr ? 'خدمات' : 'Services of'}{' '}
