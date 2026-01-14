@@ -32,10 +32,10 @@ export default function HomePage({ params }: { params: { locale: string } }) {
     <div className="min-h-screen bg-gray-50">
       <AppHeader
         locale={locale}
-        color="bg-gray-800"
         childrenList={children}
         selectedChild={selectedChild}
         onSelectChild={setSelectedChild}
+        school={selectedSchool}
       />
 
       {/* School Card - Centered */}
