@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { ArrowLeft, ArrowRight, Globe, ChevronDown, Check, School } from 'lucide-react'
 import { useState } from 'react'
 import type { Locale } from '@/lib/i18n'
+import { useSchool } from '@/lib/school-context'
 
 interface Child {
   id: string
@@ -52,9 +53,10 @@ export default function AppHeader({
   const BackArrow = isRtl ? ArrowRight : ArrowLeft
   const otherLocale = locale === 'ar' ? 'en' : 'ar'
   const [showDropdown, setShowDropdown] = useState(false)
+  const { buildHref } = useSchool()
 
-  // Replace current locale with other locale in path
-  const switchedPath = pathname.replace(`/${locale}`, `/${otherLocale}`)
+  // Replace current locale with other locale in path (preserving school param)
+  const switchedPath = buildHref(pathname.replace(`/${locale}`, `/${otherLocale}`))
 
   // Get child display info
   const getChildName = (child: Child) => {
@@ -157,7 +159,7 @@ export default function AppHeader({
     <header className={`${color || 'bg-gray-800'} text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40`}>
       <div className="flex items-center gap-3">
         {showBack && backHref && (
-          <Link href={backHref} className="p-1 -m-1 hover:opacity-80 transition-opacity">
+          <Link href={buildHref(backHref)} className="p-1 -m-1 hover:opacity-80 transition-opacity">
             <BackArrow size={20} />
           </Link>
         )}

@@ -4,7 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { BookOpen, Shirt, UtensilsCrossed, Calendar, Wallet, ShoppingBag } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { children, schools, wallet, recentActivity } from '@/lib/mock-data'
+import { useSchool } from '@/lib/school-context'
+import { children, schools as mockSchools, wallet, recentActivity } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 const modules = [
@@ -18,13 +19,26 @@ export default function HomePage({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
   const [selectedChild, setSelectedChild] = useState(children[0])
+  const { demoSchool, isOverrideMode, getSchoolLogo, buildHref } = useSchool()
 
   const t = {
     quickActions: isAr ? 'الخدمات' : 'Services',
     recentActivity: isAr ? 'النشاط الأخير' : 'Recent Activity',
   }
 
-  const selectedSchool = schools.find(s => s.id === selectedChild.schoolId) || schools[0]
+  // In override mode, use the demo school for all children
+  // Otherwise, use the child's assigned school from mock data
+  const activeSchool = isOverrideMode && demoSchool
+    ? {
+        id: 'demo',
+        name: demoSchool.name,
+        nameEn: demoSchool.nameEn,
+        logo: getSchoolLogo(),
+      }
+    : mockSchools.find(s => s.id === selectedChild.schoolId) || mockSchools[0]
+
+  // In override mode, all children belong to the same school (no school switching)
+  const availableSchools = isOverrideMode ? [activeSchool] : mockSchools
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -33,8 +47,8 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         childrenList={children}
         selectedChild={selectedChild}
         onSelectChild={setSelectedChild}
-        school={selectedSchool}
-        schools={schools}
+        school={activeSchool}
+        schools={availableSchools}
       />
 
       {/* Welcome Message */}
@@ -44,7 +58,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         </p>
         <h1 className="text-xl font-bold text-gray-800">
           {isAr ? 'خدمات' : 'Services of'}{' '}
-          <span className="text-blue-600">{isAr ? selectedSchool.name : selectedSchool.nameEn}</span>
+          <span className="text-blue-600">{isAr ? activeSchool.name : activeSchool.nameEn}</span>
         </h1>
         <p className="text-sm text-gray-500 mt-1">
           {isAr
@@ -81,7 +95,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
             return (
               <Link
                 key={module.href}
-                href={`/${locale}${module.href}`}
+                href={buildHref(`/${locale}${module.href}`)}
                 className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow border border-gray-100"
               >
                 <div className={`w-10 h-10 ${module.color} rounded-xl flex items-center justify-center mb-3`}>

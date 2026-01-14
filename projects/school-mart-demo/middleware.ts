@@ -5,6 +5,11 @@ import { locales, defaultLocale, isValidLocale } from './lib/i18n'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Skip admin routes
+  if (pathname.startsWith('/admin')) {
+    return NextResponse.next()
+  }
+
   // Check if there's a locale in the pathname
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, ShoppingCart, Bell, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
+import { useSchool } from '@/lib/school-context'
 
 const navItems = [
   { href: '/profile', icon: User, labelAr: 'حسابي', labelEn: 'Profile' },
@@ -14,13 +15,15 @@ const navItems = [
 
 export default function BottomNav({ locale }: { locale: Locale }) {
   const pathname = usePathname()
+  const { buildHref } = useSchool()
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
       <div className="max-w-md mx-auto flex justify-around px-2 py-2">
         {navItems.map((item) => {
-          const fullHref = `/${locale}${item.href}`
-          const isActive = pathname === fullHref || (item.href === '' && pathname === `/${locale}`)
+          const basePath = `/${locale}${item.href}`
+          const fullHref = buildHref(basePath)
+          const isActive = pathname === basePath || (item.href === '' && pathname === `/${locale}`)
           const Icon = item.icon
           const label = locale === 'ar' ? item.labelAr : item.labelEn
 
