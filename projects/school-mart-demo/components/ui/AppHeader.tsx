@@ -73,6 +73,10 @@ export default function AppHeader({
   }
 
   const getSchoolForChild = (child: Child) => {
+    // In override mode (single school), all children belong to that school
+    if (schools.length === 1) {
+      return schools[0]
+    }
     return schools.find(s => s.id === child.schoolId)
   }
 

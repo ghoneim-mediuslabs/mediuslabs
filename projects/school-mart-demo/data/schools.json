@@ -4,5 +4,11 @@
     "name": "مدرسة النور الدولية",
     "nameEn": "Al Noor International School",
     "logo": ""
+  },
+  {
+    "slug": "ips",
+    "name": "المدارس الرسمية الدولية",
+    "nameEn": "International Public Schools",
+    "logo": "https://www.ips-schools.com/assets/images/logo.png"
   }
 ]
