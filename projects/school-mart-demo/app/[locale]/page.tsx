@@ -39,18 +39,20 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         schools={schools}
       />
 
-      {/* School Card - Centered */}
-      <div className="px-4 pt-4">
-        <div className="bg-white rounded-xl p-4 flex flex-col items-center text-center border border-gray-100 shadow-sm">
-          <img
-            src={selectedSchool.logo}
-            alt=""
-            className="w-20 h-20 rounded-xl mb-2"
-          />
-          <p className="font-bold text-gray-800 text-lg">
-            {isAr ? selectedSchool.name : selectedSchool.nameEn}
-          </p>
-        </div>
+      {/* Welcome Message */}
+      <div className="px-4 pt-4 pb-2">
+        <p className="text-gray-500">
+          {isAr ? 'مرحباً بك' : 'Welcome'}
+        </p>
+        <h1 className="text-xl font-bold text-gray-800">
+          {isAr ? 'خدمات' : 'Services of'}{' '}
+          <span className="text-blue-600">{isAr ? selectedSchool.name : selectedSchool.nameEn}</span>
+        </h1>
+        <p className="text-sm text-gray-500 mt-1">
+          {isAr
+            ? 'جميع الخدمات المدرسية في مكان واحد'
+            : 'All school services in one place'}
+        </p>
       </div>
 
       {/* Wallet Card */}
