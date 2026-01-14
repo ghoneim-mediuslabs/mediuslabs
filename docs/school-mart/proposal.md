@@ -34,6 +34,38 @@
 
 ---
 
+## 1.1 School-Centric Supplier Model
+
+<div dir="rtl">
+
+تعتمد المنصة على **نموذج محوري يرتكز على المدرسة**، حيث أن كل مدرسة لديها موردين خاصين بها:
+
+| الخدمة | المورد |
+|--------|--------|
+| **الزي المدرسي** | مصنّع/مورد الزي المعتمد من المدرسة |
+| **الكانتين** | مشغّل الكانتين المتعاقد مع المدرسة |
+| **المستلزمات** | موردي الأدوات والكتب المعتمدين |
+| **الرحلات** | شركات النقل والسياحة المتعاقدة |
+
+**أهمية هذا النموذج:**
+
+* يضمن حصول أولياء الأمور على المنتجات والخدمات المعتمدة من المدرسة فقط
+* يربط الطلبات مباشرة بالموردين المتعاقدين مع كل مدرسة
+* يتيح للمدارس التحكم الكامل في جودة المنتجات والأسعار
+* يدعم أولياء الأمور الذين لديهم أبناء في مدارس مختلفة، حيث تظهر المنتجات والخدمات الخاصة بكل مدرسة عند اختيار الطالب
+
+</div>
+
+Each school operates as an independent entity with its own:
+- Approved uniform suppliers and designs
+- Contracted canteen operators and menus
+- Authorized bookstores and supply vendors
+- Preferred event and transportation providers
+
+The platform ensures that parents only see products and services from their child's school's approved suppliers, maintaining quality control and pricing standards set by each school.
+
+---
+
 ## 2. Scope of Work
 
 <div dir="rtl">
