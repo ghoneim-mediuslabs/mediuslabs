@@ -40,9 +40,23 @@ export default function HomePage({ params }: { params: { locale: string } }) {
     <div className="min-h-screen bg-gray-50">
       <AppHeader title="School Mart" locale={locale} color="bg-gray-800" />
 
+      {/* School Card - Centered */}
+      <div className="px-4 pt-4">
+        <div className="bg-white rounded-xl p-4 flex flex-col items-center text-center border border-gray-100 shadow-sm">
+          <img
+            src={selectedSchool.logo}
+            alt=""
+            className="w-20 h-20 rounded-xl mb-2"
+          />
+          <p className="font-bold text-gray-800 text-lg">
+            {isAr ? selectedSchool.name : selectedSchool.nameEn}
+          </p>
+        </div>
+      </div>
+
       {/* Child Selector */}
-      <div className="bg-white px-4 py-3 border-b relative">
-        <div className="flex items-center justify-between">
+      <div className="mx-4 mt-3 bg-white rounded-xl border border-gray-100 shadow-sm relative">
+        <div className="flex items-center justify-between p-3">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
               <User size={20} className="text-blue-600" />
@@ -63,7 +77,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
 
         {/* Dropdown */}
         {showChildSelector && (
-          <div className="absolute top-full left-4 right-4 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-200 z-50 overflow-hidden">
             {children.map((child) => (
               <button
                 key={child.id}
@@ -86,23 +100,6 @@ export default function HomePage({ params }: { params: { locale: string } }) {
             ))}
           </div>
         )}
-      </div>
-
-      {/* School Card */}
-      <div className="px-4 pt-4">
-        <div className="bg-white rounded-xl p-4 flex items-center gap-3 border border-gray-100 shadow-sm">
-          <img
-            src={selectedSchool.logo}
-            alt=""
-            className="w-12 h-12 rounded-lg"
-          />
-          <div>
-            <p className="font-semibold text-gray-800">
-              {isAr ? selectedSchool.name : selectedSchool.nameEn}
-            </p>
-            <p className="text-sm text-gray-500">{isAr ? 'المدرسة' : 'School'}</p>
-          </div>
-        </div>
       </div>
 
       {/* Wallet Card */}
