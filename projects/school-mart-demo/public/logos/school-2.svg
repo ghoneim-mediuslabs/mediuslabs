@@ -1,7 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="12" fill="#059669"/>
-  <path d="M32 12L48 24V52H16V24L32 12Z" fill="white" fill-opacity="0.9"/>
-  <rect x="26" y="36" width="12" height="16" fill="#059669"/>
-  <circle cx="32" cy="28" r="4" fill="#059669"/>
-  <path d="M20 24L32 15L44 24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Circular background -->
+  <circle cx="50" cy="50" r="45" fill="#065f46"/>
+  <circle cx="50" cy="50" r="40" fill="#059669"/>
+  <circle cx="50" cy="50" r="36" fill="none" stroke="#fbbf24" stroke-width="2"/>
+
+  <!-- Graduation cap -->
+  <path d="M50 30 L80 42 L50 54 L20 42 Z" fill="#1f2937"/>
+  <rect x="47" y="54" width="6" height="12" fill="#1f2937"/>
+  <rect x="44" y="66" width="12" height="4" fill="#1f2937"/>
+  <circle cx="80" cy="42" r="2" fill="#fbbf24"/>
+  <path d="M80 42 Q82 52 78 58" stroke="#fbbf24" stroke-width="2" fill="none"/>
+  <circle cx="78" cy="58" r="3" fill="#fbbf24"/>
+
+  <!-- Text arc at bottom -->
+  <path id="bottomArc" d="M20 75 Q50 90 80 75" fill="none"/>
+  <text fill="white" font-size="7" font-family="Arial" font-weight="bold">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">FUTURE ACADEMY</textPath>
+  </text>
+
+  <!-- Text arc at top -->
+  <path id="topArc" d="M25 30 Q50 15 75 30" fill="none"/>
+  <text fill="white" font-size="6" font-family="Arial">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">EXCELLENCE IN EDUCATION</textPath>
+  </text>
 </svg>
