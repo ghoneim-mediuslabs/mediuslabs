@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { BookOpen, Shirt, UtensilsCrossed, Calendar, Wallet, ChevronDown, ChevronUp, User, Check } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { children, wallet, recentActivity } from '@/lib/mock-data'
+import { children, schools, wallet, recentActivity } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 const modules = [
@@ -33,6 +33,8 @@ export default function HomePage({ params }: { params: { locale: string } }) {
     setSelectedChild(child)
     setShowChildSelector(false)
   }
+
+  const selectedSchool = schools.find(s => s.id === selectedChild.schoolId) || schools[0]
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -86,8 +88,25 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         )}
       </div>
 
+      {/* School Card */}
+      <div className="px-4 pt-4">
+        <div className="bg-white rounded-xl p-4 flex items-center gap-3 border border-gray-100 shadow-sm">
+          <img
+            src={selectedSchool.logo}
+            alt=""
+            className="w-12 h-12 rounded-lg"
+          />
+          <div>
+            <p className="font-semibold text-gray-800">
+              {isAr ? selectedSchool.name : selectedSchool.nameEn}
+            </p>
+            <p className="text-sm text-gray-500">{isAr ? 'المدرسة' : 'School'}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Wallet Card */}
-      <div className="px-4 py-4">
+      <div className="px-4 pt-3 pb-4">
         <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl p-4 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">

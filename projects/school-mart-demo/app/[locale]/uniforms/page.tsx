@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { User, Check } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { uniforms, supplies, wallet, children } from '@/lib/mock-data'
+import { uniforms, supplies, wallet, children, schools } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function UniformsPage({ params }: { params: { locale: string } }) {
@@ -22,6 +22,7 @@ export default function UniformsPage({ params }: { params: { locale: string } })
   }
 
   const child = children[0]
+  const school = schools.find(s => s.id === child.schoolId) || schools[0]
 
   const addToCart = (id: string, size?: string) => {
     if (cart.find(item => item.id === id)) {
@@ -46,15 +47,14 @@ export default function UniformsPage({ params }: { params: { locale: string } })
       {/* Student Profile Card */}
       <div className="px-4 py-4">
         <div className="bg-amber-50 rounded-xl p-3 flex items-center gap-3">
-          <div className="w-8 h-8 bg-amber-200 rounded-full flex items-center justify-center">
-            <User size={16} className="text-amber-700" />
-          </div>
+          <img src={school.logo} alt="" className="w-8 h-8 rounded-lg" />
           <div>
             <span className="font-semibold text-gray-800">
               {isAr ? child.name : child.nameEn}
             </span>
             <span className="text-gray-500 mx-2">-</span>
             <span className="text-gray-600">{isAr ? child.grade : child.gradeEn}</span>
+            <p className="text-xs text-gray-500">{isAr ? school.name : school.nameEn}</p>
           </div>
         </div>
       </div>

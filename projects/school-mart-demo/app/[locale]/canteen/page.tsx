@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Wallet, Plus, Minus, ShoppingBag, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { canteenMenu, wallet, children } from '@/lib/mock-data'
+import { canteenMenu, wallet, children, schools } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function CanteenPage({ params }: { params: { locale: string } }) {
@@ -13,6 +13,7 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
   const [orderConfirmed, setOrderConfirmed] = useState(false)
 
   const child = children[0]
+  const school = schools.find(s => s.id === child.schoolId) || schools[0]
 
   const t = {
     title: isAr ? 'الكانتين الذكي' : 'Smart Canteen',
@@ -97,15 +98,14 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
       {/* Student Profile Card */}
       <div className="px-4 pt-4">
         <div className="bg-orange-50 rounded-xl p-3 flex items-center gap-3">
-          <div className="w-8 h-8 bg-orange-200 rounded-full flex items-center justify-center">
-            <User size={16} className="text-orange-700" />
-          </div>
+          <img src={school.logo} alt="" className="w-8 h-8 rounded-lg" />
           <div>
             <span className="font-semibold text-gray-800">
               {isAr ? child.name : child.nameEn}
             </span>
             <span className="text-gray-500 mx-2">-</span>
             <span className="text-gray-600">{isAr ? child.grade : child.gradeEn}</span>
+            <p className="text-xs text-gray-500">{isAr ? school.name : school.nameEn}</p>
           </div>
         </div>
       </div>

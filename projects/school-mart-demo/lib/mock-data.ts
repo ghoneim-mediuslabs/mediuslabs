@@ -1,9 +1,14 @@
 // Mock data for the School Mart demo
 
+export const schools = [
+  { id: '1', name: 'مدرسة النور الدولية', nameEn: 'Al Nour International School', logo: '/logos/school-1.svg' },
+  { id: '2', name: 'مدرسة المستقبل', nameEn: 'Future Academy', logo: '/logos/school-2.svg' },
+]
+
 export const children = [
-  { id: '1', name: 'أحمد علي', nameEn: 'Ahmed Ali', grade: 'الصف الخامس', gradeEn: 'Grade 5' },
-  { id: '2', name: 'سارة علي', nameEn: 'Sara Ali', grade: 'الصف الثالث', gradeEn: 'Grade 3' },
-  { id: '3', name: 'منى علي', nameEn: 'Mona Ali', grade: 'الصف الأول', gradeEn: 'Grade 1' },
+  { id: '1', name: 'أحمد علي', nameEn: 'Ahmed Ali', grade: 'الصف الخامس', gradeEn: 'Grade 5', schoolId: '1' },
+  { id: '2', name: 'سارة علي', nameEn: 'Sara Ali', grade: 'الصف الثالث', gradeEn: 'Grade 3', schoolId: '1' },
+  { id: '3', name: 'منى علي', nameEn: 'Mona Ali', grade: 'الصف الأول', gradeEn: 'Grade 1', schoolId: '2' },
 ]
 
 export const wallet = {
