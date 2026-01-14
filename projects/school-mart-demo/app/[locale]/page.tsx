@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { BookOpen, Shirt, UtensilsCrossed, Calendar, Wallet } from 'lucide-react'
+import { BookOpen, Shirt, UtensilsCrossed, Calendar, Wallet, ShoppingBag } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { children, schools, wallet, recentActivity } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
@@ -53,6 +53,25 @@ export default function HomePage({ params }: { params: { locale: string } }) {
             ? 'جميع الخدمات المدرسية في مكان واحد'
             : 'All school services in one place'}
         </p>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-3 gap-3 mt-4">
+          <div className="flex flex-col items-center rounded-xl bg-emerald-100 p-3">
+            <Wallet className="mb-1 h-5 w-5 text-emerald-600" />
+            <span className="text-lg font-bold text-emerald-600">{wallet.balance}</span>
+            <span className="text-xs text-gray-500">{isAr ? 'ج.م رصيد' : 'EGP Balance'}</span>
+          </div>
+          <div className="flex flex-col items-center rounded-xl bg-orange-100 p-3">
+            <ShoppingBag className="mb-1 h-5 w-5 text-orange-600" />
+            <span className="text-lg font-bold text-orange-600">3</span>
+            <span className="text-xs text-gray-500">{isAr ? 'طلبات نشطة' : 'Active Orders'}</span>
+          </div>
+          <div className="flex flex-col items-center rounded-xl bg-teal-100 p-3">
+            <Calendar className="mb-1 h-5 w-5 text-teal-600" />
+            <span className="text-lg font-bold text-teal-600">2</span>
+            <span className="text-xs text-gray-500">{isAr ? 'فعاليات قادمة' : 'Upcoming Events'}</span>
+          </div>
+        </div>
       </div>
 
       {/* Wallet Card */}
