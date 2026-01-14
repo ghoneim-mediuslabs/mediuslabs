@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { kv } from '@vercel/kv'
 
 interface School {
   slug: string
@@ -9,26 +8,26 @@ interface School {
   logo: string
 }
 
-const dataPath = join(process.cwd(), 'data', 'schools.json')
+const SCHOOLS_KEY = 'schools'
 
-function getSchools(): School[] {
+async function getSchools(): Promise<School[]> {
   try {
-    const data = readFileSync(dataPath, 'utf-8')
-    return JSON.parse(data)
+    const schools = await kv.get<School[]>(SCHOOLS_KEY)
+    return schools || []
   } catch {
     return []
   }
 }
 
-function saveSchools(schools: School[]) {
-  writeFileSync(dataPath, JSON.stringify(schools, null, 2))
+async function saveSchools(schools: School[]) {
+  await kv.set(SCHOOLS_KEY, schools)
 }
 
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const schools = getSchools()
+  const schools = await getSchools()
   const school = schools.find(s => s.slug === params.slug)
 
   if (!school) {
@@ -48,7 +47,7 @@ export async function PUT(
   const body = await request.json()
   const { name, nameEn, logo } = body
 
-  const schools = getSchools()
+  const schools = await getSchools()
   const index = schools.findIndex(s => s.slug === params.slug)
 
   if (index === -1) {
@@ -65,7 +64,7 @@ export async function PUT(
     ...(logo !== undefined && { logo }),
   }
 
-  saveSchools(schools)
+  await saveSchools(schools)
   return NextResponse.json(schools[index])
 }
 
@@ -73,7 +72,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const schools = getSchools()
+  const schools = await getSchools()
   const index = schools.findIndex(s => s.slug === params.slug)
 
   if (index === -1) {
@@ -84,7 +83,7 @@ export async function DELETE(
   }
 
   schools.splice(index, 1)
-  saveSchools(schools)
+  await saveSchools(schools)
 
   return NextResponse.json({ success: true })
 }

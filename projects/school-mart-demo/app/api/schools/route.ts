@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { kv } from '@vercel/kv'
 
 export interface School {
   slug: string
@@ -9,23 +8,23 @@ export interface School {
   logo: string
 }
 
-const dataPath = join(process.cwd(), 'data', 'schools.json')
+const SCHOOLS_KEY = 'schools'
 
-function getSchools(): School[] {
+async function getSchools(): Promise<School[]> {
   try {
-    const data = readFileSync(dataPath, 'utf-8')
-    return JSON.parse(data)
+    const schools = await kv.get<School[]>(SCHOOLS_KEY)
+    return schools || []
   } catch {
     return []
   }
 }
 
-function saveSchools(schools: School[]) {
-  writeFileSync(dataPath, JSON.stringify(schools, null, 2))
+async function saveSchools(schools: School[]) {
+  await kv.set(SCHOOLS_KEY, schools)
 }
 
 export async function GET() {
-  const schools = getSchools()
+  const schools = await getSchools()
   return NextResponse.json(schools)
 }
 
@@ -40,7 +39,7 @@ export async function POST(request: Request) {
     )
   }
 
-  const schools = getSchools()
+  const schools = await getSchools()
 
   if (schools.some(s => s.slug === slug)) {
     return NextResponse.json(
@@ -51,7 +50,7 @@ export async function POST(request: Request) {
 
   const newSchool: School = { slug, name, nameEn, logo }
   schools.push(newSchool)
-  saveSchools(schools)
+  await saveSchools(schools)
 
   return NextResponse.json(newSchool, { status: 201 })
 }
