@@ -20,10 +20,8 @@ export default function HomePage({ params }: { params: { locale: string } }) {
   const [selectedChild, setSelectedChild] = useState(children[0])
 
   const t = {
-    walletBalance: isAr ? 'رصيد المحفظة' : 'Wallet Balance',
     quickActions: isAr ? 'الخدمات' : 'Services',
     recentActivity: isAr ? 'النشاط الأخير' : 'Recent Activity',
-    topUp: isAr ? 'شحن' : 'Top Up',
   }
 
   const selectedSchool = schools.find(s => s.id === selectedChild.schoolId) || schools[0]
@@ -71,24 +69,6 @@ export default function HomePage({ params }: { params: { locale: string } }) {
             <span className="text-lg font-bold text-teal-600">2</span>
             <span className="text-xs text-gray-500">{isAr ? 'فعاليات قادمة' : 'Upcoming Events'}</span>
           </div>
-        </div>
-      </div>
-
-      {/* Wallet Card */}
-      <div className="px-4 pt-3 pb-4">
-        <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl p-3 text-white flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Wallet size={20} />
-            <div>
-              <p className="text-xs opacity-80">{t.walletBalance}</p>
-              <p className="text-lg font-bold">
-                {wallet.balance} <span className="text-sm font-normal">{isAr ? wallet.currencyAr : wallet.currency}</span>
-              </p>
-            </div>
-          </div>
-          <button className="bg-white/20 hover:bg-white/30 transition-colors px-3 py-1.5 rounded-full text-sm">
-            {t.topUp}
-          </button>
         </div>
       </div>
 
