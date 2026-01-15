@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { Wallet, Plus, Minus, ShoppingBag, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { canteenMenu, wallet, children, schools } from '@/lib/mock-data'
+import { canteenMenu, wallet, children, schools as mockSchools } from '@/lib/mock-data'
+import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function CanteenPage({ params }: { params: { locale: string } }) {
@@ -11,9 +12,12 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
   const isAr = locale === 'ar'
   const [quantities, setQuantities] = useState<Record<string, number>>({})
   const [orderConfirmed, setOrderConfirmed] = useState(false)
+  const { demoSchool, isOverrideMode, getSchoolLogo } = useSchool()
 
   const child = children[0]
-  const school = schools.find(s => s.id === child.schoolId) || schools[0]
+  const school = isOverrideMode && demoSchool
+    ? { id: 'demo', name: demoSchool.name, nameEn: demoSchool.nameEn, logo: getSchoolLogo() }
+    : mockSchools.find(s => s.id === child.schoolId) || mockSchools[0]
 
   const t = {
     title: isAr ? 'الكانتين الذكي' : 'Smart Canteen',

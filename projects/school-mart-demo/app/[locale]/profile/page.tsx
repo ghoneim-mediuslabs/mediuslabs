@@ -2,14 +2,18 @@
 
 import { User, Mail, Phone, School, CreditCard, Settings, LogOut } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { children, schools, wallet } from '@/lib/mock-data'
+import { children, schools as mockSchools, wallet } from '@/lib/mock-data'
+import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function ProfilePage({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
+  const { demoSchool, isOverrideMode, getSchoolLogo } = useSchool()
   const child = children[0]
-  const school = schools.find(s => s.id === child.schoolId) || schools[0]
+  const school = isOverrideMode && demoSchool
+    ? { id: 'demo', name: demoSchool.name, nameEn: demoSchool.nameEn, logo: getSchoolLogo() }
+    : mockSchools.find(s => s.id === child.schoolId) || mockSchools[0]
 
   const t = {
     title: isAr ? 'حسابي' : 'My Profile',
@@ -61,7 +65,9 @@ export default function ProfilePage({ params }: { params: { locale: string } }) 
         <h3 className="font-semibold text-gray-800 mb-3">{t.children}</h3>
         <div className="space-y-3">
           {children.map((child) => {
-            const childSchool = schools.find(s => s.id === child.schoolId)
+            const childSchool = isOverrideMode && demoSchool
+              ? { id: 'demo', name: demoSchool.name, nameEn: demoSchool.nameEn, logo: getSchoolLogo() }
+              : mockSchools.find(s => s.id === child.schoolId)
             return (
               <div key={child.id} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex items-center gap-3">
                 <img src={childSchool?.logo} alt="" className="w-10 h-10 rounded-lg" />

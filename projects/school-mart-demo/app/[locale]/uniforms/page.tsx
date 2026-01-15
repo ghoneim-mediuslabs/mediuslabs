@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { User, Check } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { uniforms, supplies, wallet, children, schools } from '@/lib/mock-data'
+import { uniforms, supplies, wallet, children, schools as mockSchools } from '@/lib/mock-data'
+import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function UniformsPage({ params }: { params: { locale: string } }) {
@@ -11,6 +12,7 @@ export default function UniformsPage({ params }: { params: { locale: string } })
   const isAr = locale === 'ar'
   const [cart, setCart] = useState<{ id: string; size?: string }[]>([])
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({})
+  const { demoSchool, isOverrideMode, getSchoolLogo } = useSchool()
 
   const t = {
     title: isAr ? 'الزي والمستلزمات' : 'Uniforms & Supplies',
@@ -22,7 +24,9 @@ export default function UniformsPage({ params }: { params: { locale: string } })
   }
 
   const child = children[0]
-  const school = schools.find(s => s.id === child.schoolId) || schools[0]
+  const school = isOverrideMode && demoSchool
+    ? { id: 'demo', name: demoSchool.name, nameEn: demoSchool.nameEn, logo: getSchoolLogo() }
+    : mockSchools.find(s => s.id === child.schoolId) || mockSchools[0]
 
   const addToCart = (id: string, size?: string) => {
     if (cart.find(item => item.id === id)) {

@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { BookOpen, Clock, Check, User } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { extraLessons, educationalMaterials, wallet, children, schools } from '@/lib/mock-data'
+import { extraLessons, educationalMaterials, wallet, children, schools as mockSchools } from '@/lib/mock-data'
+import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function AcademicPage({ params }: { params: { locale: string } }) {
@@ -11,9 +12,12 @@ export default function AcademicPage({ params }: { params: { locale: string } })
   const isAr = locale === 'ar'
   const [bookedLessons, setBookedLessons] = useState<string[]>([])
   const [cart, setCart] = useState<string[]>([])
+  const { demoSchool, isOverrideMode, getSchoolLogo } = useSchool()
 
   const child = children[0]
-  const school = schools.find(s => s.id === child.schoolId) || schools[0]
+  const school = isOverrideMode && demoSchool
+    ? { id: 'demo', name: demoSchool.name, nameEn: demoSchool.nameEn, logo: getSchoolLogo() }
+    : mockSchools.find(s => s.id === child.schoolId) || mockSchools[0]
 
   const t = {
     title: isAr ? 'الخدمات الأكاديمية' : 'Academic Services',
