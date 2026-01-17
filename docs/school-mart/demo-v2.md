@@ -129,6 +129,65 @@ The existing parent functionality moves to a new path. All features remain the s
 
 ---
 
+## Non-Functional Requirements
+
+### Mobile-First Design
+- Primary target: 375px mobile viewport
+- All views must be fully functional on mobile devices
+- Touch-friendly interactions (minimum 44px touch targets)
+- Responsive breakpoints for tablet and desktop
+
+### Internationalization & RTL
+- Full bilingual support: Arabic (RTL) and English (LTR)
+- Language switcher accessible from all views
+- RTL layout must work correctly for Arabic locale
+- Inline translations pattern: `isAr ? 'Arabic' : 'English'`
+
+### Visual Polish & Animations
+- Smooth page transitions between views
+- Micro-animations for interactive elements:
+  - Button hover/press states
+  - Card hover effects
+  - Loading spinners
+  - Success/error feedback animations
+- Consistent transition timing (150-300ms)
+
+### Loading States & Feedback
+- Skeleton loaders for content loading
+- Button loading states during actions
+- Toast notifications for user feedback
+- Empty states for lists with no data
+
+### Color Scheme
+
+| Module/View | Primary Color | Hex |
+|-------------|---------------|-----|
+| Academic Services | Blue | `#2563eb` |
+| Uniforms & Supplies | Purple | `#7c3aed` |
+| Smart Canteen | Orange | `#ea580c` |
+| Events & Trips | Teal | `#0d9488` |
+| School Portal | Emerald | `#059669` |
+| Supplier Portal | Red | `#dc2626` |
+| Group Portal | Violet | `#7c3aed` |
+
+### Design Language Consistency
+- All views must follow the same design patterns as Parent view:
+  - `AppHeader` component for headers
+  - Welcome section with gradient background (`from-{color}-50 to-gray-50`)
+  - 3-column stats grid with colored backgrounds
+  - 2-column quick actions grid
+  - Card styling: `bg-white rounded-xl p-4 shadow-sm border border-gray-100`
+  - Section headers: `font-semibold text-gray-800 mb-3`
+  - Consistent spacing: `px-4` padding, `pb-4`/`pb-8` margins
+
+### Accessibility
+- Proper contrast ratios for text
+- Focus states for keyboard navigation
+- Semantic HTML structure
+- Alt text for images
+
+---
+
 ## Priority Order
 
 1. Landing Page (high priority - first impression)
