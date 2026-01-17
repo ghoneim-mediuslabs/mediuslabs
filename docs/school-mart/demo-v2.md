@@ -44,49 +44,60 @@ The landing page should provide clear access to all user views:
 
 ### 2. School View (NEW)
 
-Portal for individual school administrators to manage their school's marketplace.
+A full mobile app experience for individual school administrators to manage their school's marketplace.
 
-**Path:** `/[locale]/school`
+**Path:** `/[locale]/school` (with subpages like `/school/products`, `/school/orders`, etc.)
+
+**App Structure:**
+- Own bottom navigation (Dashboard, Products, Orders, Settings)
+- Own app header with school branding
+- Consistent with Parent app design language
 
 **Features:**
-- Dashboard with school overview and key metrics
-- Product management (add/edit/remove products available to parents)
-- Order management (view and process incoming orders)
-- Parent/student management
-- School settings and branding
+- **Dashboard** - School overview with key metrics (orders, revenue, products, students)
+- **Products** - Product management (add/edit/remove products available to parents)
+- **Orders** - Order management (view and process incoming orders)
+- **Settings** - School settings, branding, parent/student management
 - Reports and analytics
 
 ---
 
 ### 3. Supplier View (NEW)
 
-Portal for suppliers to manage their products and orders across schools.
+A full mobile app experience for suppliers to manage their products and orders across schools.
 
-**Path:** `/[locale]/supplier`
+**Path:** `/[locale]/supplier` (with subpages like `/supplier/catalog`, `/supplier/orders`, etc.)
+
+**App Structure:**
+- Own bottom navigation (Dashboard, Catalog, Orders, Schools)
+- Own app header with supplier branding
+- Consistent with Parent app design language
 
 **Features:**
-- Dashboard with supplier overview and metrics
-- Product catalog management
-- Order fulfillment (orders from schools)
-- School relationships (which schools they supply to)
-- Inventory management
+- **Dashboard** - Supplier overview with metrics (orders, revenue, products, partner schools)
+- **Catalog** - Product catalog management with inventory tracking
+- **Orders** - Order fulfillment (orders from schools)
+- **Schools** - School relationships (which schools they supply to)
 - Reports and analytics
 
 ---
 
 ### 4. Group View (NEW)
 
-Portal for school group administrators (e.g., school districts, franchise networks, educational organizations).
+A full mobile app experience for school group administrators (e.g., school districts, franchise networks, educational organizations).
 
-**Path:** `/[locale]/group`
+**Path:** `/[locale]/group` (with subpages like `/group/schools`, `/group/analytics`, etc.)
+
+**App Structure:**
+- Own bottom navigation (Dashboard, Schools, Analytics, Settings)
+- Own app header with group branding
+- Consistent with Parent app design language
 
 **Features:**
-- Dashboard with overview of all schools in the group
-- View and manage individual schools
-- Group-level analytics and reporting across all schools
-- Manage group-wide settings and policies
-- Add/remove schools from the group
-- Bulk operations across schools
+- **Dashboard** - Overview of all schools in the group with key metrics
+- **Schools** - List and manage individual schools, add/remove schools
+- **Analytics** - Group-level analytics and reporting across all schools
+- **Settings** - Group-wide settings and policies, bulk operations
 
 ---
 
@@ -110,13 +121,19 @@ The existing parent functionality moves to a new path. All features remain the s
 
 ## Views Structure Summary
 
-| View | Path | Status |
-|------|------|--------|
-| Landing Page | `/[locale]/` | NEW |
-| Parent View | `/[locale]/parent?school=<school_id>` | MOVED |
-| School View | `/[locale]/school` | NEW |
-| Supplier View | `/[locale]/supplier` | NEW |
-| Group View | `/[locale]/group` | NEW |
+| View | Path | Bottom Nav | Status |
+|------|------|------------|--------|
+| Landing Page | `/[locale]/` | None | NEW |
+| Parent App | `/[locale]/parent/**` | Home, Cart, Notifications, Profile | MOVED |
+| School App | `/[locale]/school/**` | Dashboard, Products, Orders, Settings | NEW |
+| Supplier App | `/[locale]/supplier/**` | Dashboard, Catalog, Orders, Schools | NEW |
+| Group App | `/[locale]/group/**` | Dashboard, Schools, Analytics, Settings | NEW |
+
+Each app (Parent, School, Supplier, Group) is a self-contained mobile app experience with its own:
+- Bottom navigation
+- App header
+- Subpages for each feature
+- Layout with consistent design language
 
 ---
 
