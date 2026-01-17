@@ -5,6 +5,7 @@ import { Building2, ShoppingCart, Users, DollarSign, TrendingUp, BarChart3, Arro
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
+import DemoBanner from '@/components/ui/DemoBanner'
 
 const schoolsOverview = [
   { id: '1', nameAr: 'مدرسة النور', nameEn: 'Al Noor School', students: 1250, orders: 156, revenue: 245000, trend: 12 },
@@ -40,6 +41,7 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <DemoBanner locale={locale} appNameAr="مجموعة المدارس" appNameEn="School Group" />
       <AppHeader
         title={t.groupName}
         locale={locale}

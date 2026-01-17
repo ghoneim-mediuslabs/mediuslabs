@@ -7,6 +7,7 @@ import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import { children, schools as mockSchools, wallet, recentActivity } from '@/lib/mock-data'
 import AppHeader from '@/components/ui/AppHeader'
+import DemoBanner from '@/components/ui/DemoBanner'
 
 const modules = [
   { href: '/parent/academic', icon: BookOpen, labelAr: 'الخدمات الأكاديمية', labelEn: 'Academic Services', color: 'bg-academic', description: { ar: 'دروس إضافية ومواد تعليمية', en: 'Extra lessons & materials' } },
@@ -42,6 +43,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <DemoBanner locale={locale} appNameAr="ولي الأمر" appNameEn="Parent" />
       <AppHeader
         locale={locale}
         childrenList={children}

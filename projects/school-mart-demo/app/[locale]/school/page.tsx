@@ -5,6 +5,7 @@ import { Package, ShoppingCart, Users, DollarSign, TrendingUp, Clock, Plus, Arro
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
+import DemoBanner from '@/components/ui/DemoBanner'
 
 const recentOrders = [
   { id: '1', parentAr: 'أحمد محمد', parentEn: 'Ahmed Mohamed', itemsAr: '٣ قطع زي مدرسي', itemsEn: '3 Uniform Items', amount: 580, status: 'pending' },
@@ -63,6 +64,7 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <DemoBanner locale={locale} appNameAr="المدرسة" appNameEn="School" />
       <AppHeader
         title={schoolName}
         locale={locale}
