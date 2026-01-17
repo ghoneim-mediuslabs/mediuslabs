@@ -68,7 +68,7 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
           locale={locale}
           color="bg-canteen"
           showBack
-          backHref={`/${locale}`}
+          backHref={`/${locale}/parent`}
         />
         <div className="flex flex-col items-center justify-center px-4 py-20">
           <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
@@ -96,7 +96,7 @@ export default function CanteenPage({ params }: { params: { locale: string } }) 
         locale={locale}
         color="bg-canteen"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       {/* Student Profile Card */}

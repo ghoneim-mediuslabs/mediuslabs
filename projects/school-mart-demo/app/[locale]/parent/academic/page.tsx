@@ -49,7 +49,7 @@ export default function AcademicPage({ params }: { params: { locale: string } })
         locale={locale}
         color="bg-academic"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       {/* Student Profile Card */}

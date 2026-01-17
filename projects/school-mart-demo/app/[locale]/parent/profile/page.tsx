@@ -32,7 +32,7 @@ export default function ProfilePage({ params }: { params: { locale: string } }) 
         locale={locale}
         color="bg-gray-800"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       {/* Parent Info */}

@@ -51,7 +51,7 @@ export default function EventsPage({ params }: { params: { locale: string } }) {
         locale={locale}
         color="bg-events"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       {/* Student Profile Card */}

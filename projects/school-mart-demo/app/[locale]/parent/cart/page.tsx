@@ -35,7 +35,7 @@ export default function CartPage({ params }: { params: { locale: string } }) {
         locale={locale}
         color="bg-gray-800"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       {/* Cart Items */}

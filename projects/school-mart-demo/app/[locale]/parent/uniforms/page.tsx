@@ -45,7 +45,7 @@ export default function UniformsPage({ params }: { params: { locale: string } })
         locale={locale}
         color="bg-uniforms"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       {/* Student Profile Card */}

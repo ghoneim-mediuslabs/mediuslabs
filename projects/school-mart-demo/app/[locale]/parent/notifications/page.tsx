@@ -29,7 +29,7 @@ export default function NotificationsPage({ params }: { params: { locale: string
         locale={locale}
         color="bg-gray-800"
         showBack
-        backHref={`/${locale}`}
+        backHref={`/${locale}/parent`}
       />
 
       <div className="px-4 pt-4 pb-24">
