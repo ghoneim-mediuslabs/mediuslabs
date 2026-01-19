@@ -97,14 +97,14 @@
       "viewAll": "View All Products",
       "inDevelopment": "In Development",
       "schoolMeal": {
-        "title": "School Food Ordering Platform",
-        "description": "A mobile platform for school meal ordering in Egypt. Connecting parents, schools, and suppliers with a streamlined B2B2C model.",
+        "title": "School-Mart",
+        "description": "A comprehensive school services platform in Egypt. Uniforms, supplies, canteen, events, and more—all in one place for parents, schools, and suppliers.",
         "market": "Market",
         "marketValue": "Egypt",
         "stakeholders": "Stakeholders",
-        "stakeholdersValue": "Parents, Schools, Suppliers",
+        "stakeholdersValue": "Parents, Schools, Suppliers, School Groups",
         "model": "Model",
-        "modelValue": "B2B2C with escrow payments"
+        "modelValue": "B2B2C with digital payments"
       },
       "learnMore": "Learn More"
     },
@@ -189,20 +189,21 @@
       "subtitle": "More products in the pipeline. Stay tuned."
     },
     "schoolMeal": {
-      "name": "School Food Ordering Platform",
-      "description": "A mobile platform for school meal ordering in Egypt. Each school is linked to exactly one assigned supplier—no marketplace, no complexity. Parents order, suppliers prepare in batch, schools distribute and confirm delivery.",
+      "name": "School-Mart",
+      "description": "A comprehensive school services platform in Egypt. All school services in one place—uniforms, supplies, canteen, events, trips, and more. Parents get a single app, schools get centralized management, and suppliers get direct access.",
       "problem": [
-        "Parents lack time to prep healthy meals; kids resort to junk food",
-        "Schools have no visibility on what students eat",
-        "Suppliers can't predict daily demand"
+        "Parents juggle multiple apps and systems for different school services",
+        "Schools struggle with cash handling and fragmented service management",
+        "Suppliers have no direct channel to reach schools efficiently",
+        "School groups lack unified visibility across branches"
       ],
       "solution": [
-        "Parents order from their school's designated supplier",
-        "Supplier prepares meals in batch and delivers to the school",
-        "School distributes to students and confirms delivery",
-        "Payment is released only after confirmation"
+        "One platform for all school services: uniforms, books, canteen, events",
+        "Digital wallet and cashless payments for parents",
+        "Centralized dashboard for schools to manage services and vendors",
+        "Group-level analytics and management for school networks"
       ],
-      "stakeholdersList": ["Parents", "Schools", "Suppliers", "Floor Admins"],
+      "stakeholdersList": ["Parents", "Schools", "Suppliers", "School Groups"],
       "marketValue": "Egypt"
     }
   },
