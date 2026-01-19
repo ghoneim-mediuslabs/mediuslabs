@@ -543,7 +543,7 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
               {isAr ? 'احجز عرض تجريبي' : 'Book a Demo'}
             </a>
             <a
-              href="https://wa.me/201234567890"
+              href="https://wa.me/201117344477"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 text-white border-2 border-white/30 px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-colors"
@@ -568,14 +568,14 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
 
           <div className="grid sm:grid-cols-3 gap-6">
             <a
-              href="tel:+201234567890"
+              href="tel:+201117344477"
               className="flex flex-col items-center gap-3 bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
             >
               <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
                 <Phone size={24} className="text-blue-600" />
               </div>
               <p className="font-semibold text-gray-900">{isAr ? 'اتصل بنا' : 'Call Us'}</p>
-              <p className="text-gray-600 text-sm" dir="ltr">+20 123 456 7890</p>
+              <p className="text-gray-600 text-sm" dir="ltr">+20 111 734 4477</p>
             </a>
 
             <a
