@@ -40,28 +40,34 @@ interface DemoSchool {
 
 The platform supports two URL parameters for context switching:
 
-| URL Pattern | Parent/School App | Group App |
-|-------------|-------------------|-----------|
-| `?group=xyz` | Uses first school in group | Shows group context |
-| `?school=abc` (school has group) | Uses that school | Shows school's parent group |
-| `?school=abc` (school has no group) | Uses that school | **Hidden** (no group portal) |
+| URL Pattern | Parent/School App | Group App | Group Portal Visible |
+|-------------|-------------------|-----------|----------------------|
+| No params (default) | Default/sample data | Default/sample data | **Yes** (sample group) |
+| `?group=xyz` | Uses first school in group | Shows group context | Yes |
+| `?school=abc` (school has group) | Uses that school | Shows school's parent group | Yes |
+| `?school=abc` (school has no group) | Uses that school | N/A | **Hidden** |
 
 ### Examples
 
-1. **Group URL:** `/?group=saudi-schools`
+1. **No URL params:** `/`
+   - Landing page shows default School-Mart branding
+   - All portals visible (including Group)
+   - Group portal links to sample/default group view
+
+2. **Group URL:** `/?group=egyptian-schools`
    - Landing page shows group branding
-   - Parent/School apps use first school in group's `schoolSlugs` array
+   - Parent/School apps use first school in group's `schoolSlugs` array (or sample school if group has no schools)
    - Group app shows the group's dashboard
 
-2. **School URL (with group):** `/?school=al-noor`
+3. **School URL (with group):** `/?school=al-noor`
    - Landing page shows school branding
    - Parent/School apps use Al Noor school
    - Group app shows the parent group's dashboard
 
-3. **School URL (no group):** `/?school=standalone-school`
+4. **School URL (no group):** `/?school=standalone-school`
    - Landing page shows school branding
    - Parent/School apps use that school
-   - Group portal card is hidden on landing page
+   - Group portal card is **hidden** on landing page (only case where it's hidden)
 
 ---
 
@@ -215,13 +221,18 @@ interface SchoolContextType {
 - [ ] Group app shows parent group context
 - [ ] Group portal is visible
 
+### URL Behavior - No Parameters (Default)
+- [ ] Landing page shows default School-Mart branding
+- [ ] All portals visible including Group
+- [ ] Group portal links to default group view
+
 ### URL Behavior - School Mode without Group
 - [ ] Landing page shows school branding
 - [ ] Parent/School apps use that school
-- [ ] Group portal is hidden on landing page
+- [ ] Group portal is hidden on landing page (only case where hidden)
 
 ### Edge Cases
-- [ ] Empty group (no schools) handled gracefully
+- [ ] Empty group (no schools) falls back to sample school for Parent/School apps
 - [ ] Invalid group slug shows appropriate fallback
 - [ ] Invalid school slug shows appropriate fallback
 - [ ] School removed from group updates correctly
