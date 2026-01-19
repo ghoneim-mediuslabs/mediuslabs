@@ -2,17 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Building2, ShoppingCart, Users, DollarSign, TrendingUp, BarChart3, ArrowUpRight, ArrowUp, ArrowDown } from 'lucide-react'
+import { Building2, ShoppingCart, Users, DollarSign, ArrowUpRight, ArrowUp, ArrowDown } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool, DemoSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 import DemoBanner from '@/components/ui/DemoBanner'
-
-const defaultRecentActivity = [
-  { id: '1', schoolAr: 'مدرسة النور', schoolEn: 'Al Noor School', actionAr: 'طلب جديد بقيمة 5,000 ج.م', actionEn: 'New order worth 5,000 EGP', time: '5 min' },
-  { id: '2', schoolAr: 'مدرسة الأمل', schoolEn: 'Al Amal School', actionAr: 'تم إضافة 3 منتجات جديدة', actionEn: 'Added 3 new products', time: '15 min' },
-  { id: '3', schoolAr: 'مدرسة الفجر', schoolEn: 'Al Fajr School', actionAr: 'تحديث بيانات المدرسة', actionEn: 'Updated school info', time: '1 hr' },
-]
 
 export default function GroupDashboard({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
@@ -20,19 +14,33 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
   const { demoGroup, buildHref, groupSlug, getGroupLogo } = useSchool()
   const [groupSchools, setGroupSchools] = useState<DemoSchool[]>([])
 
+  // Sample schools for default view
+  const sampleSchools: DemoSchool[] = [
+    { slug: 'al-noor', name: 'مدرسة النور الدولية', nameEn: 'Al Noor International School', logo: '', groupSlug: 'sample' },
+    { slug: 'al-amal', name: 'مدرسة الأمل', nameEn: 'Al Amal School', logo: '', groupSlug: 'sample' },
+    { slug: 'future-leaders', name: 'مدرسة قادة المستقبل', nameEn: 'Future Leaders School', logo: '', groupSlug: 'sample' },
+    { slug: 'al-salam', name: 'مدرسة السلام', nameEn: 'Al Salam School', logo: '', groupSlug: 'sample' },
+    { slug: 'bright-minds', name: 'مدرسة العقول المضيئة', nameEn: 'Bright Minds Academy', logo: '', groupSlug: 'sample' },
+  ]
+
   // Fetch schools that belong to this group
   useEffect(() => {
     const fetchGroupSchools = async () => {
-      if (!groupSlug) return
+      if (!groupSlug) {
+        setGroupSchools(sampleSchools)
+        return
+      }
       try {
         const res = await fetch('/api/schools')
         if (res.ok) {
           const allSchools: DemoSchool[] = await res.json()
           const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
-          setGroupSchools(filtered)
+          setGroupSchools(filtered.length > 0 ? filtered : sampleSchools)
+        } else {
+          setGroupSchools(sampleSchools)
         }
       } catch {
-        setGroupSchools([])
+        setGroupSchools(sampleSchools)
       }
     }
     fetchGroupSchools()
@@ -121,7 +129,7 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
           </Link>
         </div>
         <div className="space-y-3">
-          {(groupSchools.length > 0 ? groupSchools.slice(0, 5) : []).map((school, idx) => {
+          {groupSchools.slice(0, 5).map((school, idx) => {
             // Generate random-ish mock data per school
             const mockStudents = 800 + (idx * 150)
             const mockOrders = 90 + (idx * 20)
@@ -130,8 +138,12 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
             return (
               <div key={school.slug} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
                 <div className="flex items-start gap-3">
-                  {school.logo && (
+                  {school.logo ? (
                     <img src={school.logo} alt="" className="w-10 h-10 rounded-lg object-cover" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center">
+                      <Building2 size={20} className="text-violet-600" />
+                    </div>
                   )}
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-2">
@@ -152,11 +164,6 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
               </div>
             )
           })}
-          {groupSchools.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
-              {isAr ? 'لا توجد مدارس في هذه المجموعة' : 'No schools in this group'}
-            </div>
-          )}
         </div>
       </div>
 
@@ -166,7 +173,7 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
           <h2 className="font-semibold text-gray-800">{t.recentActivity}</h2>
         </div>
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 divide-y">
-          {(groupSchools.length > 0 ? groupSchools.slice(0, 3) : []).map((school, idx) => {
+          {groupSchools.slice(0, 3).map((school, idx) => {
             const actions = [
               { ar: 'طلب جديد بقيمة 5,000 ج.م', en: 'New order worth 5,000 EGP' },
               { ar: 'تم إضافة 3 منتجات جديدة', en: 'Added 3 new products' },
@@ -190,18 +197,6 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
               </div>
             )
           })}
-          {groupSchools.length === 0 && defaultRecentActivity.map((activity) => (
-            <div key={activity.id} className="flex items-center gap-3 p-4">
-              <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center">
-                <Building2 size={18} className="text-violet-600" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-gray-800">{isAr ? activity.schoolAr : activity.schoolEn}</p>
-                <p className="text-sm text-gray-500">{isAr ? activity.actionAr : activity.actionEn}</p>
-              </div>
-              <span className="text-xs text-gray-400">{activity.time}</span>
-            </div>
-          ))}
         </div>
       </div>
     </div>

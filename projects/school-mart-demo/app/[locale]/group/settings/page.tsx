@@ -16,16 +16,19 @@ export default function GroupSettings({ params }: { params: { locale: string } }
   // Fetch schools count
   useEffect(() => {
     const fetchSchoolCount = async () => {
-      if (!groupSlug) return
+      if (!groupSlug) {
+        setSchoolCount(5) // Default sample count
+        return
+      }
       try {
         const res = await fetch('/api/schools')
         if (res.ok) {
           const allSchools: DemoSchool[] = await res.json()
           const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
-          setSchoolCount(filtered.length)
+          setSchoolCount(filtered.length || 5) // Fall back to 5 if no schools
         }
       } catch {
-        setSchoolCount(0)
+        setSchoolCount(5)
       }
     }
     fetchSchoolCount()

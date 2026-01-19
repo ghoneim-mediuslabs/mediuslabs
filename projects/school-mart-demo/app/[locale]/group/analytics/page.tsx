@@ -27,19 +27,33 @@ export default function GroupAnalytics({ params }: { params: { locale: string } 
   const { demoGroup, groupSlug } = useSchool()
   const [groupSchools, setGroupSchools] = useState<DemoSchool[]>([])
 
+  // Sample schools for default view
+  const sampleSchools: DemoSchool[] = [
+    { slug: 'al-noor', name: 'مدرسة النور الدولية', nameEn: 'Al Noor International School', logo: '', groupSlug: 'sample' },
+    { slug: 'al-amal', name: 'مدرسة الأمل', nameEn: 'Al Amal School', logo: '', groupSlug: 'sample' },
+    { slug: 'future-leaders', name: 'مدرسة قادة المستقبل', nameEn: 'Future Leaders School', logo: '', groupSlug: 'sample' },
+    { slug: 'al-salam', name: 'مدرسة السلام', nameEn: 'Al Salam School', logo: '', groupSlug: 'sample' },
+    { slug: 'bright-minds', name: 'مدرسة العقول المضيئة', nameEn: 'Bright Minds Academy', logo: '', groupSlug: 'sample' },
+  ]
+
   // Fetch schools that belong to this group
   useEffect(() => {
     const fetchGroupSchools = async () => {
-      if (!groupSlug) return
+      if (!groupSlug) {
+        setGroupSchools(sampleSchools)
+        return
+      }
       try {
         const res = await fetch('/api/schools')
         if (res.ok) {
           const allSchools: DemoSchool[] = await res.json()
           const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
-          setGroupSchools(filtered)
+          setGroupSchools(filtered.length > 0 ? filtered : sampleSchools)
+        } else {
+          setGroupSchools(sampleSchools)
         }
       } catch {
-        setGroupSchools([])
+        setGroupSchools(sampleSchools)
       }
     }
     fetchGroupSchools()

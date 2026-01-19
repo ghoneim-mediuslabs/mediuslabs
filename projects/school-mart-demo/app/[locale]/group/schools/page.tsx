@@ -15,10 +15,21 @@ export default function GroupSchools({ params }: { params: { locale: string } })
   const [groupSchools, setGroupSchools] = useState<DemoSchool[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
+  // Sample schools for default view (when no group specified)
+  const sampleSchools: DemoSchool[] = [
+    { slug: 'al-noor', name: 'مدرسة النور الدولية', nameEn: 'Al Noor International School', logo: '', groupSlug: 'sample' },
+    { slug: 'al-amal', name: 'مدرسة الأمل', nameEn: 'Al Amal School', logo: '', groupSlug: 'sample' },
+    { slug: 'future-leaders', name: 'مدرسة قادة المستقبل', nameEn: 'Future Leaders School', logo: '', groupSlug: 'sample' },
+    { slug: 'al-salam', name: 'مدرسة السلام', nameEn: 'Al Salam School', logo: '', groupSlug: 'sample' },
+    { slug: 'bright-minds', name: 'مدرسة العقول المضيئة', nameEn: 'Bright Minds Academy', logo: '', groupSlug: 'sample' },
+  ]
+
   // Fetch schools that belong to this group
   useEffect(() => {
     const fetchGroupSchools = async () => {
+      // If no group specified, use sample schools
       if (!groupSlug) {
+        setGroupSchools(sampleSchools)
         setIsLoading(false)
         return
       }
@@ -27,10 +38,13 @@ export default function GroupSchools({ params }: { params: { locale: string } })
         if (res.ok) {
           const allSchools: DemoSchool[] = await res.json()
           const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
-          setGroupSchools(filtered)
+          // If group has no schools, fall back to sample schools
+          setGroupSchools(filtered.length > 0 ? filtered : sampleSchools)
+        } else {
+          setGroupSchools(sampleSchools)
         }
       } catch {
-        setGroupSchools([])
+        setGroupSchools(sampleSchools)
       }
       setIsLoading(false)
     }
