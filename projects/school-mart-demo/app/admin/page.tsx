@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Plus, Pencil, Trash2, Copy, ExternalLink, X, Building2, School as SchoolIcon, Upload } from 'lucide-react'
+import { Plus, Pencil, Trash2, Copy, ExternalLink, X, Building2, School as SchoolIcon, Upload, Lock } from 'lucide-react'
+
+const ADMIN_PASSWORD = 'schoolmart2024'
 
 interface School {
   slug: string
@@ -20,6 +22,11 @@ interface SchoolGroup {
 }
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState('')
+  const [passwordError, setPasswordError] = useState(false)
+  const [checkingAuth, setCheckingAuth] = useState(true)
+
   const [schools, setSchools] = useState<School[]>([])
   const [groups, setGroups] = useState<SchoolGroup[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -45,9 +52,31 @@ export default function AdminPage() {
   const [isImporting, setIsImporting] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Check for existing auth on mount
   useEffect(() => {
-    fetchData()
+    const savedAuth = sessionStorage.getItem('admin_authenticated')
+    if (savedAuth === 'true') {
+      setIsAuthenticated(true)
+    }
+    setCheckingAuth(false)
   }, [])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchData()
+    }
+  }, [isAuthenticated])
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true)
+      sessionStorage.setItem('admin_authenticated', 'true')
+      setPasswordError(false)
+    } else {
+      setPasswordError(true)
+    }
+  }
 
   const fetchData = async () => {
     try {
@@ -314,6 +343,59 @@ export default function AdminPage() {
     setCsvPreview([])
     setImportError(null)
     if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  // Loading state while checking auth
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
+      </div>
+    )
+  }
+
+  // Login screen
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+        <div className="bg-white rounded-xl p-8 shadow-lg w-full max-w-sm">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+              <Lock size={32} className="text-blue-600" />
+            </div>
+          </div>
+          <h1 className="text-xl font-bold text-gray-900 text-center mb-2">Admin Access</h1>
+          <p className="text-gray-500 text-center text-sm mb-6">Enter password to continue</p>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={e => {
+                  setPassword(e.target.value)
+                  setPasswordError(false)
+                }}
+                placeholder="Password"
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                  passwordError ? 'border-red-500' : 'border-gray-300'
+                }`}
+                autoFocus
+              />
+              {passwordError && (
+                <p className="text-red-500 text-sm mt-2">Incorrect password</p>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    )
   }
 
   return (
