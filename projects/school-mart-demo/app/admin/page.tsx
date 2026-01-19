@@ -424,6 +424,7 @@ export default function AdminPage() {
                           <table className="w-full text-sm">
                             <thead className="bg-gray-50 sticky top-0">
                               <tr>
+                                <th className="px-3 py-2 text-left w-10">Logo</th>
                                 <th className="px-3 py-2 text-left">Slug</th>
                                 <th className="px-3 py-2 text-left">English Name</th>
                                 <th className="px-3 py-2 text-right">Arabic Name</th>
@@ -433,6 +434,13 @@ export default function AdminPage() {
                             <tbody className="divide-y">
                               {csvPreview.map((school, i) => (
                                 <tr key={i} className="hover:bg-gray-50">
+                                  <td className="px-3 py-2">
+                                    {school.logo ? (
+                                      <img src={school.logo} alt="" className="w-8 h-8 rounded object-cover bg-gray-100" />
+                                    ) : (
+                                      <div className="w-8 h-8 rounded bg-gray-200" />
+                                    )}
+                                  </td>
                                   <td className="px-3 py-2 font-mono text-xs">{school.slug}</td>
                                   <td className="px-3 py-2">{school.nameEn}</td>
                                   <td className="px-3 py-2 text-right" dir="rtl">{school.name}</td>
