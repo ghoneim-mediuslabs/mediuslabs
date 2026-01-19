@@ -104,7 +104,9 @@
         "stakeholders": "أصحاب المصلحة",
         "stakeholdersValue": "الآباء، المدارس، الموردون، مجموعات المدارس",
         "model": "النموذج",
-        "modelValue": "B2B2C مع الدفع الرقمي"
+        "modelValue": "B2B2C مع الدفع الرقمي",
+        "demoUrl": "https://school-mart-demo.vercel.app/",
+        "viewDemo": "عرض تجريبي"
       },
       "learnMore": "اعرف المزيد"
     },
@@ -204,7 +206,9 @@
         "تحليلات وإدارة على مستوى المجموعة لشبكات المدارس"
       ],
       "stakeholdersList": ["الآباء", "المدارس", "الموردون", "مجموعات المدارس"],
-      "marketValue": "مصر"
+      "marketValue": "مصر",
+      "demoUrl": "https://school-mart-demo.vercel.app/",
+      "viewDemo": "عرض تجريبي"
     }
   },
   "contact": {

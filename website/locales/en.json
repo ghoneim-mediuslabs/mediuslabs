@@ -104,7 +104,9 @@
         "stakeholders": "Stakeholders",
         "stakeholdersValue": "Parents, Schools, Suppliers, School Groups",
         "model": "Model",
-        "modelValue": "B2B2C with digital payments"
+        "modelValue": "B2B2C with digital payments",
+        "demoUrl": "https://school-mart-demo.vercel.app/",
+        "viewDemo": "View Demo"
       },
       "learnMore": "Learn More"
     },
@@ -204,7 +206,9 @@
         "Group-level analytics and management for school networks"
       ],
       "stakeholdersList": ["Parents", "Schools", "Suppliers", "School Groups"],
-      "marketValue": "Egypt"
+      "marketValue": "Egypt",
+      "demoUrl": "https://school-mart-demo.vercel.app/",
+      "viewDemo": "View Demo"
     }
   },
   "contact": {

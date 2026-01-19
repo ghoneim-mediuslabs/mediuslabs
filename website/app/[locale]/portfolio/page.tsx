@@ -26,6 +26,8 @@ export default async function PortfolioPage({
         stakeholders: t.portfolio.schoolMeal.stakeholdersList,
         market: t.portfolio.schoolMeal.marketValue,
       },
+      demoUrl: t.portfolio.schoolMeal.demoUrl,
+      viewDemo: t.portfolio.schoolMeal.viewDemo,
     },
   ];
 
@@ -94,7 +96,7 @@ export default async function PortfolioPage({
                   </div>
                 </div>
 
-                <div className="mt-8 pt-8 border-t border-border flex flex-wrap gap-8">
+                <div className="mt-8 pt-8 border-t border-border flex flex-wrap gap-8 items-end">
                   <div>
                     <h3 className="font-semibold text-sm uppercase tracking-wider text-muted">
                       {t.portfolio.stakeholders}
@@ -117,6 +119,24 @@ export default async function PortfolioPage({
                     </h3>
                     <p className="mt-2 text-sm">{product.details.market}</p>
                   </div>
+
+                  {product.demoUrl && (
+                    <div className="flex-1 flex justify-end">
+                      <a
+                        href={product.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+                      >
+                        {product.viewDemo}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
