@@ -6,6 +6,7 @@ export interface School {
   name: string
   nameEn: string
   logo: string
+  groupSlug?: string
 }
 
 const SCHOOLS_KEY = 'schools'
@@ -30,7 +31,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const { slug, name, nameEn, logo = '' } = body
+  const { slug, name, nameEn, logo = '', groupSlug } = body
 
   if (!slug || !name || !nameEn) {
     return NextResponse.json(
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
     )
   }
 
-  const newSchool: School = { slug, name, nameEn, logo }
+  const newSchool: School = { slug, name, nameEn, logo, ...(groupSlug && { groupSlug }) }
   schools.push(newSchool)
   await saveSchools(schools)
 

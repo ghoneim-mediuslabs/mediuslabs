@@ -6,6 +6,7 @@ interface School {
   name: string
   nameEn: string
   logo: string
+  groupSlug?: string
 }
 
 const SCHOOLS_KEY = 'schools'
@@ -45,7 +46,7 @@ export async function PUT(
   { params }: { params: { slug: string } }
 ) {
   const body = await request.json()
-  const { name, nameEn, logo } = body
+  const { name, nameEn, logo, groupSlug } = body
 
   const schools = await getSchools()
   const index = schools.findIndex(s => s.slug === params.slug)
@@ -62,6 +63,7 @@ export async function PUT(
     ...(name && { name }),
     ...(nameEn && { nameEn }),
     ...(logo !== undefined && { logo }),
+    ...(groupSlug !== undefined && { groupSlug: groupSlug || undefined }),
   }
 
   await saveSchools(schools)

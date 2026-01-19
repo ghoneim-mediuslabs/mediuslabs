@@ -84,8 +84,11 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
   const otherLocale = locale === 'ar' ? 'en' : 'ar'
-  const { demoSchool, isOverrideMode, getSchoolLogo, buildHref } = useSchool()
+  const { demoSchool, demoGroup, isOverrideMode, isGroupMode, getSchoolLogo, getGroupLogo, buildHref, hideGroupPortal } = useSchool()
   const Arrow = isAr ? ArrowLeft : ArrowRight
+
+  // Filter portals - hide group portal if school has no group
+  const visiblePortals = hideGroupPortal ? portals.filter(p => p.id !== 'group') : portals
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -93,7 +96,12 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {isOverrideMode && demoSchool ? (
+            {isGroupMode && demoGroup ? (
+              <>
+                <img src={getGroupLogo()} alt="" className="h-8 w-8 rounded-lg object-cover" />
+                <span className="font-bold text-gray-800">{isAr ? demoGroup.name : demoGroup.nameEn}</span>
+              </>
+            ) : isOverrideMode && demoSchool ? (
               <>
                 <img src={getSchoolLogo()} alt="" className="h-8 w-8 rounded-lg object-cover" />
                 <span className="font-bold text-gray-800">{isAr ? demoSchool.name : demoSchool.nameEn}</span>
@@ -120,7 +128,12 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
       {/* Hero Section */}
       <section className="px-4 pt-8 pb-10 text-center">
         <div className="max-w-md mx-auto">
-          {isOverrideMode && demoSchool ? (
+          {isGroupMode && demoGroup ? (
+            <div className="inline-flex items-center gap-2 bg-violet-50 text-violet-700 px-4 py-2 rounded-full text-sm font-medium mb-4 animate-fade-in">
+              <CheckCircle2 size={16} />
+              {isAr ? 'خدمات حصرية لـ' : 'Exclusive services for'} {isAr ? demoGroup.name : demoGroup.nameEn}
+            </div>
+          ) : isOverrideMode && demoSchool ? (
             <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4 animate-fade-in">
               <CheckCircle2 size={16} />
               {isAr ? 'خدمات حصرية لـ' : 'Exclusive services for'} {isAr ? demoSchool.name : demoSchool.nameEn}
@@ -199,7 +212,7 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
             {isAr ? 'نخدم جميع أطراف المنظومة التعليمية' : 'We serve all stakeholders in education'}
           </p>
           <div className="grid grid-cols-2 gap-3">
-            {portals.map((portal) => {
+            {visiblePortals.map((portal) => {
               const Icon = portal.icon
               return (
                 <Link
