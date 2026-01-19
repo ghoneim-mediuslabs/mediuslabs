@@ -21,7 +21,7 @@ const navConfigs: Record<string, { items: NavItem[], color: string }> = {
       { href: '/profile', icon: User, labelAr: 'حسابي', labelEn: 'Profile' },
       { href: '/notifications', icon: Bell, labelAr: 'الإشعارات', labelEn: 'Notifications' },
       { href: '/cart', icon: ShoppingCart, labelAr: 'السلة', labelEn: 'Cart' },
-      { href: '', icon: Home, labelAr: 'الرئيسية', labelEn: 'Home' },
+      { href: '', icon: LayoutDashboard, labelAr: 'الرئيسية', labelEn: 'Dashboard' },
     ]
   },
   '/school': {

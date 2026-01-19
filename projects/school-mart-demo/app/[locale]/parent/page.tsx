@@ -16,7 +16,7 @@ const modules = [
   { href: '/parent/events', icon: Calendar, labelAr: 'الفعاليات والرحلات', labelEn: 'Events & Trips', color: 'bg-events', description: { ar: 'التسجيل والموافقات', en: 'Registration & consent' } },
 ]
 
-export default function HomePage({ params }: { params: { locale: string } }) {
+export default function ParentDashboard({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
   const [selectedChild, setSelectedChild] = useState(children[0])
@@ -53,15 +53,17 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         schools={availableSchools}
       />
 
-      {/* Welcome Message */}
+      {/* Welcome & Stats */}
       <div className="px-4 pt-4 pb-4 bg-gradient-to-b from-blue-50 to-gray-50">
-        <p className="text-gray-500">
-          {isAr ? 'مرحباً بك' : 'Welcome'} 👋
-        </p>
-        <h1 className="text-xl font-bold text-gray-800">
-          {isAr ? 'خدمات' : 'Services of'}{' '}
-          <span className="text-blue-600">{isAr ? activeSchool.name : activeSchool.nameEn}</span>
-        </h1>
+        <div className="flex items-center gap-3 mb-2">
+          {activeSchool.logo && (
+            <img src={activeSchool.logo} alt="" className="w-12 h-12 rounded-lg object-cover" />
+          )}
+          <div>
+            <p className="text-gray-500">{isAr ? 'مرحباً بك' : 'Welcome'} 👋</p>
+            <h1 className="text-xl font-bold text-blue-600">{isAr ? activeSchool.name : activeSchool.nameEn}</h1>
+          </div>
+        </div>
         <p className="text-sm text-gray-500 mt-1">
           {isAr
             ? 'جميع الخدمات المدرسية في مكان واحد'
