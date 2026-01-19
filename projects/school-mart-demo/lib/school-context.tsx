@@ -58,7 +58,7 @@ export function SchoolProvider({ children }: { children: ReactNode }) {
             const group: DemoSchoolGroup = await groupRes.json()
             setDemoGroup(group)
 
-            // Get first school in group, or null if empty
+            // Get first school in group
             if (group.schoolSlugs && group.schoolSlugs.length > 0) {
               const schoolRes = await fetch(`/api/schools/${group.schoolSlugs[0]}`)
               if (schoolRes.ok) {
@@ -68,7 +68,19 @@ export function SchoolProvider({ children }: { children: ReactNode }) {
                 setDemoSchool(null)
               }
             } else {
-              setDemoSchool(null)
+              // Group has no schoolSlugs, try to find schools that belong to this group
+              const allSchoolsRes = await fetch('/api/schools')
+              if (allSchoolsRes.ok) {
+                const allSchools: DemoSchool[] = await allSchoolsRes.json()
+                const groupSchools = allSchools.filter(s => s.groupSlug === groupSlugParam)
+                if (groupSchools.length > 0) {
+                  setDemoSchool(groupSchools[0])
+                } else {
+                  setDemoSchool(null)
+                }
+              } else {
+                setDemoSchool(null)
+              }
             }
           } else {
             setDemoGroup(null)
