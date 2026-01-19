@@ -101,8 +101,8 @@ const benefits = [
   },
   {
     icon: Banknote,
-    titleAr: 'حرم جامعي بلا نقد',
-    titleEn: 'Cashless Campus',
+    titleAr: 'مدرسة بلا نقد',
+    titleEn: 'Cashless School',
     descAr: 'محفظة رقمية ودفع إلكتروني آمن',
     descEn: 'Digital wallet and secure e-payments',
   },
