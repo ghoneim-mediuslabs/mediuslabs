@@ -579,14 +579,14 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
             </a>
 
             <a
-              href="mailto:hello@school-mart.com"
+              href="mailto:hello@mediuslabs.io"
               className="flex flex-col items-center gap-3 bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
             >
               <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
                 <Mail size={24} className="text-emerald-600" />
               </div>
               <p className="font-semibold text-gray-900">{isAr ? 'راسلنا' : 'Email Us'}</p>
-              <p className="text-gray-600 text-sm">hello@school-mart.com</p>
+              <p className="text-gray-600 text-sm">hello@mediuslabs.io</p>
             </a>
 
             <div className="flex flex-col items-center gap-3 bg-white rounded-xl p-6 border border-gray-200">
@@ -622,7 +622,18 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
               </a>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center">
+          <div className="border-t border-gray-800 pt-8 text-center space-y-2">
+            <p className="text-gray-400 text-sm">
+              {isAr ? 'منتج من' : 'A product by'}{' '}
+              <a
+                href="https://mediuslabs.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-blue-400 transition-colors font-medium"
+              >
+                Medius Labs
+              </a>
+            </p>
             <p className="text-gray-500 text-sm">
               © 2024 School-Mart. {isAr ? 'جميع الحقوق محفوظة' : 'All rights reserved'}
             </p>
