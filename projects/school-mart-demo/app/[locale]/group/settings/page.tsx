@@ -1,14 +1,39 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Building2, Bell, CreditCard, Users, Shield, HelpCircle, LogOut, ChevronRight, ChevronLeft } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { useSchool } from '@/lib/school-context'
+import { useSchool, DemoSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 export default function GroupSettings({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
   const Chevron = isAr ? ChevronLeft : ChevronRight
+  const { demoGroup, groupSlug, getGroupLogo } = useSchool()
+  const [schoolCount, setSchoolCount] = useState(0)
+
+  // Fetch schools count
+  useEffect(() => {
+    const fetchSchoolCount = async () => {
+      if (!groupSlug) return
+      try {
+        const res = await fetch('/api/schools')
+        if (res.ok) {
+          const allSchools: DemoSchool[] = await res.json()
+          const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
+          setSchoolCount(filtered.length)
+        }
+      } catch {
+        setSchoolCount(0)
+      }
+    }
+    fetchSchoolCount()
+  }, [groupSlug])
+
+  const groupName = demoGroup
+    ? (isAr ? demoGroup.name : demoGroup.nameEn)
+    : (isAr ? 'مجموعة المدارس المتحدة' : 'United Schools Group')
 
   const t = {
     title: isAr ? 'الإعدادات' : 'Settings',
@@ -25,7 +50,6 @@ export default function GroupSettings({ params }: { params: { locale: string } }
     help: isAr ? 'المساعدة' : 'Help & Support',
     helpDesc: isAr ? 'تواصل مع فريق الدعم' : 'Contact support team',
     logout: isAr ? 'تسجيل الخروج' : 'Logout',
-    groupName: isAr ? 'مجموعة المدارس المتحدة' : 'United Schools Group',
     schools: isAr ? 'مدارس' : 'Schools',
   }
 
@@ -52,12 +76,16 @@ export default function GroupSettings({ params }: { params: { locale: string } }
       <div className="px-4 pt-4">
         <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-xl bg-violet-100 flex items-center justify-center">
-              <Building2 size={32} className="text-violet-600" />
-            </div>
+            {demoGroup?.logo ? (
+              <img src={getGroupLogo()} alt="" className="w-16 h-16 rounded-xl object-cover" />
+            ) : (
+              <div className="w-16 h-16 rounded-xl bg-violet-100 flex items-center justify-center">
+                <Building2 size={32} className="text-violet-600" />
+              </div>
+            )}
             <div>
-              <h2 className="font-bold text-gray-800 text-lg">{t.groupName}</h2>
-              <p className="text-gray-500 text-sm">5 {t.schools}</p>
+              <h2 className="font-bold text-gray-800 text-lg">{groupName}</h2>
+              <p className="text-gray-500 text-sm">{schoolCount || 5} {t.schools}</p>
             </div>
           </div>
         </div>

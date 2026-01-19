@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BarChart3, TrendingUp, TrendingDown, DollarSign, ShoppingCart, Users, Building2 } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { useSchool } from '@/lib/school-context'
+import { useSchool, DemoSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 const periodFilters = [
@@ -13,30 +13,60 @@ const periodFilters = [
   { id: 'year', labelAr: 'سنة', labelEn: 'Year' },
 ]
 
-const metrics = [
-  { id: 'revenue', labelAr: 'الإيرادات', labelEn: 'Revenue', value: '599,000', unit: 'EGP', unitAr: 'ج.م', change: 12.5, icon: DollarSign, color: 'violet' },
-  { id: 'orders', labelAr: 'الطلبات', labelEn: 'Orders', value: '388', unit: '', unitAr: '', change: 8.2, icon: ShoppingCart, color: 'blue' },
-  { id: 'students', labelAr: 'الطلاب', labelEn: 'Students', value: '3,080', unit: '', unitAr: '', change: 5.1, icon: Users, color: 'emerald' },
-  { id: 'avgOrder', labelAr: 'متوسط الطلب', labelEn: 'Avg. Order', value: '1,544', unit: 'EGP', unitAr: 'ج.م', change: -2.3, icon: BarChart3, color: 'amber' },
-]
-
 const topCategories = [
-  { nameAr: 'الزي المدرسي', nameEn: 'Uniforms', percentage: 45, amount: 269550 },
-  { nameAr: 'الكتب والمستلزمات', nameEn: 'Books & Supplies', percentage: 30, amount: 179700 },
-  { nameAr: 'الكانتين', nameEn: 'Canteen', percentage: 15, amount: 89850 },
-  { nameAr: 'الأنشطة', nameEn: 'Activities', percentage: 10, amount: 59900 },
-]
-
-const schoolPerformance = [
-  { nameAr: 'مدرسة النور', nameEn: 'Al Noor School', revenue: 245000, percentage: 41 },
-  { nameAr: 'مدرسة الأمل', nameEn: 'Al Amal School', revenue: 198000, percentage: 33 },
-  { nameAr: 'مدرسة الفجر', nameEn: 'Al Fajr School', revenue: 156000, percentage: 26 },
+  { nameAr: 'الزي المدرسي', nameEn: 'Uniforms', percentage: 45 },
+  { nameAr: 'الكتب والمستلزمات', nameEn: 'Books & Supplies', percentage: 30 },
+  { nameAr: 'الكانتين', nameEn: 'Canteen', percentage: 15 },
+  { nameAr: 'الأنشطة', nameEn: 'Activities', percentage: 10 },
 ]
 
 export default function GroupAnalytics({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
   const [activePeriod, setActivePeriod] = useState('month')
+  const { demoGroup, groupSlug } = useSchool()
+  const [groupSchools, setGroupSchools] = useState<DemoSchool[]>([])
+
+  // Fetch schools that belong to this group
+  useEffect(() => {
+    const fetchGroupSchools = async () => {
+      if (!groupSlug) return
+      try {
+        const res = await fetch('/api/schools')
+        if (res.ok) {
+          const allSchools: DemoSchool[] = await res.json()
+          const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
+          setGroupSchools(filtered)
+        }
+      } catch {
+        setGroupSchools([])
+      }
+    }
+    fetchGroupSchools()
+  }, [groupSlug])
+
+  const schoolCount = groupSchools.length || 5
+  const totalRevenue = schoolCount * 120000
+  const totalOrders = schoolCount * 78
+  const totalStudents = schoolCount * 620
+  const avgOrder = Math.round(totalRevenue / totalOrders)
+
+  const metrics = [
+    { id: 'revenue', labelAr: 'الإيرادات', labelEn: 'Revenue', value: totalRevenue.toLocaleString(), unit: 'EGP', unitAr: 'ج.م', change: 12.5, icon: DollarSign, color: 'violet' },
+    { id: 'orders', labelAr: 'الطلبات', labelEn: 'Orders', value: totalOrders.toLocaleString(), unit: '', unitAr: '', change: 8.2, icon: ShoppingCart, color: 'blue' },
+    { id: 'students', labelAr: 'الطلاب', labelEn: 'Students', value: totalStudents.toLocaleString(), unit: '', unitAr: '', change: 5.1, icon: Users, color: 'emerald' },
+    { id: 'avgOrder', labelAr: 'متوسط الطلب', labelEn: 'Avg. Order', value: avgOrder.toLocaleString(), unit: 'EGP', unitAr: 'ج.م', change: -2.3, icon: BarChart3, color: 'amber' },
+  ]
+
+  // Generate school performance from actual schools
+  const schoolPerformance = groupSchools.slice(0, 5).map((school, idx) => {
+    const revenue = 150000 + (idx * 30000)
+    return {
+      school,
+      revenue,
+      percentage: Math.round((revenue / totalRevenue) * 100) || 20,
+    }
+  })
 
   const t = {
     title: isAr ? 'التحليلات' : 'Analytics',
@@ -118,21 +148,24 @@ export default function GroupAnalytics({ params }: { params: { locale: string } 
         <h2 className="font-semibold text-gray-800 mb-3">{t.topCategories}</h2>
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
           <div className="space-y-4">
-            {topCategories.map((category) => (
-              <div key={category.nameEn}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm font-medium text-gray-700">{isAr ? category.nameAr : category.nameEn}</span>
-                  <span className="text-sm text-gray-500">{category.percentage}%</span>
+            {topCategories.map((category) => {
+              const amount = Math.round(totalRevenue * category.percentage / 100)
+              return (
+                <div key={category.nameEn}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium text-gray-700">{isAr ? category.nameAr : category.nameEn}</span>
+                    <span className="text-sm text-gray-500">{category.percentage}%</span>
+                  </div>
+                  <div className="w-full bg-gray-100 rounded-full h-2">
+                    <div
+                      className="bg-violet-600 h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${category.percentage}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">{amount.toLocaleString()} {isAr ? 'ج.م' : 'EGP'}</p>
                 </div>
-                <div className="w-full bg-gray-100 rounded-full h-2">
-                  <div
-                    className="bg-violet-600 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${category.percentage}%` }}
-                  />
-                </div>
-                <p className="text-xs text-gray-400 mt-1">{category.amount.toLocaleString()} {isAr ? 'ج.م' : 'EGP'}</p>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </div>
@@ -141,28 +174,36 @@ export default function GroupAnalytics({ params }: { params: { locale: string } 
       <div className="px-4 pb-24">
         <h2 className="font-semibold text-gray-800 mb-3">{t.schoolPerformance}</h2>
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 divide-y">
-          {schoolPerformance.map((school) => (
-            <div key={school.nameEn} className="p-4">
+          {schoolPerformance.length > 0 ? schoolPerformance.map(({ school, revenue, percentage }) => (
+            <div key={school.slug} className="p-4">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center">
-                    <Building2 size={18} className="text-violet-600" />
-                  </div>
+                  {school.logo ? (
+                    <img src={school.logo} alt="" className="w-10 h-10 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center">
+                      <Building2 size={18} className="text-violet-600" />
+                    </div>
+                  )}
                   <div>
-                    <p className="font-medium text-gray-800">{isAr ? school.nameAr : school.nameEn}</p>
-                    <p className="text-xs text-gray-500">{school.percentage}% {t.ofTotal}</p>
+                    <p className="font-medium text-gray-800">{isAr ? school.name : school.nameEn}</p>
+                    <p className="text-xs text-gray-500">{percentage}% {t.ofTotal}</p>
                   </div>
                 </div>
-                <p className="font-semibold text-violet-600">{school.revenue.toLocaleString()} {isAr ? 'ج.م' : 'EGP'}</p>
+                <p className="font-semibold text-violet-600">{revenue.toLocaleString()} {isAr ? 'ج.م' : 'EGP'}</p>
               </div>
               <div className="w-full bg-gray-100 rounded-full h-1.5">
                 <div
                   className="bg-violet-600 h-1.5 rounded-full transition-all duration-500"
-                  style={{ width: `${school.percentage}%` }}
+                  style={{ width: `${percentage}%` }}
                 />
               </div>
             </div>
-          ))}
+          )) : (
+            <div className="p-8 text-center text-gray-500">
+              {isAr ? 'لا توجد بيانات' : 'No data available'}
+            </div>
+          )}
         </div>
       </div>
     </div>

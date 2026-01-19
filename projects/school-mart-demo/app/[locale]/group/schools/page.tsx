@@ -1,24 +1,45 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Search, Building2, Users, ShoppingCart, TrendingUp, ChevronRight, ChevronLeft, Plus } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
-import { useSchool } from '@/lib/school-context'
+import { useSchool, DemoSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
-
-const schools = [
-  { id: '1', nameAr: 'مدرسة النور', nameEn: 'Al Noor School', locationAr: 'المعادي، القاهرة', locationEn: 'Maadi, Cairo', students: 1250, orders: 156, revenue: 245000, status: 'active' },
-  { id: '2', nameAr: 'مدرسة الأمل', nameEn: 'Al Amal School', locationAr: 'مدينة نصر، القاهرة', locationEn: 'Nasr City, Cairo', students: 980, orders: 134, revenue: 198000, status: 'active' },
-  { id: '3', nameAr: 'مدرسة الفجر', nameEn: 'Al Fajr School', locationAr: 'الدقي، الجيزة', locationEn: 'Dokki, Giza', students: 850, orders: 98, revenue: 156000, status: 'active' },
-  { id: '4', nameAr: 'مدرسة الإيمان', nameEn: 'Al Iman School', locationAr: 'المهندسين، الجيزة', locationEn: 'Mohandeseen, Giza', students: 0, orders: 0, revenue: 0, status: 'pending' },
-  { id: '5', nameAr: 'مدرسة السلام', nameEn: 'Al Salam School', locationAr: 'الزمالك، القاهرة', locationEn: 'Zamalek, Cairo', students: 720, orders: 76, revenue: 112000, status: 'active' },
-]
 
 export default function GroupSchools({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
   const [searchQuery, setSearchQuery] = useState('')
   const Chevron = isAr ? ChevronLeft : ChevronRight
+  const { demoGroup, groupSlug, buildHref } = useSchool()
+  const [groupSchools, setGroupSchools] = useState<DemoSchool[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Fetch schools that belong to this group
+  useEffect(() => {
+    const fetchGroupSchools = async () => {
+      if (!groupSlug) {
+        setIsLoading(false)
+        return
+      }
+      try {
+        const res = await fetch('/api/schools')
+        if (res.ok) {
+          const allSchools: DemoSchool[] = await res.json()
+          const filtered = allSchools.filter(s => s.groupSlug === groupSlug)
+          setGroupSchools(filtered)
+        }
+      } catch {
+        setGroupSchools([])
+      }
+      setIsLoading(false)
+    }
+    fetchGroupSchools()
+  }, [groupSlug])
+
+  const groupName = demoGroup
+    ? (isAr ? demoGroup.name : demoGroup.nameEn)
+    : (isAr ? 'مجموعة المدارس المتحدة' : 'United Schools Group')
 
   const t = {
     title: isAr ? 'المدارس' : 'Schools',
@@ -30,11 +51,12 @@ export default function GroupSchools({ params }: { params: { locale: string } })
     active: isAr ? 'نشط' : 'Active',
     pending: isAr ? 'قيد الإعداد' : 'Setup',
     manageSchool: isAr ? 'إدارة المدرسة' : 'Manage',
+    loading: isAr ? 'جاري التحميل...' : 'Loading...',
   }
 
-  const filteredSchools = schools.filter(school => {
-    return (isAr ? school.nameAr : school.nameEn).toLowerCase().includes(searchQuery.toLowerCase()) ||
-           (isAr ? school.locationAr : school.locationEn).toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredSchools = groupSchools.filter(school => {
+    const name = isAr ? school.name : school.nameEn
+    return name.toLowerCase().includes(searchQuery.toLowerCase())
   })
 
   return (
@@ -64,59 +86,80 @@ export default function GroupSchools({ params }: { params: { locale: string } })
             <Plus size={18} />
           </button>
         </div>
+        {groupSlug && (
+          <p className="text-sm text-gray-500 mt-2">
+            {filteredSchools.length} {isAr ? 'مدرسة في' : 'schools in'} {groupName}
+          </p>
+        )}
       </div>
 
       {/* Schools List */}
       <div className="px-4 pb-24">
-        {filteredSchools.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-12">
+            <p className="text-gray-500">{t.loading}</p>
+          </div>
+        ) : filteredSchools.length === 0 ? (
           <div className="text-center py-12">
             <Building2 size={48} className="mx-auto text-gray-300 mb-4" />
             <p className="text-gray-500">{t.noSchools}</p>
           </div>
         ) : (
           <div className="space-y-3">
-            {filteredSchools.map((school) => (
-              <div key={school.id} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
-                <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
-                    <Building2 size={24} className="text-violet-600" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <p className="font-semibold text-gray-800">{isAr ? school.nameAr : school.nameEn}</p>
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${school.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                        {school.status === 'active' ? t.active : t.pending}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-500 mb-2">{isAr ? school.locationAr : school.locationEn}</p>
+            {filteredSchools.map((school, idx) => {
+              // Generate mock data per school
+              const mockStudents = 800 + (idx * 50)
+              const mockOrders = 90 + (idx * 5)
+              const mockRevenue = 150000 + (idx * 10000)
+              const isActive = idx % 5 !== 4 // Most are active
 
-                    {school.status === 'active' && (
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-1">
-                          <Users size={14} />
-                          <span>{school.students}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <ShoppingCart size={14} />
-                          <span>{school.orders}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <TrendingUp size={14} />
-                          <span className="text-violet-600 font-medium">{school.revenue.toLocaleString()}</span>
-                        </div>
+              return (
+                <div key={school.slug} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+                  <div className="flex items-start gap-3">
+                    {school.logo ? (
+                      <img src={school.logo} alt="" className="w-12 h-12 rounded-xl object-cover" />
+                    ) : (
+                      <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
+                        <Building2 size={24} className="text-violet-600" />
                       </div>
                     )}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-semibold text-gray-800">{isAr ? school.name : school.nameEn}</p>
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                          {isActive ? t.active : t.pending}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-500 mb-2">{school.slug}</p>
 
-                    <div className="flex items-center justify-end pt-2 mt-2 border-t border-gray-100">
-                      <button className="flex items-center gap-1 text-sm text-violet-600 font-medium">
-                        {t.manageSchool}
-                        <Chevron size={16} />
-                      </button>
+                      {isActive && (
+                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <div className="flex items-center gap-1">
+                            <Users size={14} />
+                            <span>{mockStudents}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <ShoppingCart size={14} />
+                            <span>{mockOrders}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <TrendingUp size={14} />
+                            <span className="text-violet-600 font-medium">{mockRevenue.toLocaleString()}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-end pt-2 mt-2 border-t border-gray-100">
+                        <button className="flex items-center gap-1 text-sm text-violet-600 font-medium">
+                          {t.manageSchool}
+                          <Chevron size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </div>
