@@ -243,13 +243,13 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href={buildHref(`/${locale}/parent`)}
+            <a
+              href="#contact"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105"
             >
-              {isAr ? 'جرب كولي أمر' : 'Try as Parent'}
+              {isAr ? 'احجز عرض تجريبي' : 'Book a Demo'}
               <Arrow size={18} />
-            </Link>
+            </a>
             <a
               href="#portals"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-xl font-semibold border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300"
