@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Plus, Pencil, Trash2, Copy, ExternalLink, X, Building2, School as SchoolIcon } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Plus, Pencil, Trash2, Copy, ExternalLink, X, Building2, School as SchoolIcon, Upload } from 'lucide-react'
 
 interface School {
   slug: string
@@ -36,6 +36,14 @@ export default function AdminPage() {
 
   const [copied, setCopied] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'schools' | 'groups'>('schools')
+
+  // CSV Import state
+  const [showCsvImport, setShowCsvImport] = useState(false)
+  const [csvData, setCsvData] = useState('')
+  const [csvPreview, setCsvPreview] = useState<School[]>([])
+  const [importError, setImportError] = useState<string | null>(null)
+  const [isImporting, setIsImporting] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     fetchData()
@@ -198,6 +206,116 @@ export default function AdminPage() {
     return group?.nameEn || groupSlug
   }
 
+  // CSV Import handlers
+  const parseCsv = (csv: string): School[] => {
+    const lines = csv.trim().split('\n')
+    if (lines.length < 2) return []
+
+    const headers = lines[0].toLowerCase().split(',').map(h => h.trim())
+    const slugIdx = headers.findIndex(h => h === 'slug' || h === 'url slug')
+    const nameIdx = headers.findIndex(h => h === 'name' || h === 'name (arabic)' || h === 'arabic name' || h === 'namear')
+    const nameEnIdx = headers.findIndex(h => h === 'nameen' || h === 'name (english)' || h === 'english name' || h === 'name_en')
+    const logoIdx = headers.findIndex(h => h === 'logo' || h === 'logo url')
+    const groupIdx = headers.findIndex(h => h === 'group' || h === 'groupslug' || h === 'group slug')
+
+    const parsed: School[] = []
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',').map(v => v.trim().replace(/^["']|["']$/g, ''))
+      if (values.length < 2) continue
+
+      // Auto-generate slug from English name if not provided
+      const nameEn = nameEnIdx >= 0 ? values[nameEnIdx] : values[1]
+      const slug = slugIdx >= 0 && values[slugIdx]
+        ? values[slugIdx].toLowerCase().replace(/\s+/g, '-')
+        : nameEn.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
+      const school: School = {
+        slug,
+        name: nameIdx >= 0 ? values[nameIdx] : values[0],
+        nameEn,
+        logo: logoIdx >= 0 ? values[logoIdx] || '' : '',
+        groupSlug: groupIdx >= 0 ? values[groupIdx] || undefined : undefined
+      }
+
+      if (school.slug && school.name && school.nameEn) {
+        parsed.push(school)
+      }
+    }
+    return parsed
+  }
+
+  const handleCsvChange = (csv: string) => {
+    setCsvData(csv)
+    setImportError(null)
+    try {
+      const parsed = parseCsv(csv)
+      setCsvPreview(parsed)
+    } catch {
+      setCsvPreview([])
+    }
+  }
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const text = event.target?.result as string
+      handleCsvChange(text)
+    }
+    reader.readAsText(file)
+  }
+
+  const handleCsvImport = async () => {
+    if (csvPreview.length === 0) return
+
+    setIsImporting(true)
+    setImportError(null)
+
+    let successCount = 0
+    let errors: string[] = []
+
+    for (const school of csvPreview) {
+      try {
+        const res = await fetch('/api/schools', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(school),
+        })
+
+        if (res.ok) {
+          successCount++
+        } else {
+          const data = await res.json()
+          errors.push(`${school.nameEn}: ${data.error}`)
+        }
+      } catch {
+        errors.push(`${school.nameEn}: Network error`)
+      }
+    }
+
+    setIsImporting(false)
+
+    if (errors.length > 0) {
+      setImportError(`Imported ${successCount}/${csvPreview.length}. Errors: ${errors.slice(0, 3).join(', ')}${errors.length > 3 ? '...' : ''}`)
+    } else {
+      setShowCsvImport(false)
+      setCsvData('')
+      setCsvPreview([])
+    }
+
+    fetchData()
+  }
+
+  const resetCsvImport = () => {
+    setShowCsvImport(false)
+    setCsvData('')
+    setCsvPreview([])
+    setImportError(null)
+    if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -235,7 +353,14 @@ export default function AdminPage() {
         {/* Schools Tab */}
         {activeTab === 'schools' && (
           <>
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end gap-2 mb-4">
+              <button
+                onClick={() => setShowCsvImport(true)}
+                className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <Upload size={20} />
+                Import CSV
+              </button>
               <button
                 onClick={() => setShowSchoolForm(true)}
                 className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -244,6 +369,108 @@ export default function AdminPage() {
                 Add School
               </button>
             </div>
+
+            {/* CSV Import Modal */}
+            {showCsvImport && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold">Import Schools from CSV</h2>
+                    <button onClick={resetCsvImport} className="text-gray-400 hover:text-gray-600">
+                      <X size={24} />
+                    </button>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Upload CSV File
+                      </label>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".csv"
+                        onChange={handleFileUpload}
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+
+                    <div className="text-center text-gray-400 text-sm">or paste CSV below</div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        CSV Data
+                      </label>
+                      <textarea
+                        value={csvData}
+                        onChange={e => handleCsvChange(e.target.value)}
+                        placeholder={`name,nameEn,logo,group
+مدرسة النور,Al Noor School,,egyptian-schools
+مدرسة الأمل,Al Amal School,,`}
+                        rows={6}
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">
+                        Columns: name (Arabic), nameEn (English), logo (optional), group (optional). Slug auto-generated from English name.
+                      </p>
+                    </div>
+
+                    {csvPreview.length > 0 && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Preview ({csvPreview.length} schools)
+                        </label>
+                        <div className="border rounded-lg max-h-48 overflow-y-auto">
+                          <table className="w-full text-sm">
+                            <thead className="bg-gray-50 sticky top-0">
+                              <tr>
+                                <th className="px-3 py-2 text-left">Slug</th>
+                                <th className="px-3 py-2 text-left">English Name</th>
+                                <th className="px-3 py-2 text-right">Arabic Name</th>
+                                <th className="px-3 py-2 text-left">Group</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y">
+                              {csvPreview.map((school, i) => (
+                                <tr key={i} className="hover:bg-gray-50">
+                                  <td className="px-3 py-2 font-mono text-xs">{school.slug}</td>
+                                  <td className="px-3 py-2">{school.nameEn}</td>
+                                  <td className="px-3 py-2 text-right" dir="rtl">{school.name}</td>
+                                  <td className="px-3 py-2 text-xs text-violet-600">{school.groupSlug || '-'}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+
+                    {importError && (
+                      <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
+                        {importError}
+                      </div>
+                    )}
+
+                    <div className="flex gap-3 pt-2">
+                      <button
+                        type="button"
+                        onClick={resetCsvImport}
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleCsvImport}
+                        disabled={csvPreview.length === 0 || isImporting}
+                        className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isImporting ? 'Importing...' : `Import ${csvPreview.length} Schools`}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* School Form Modal */}
             {showSchoolForm && (
