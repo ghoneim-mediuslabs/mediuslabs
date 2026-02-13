@@ -1,47 +1,122 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, Search, Package, Edit2, Trash2 } from 'lucide-react'
+import { Search, Banknote, Shirt, BookOpen, UtensilsCrossed, ChevronDown, ChevronUp } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
+import type { LucideIcon } from 'lucide-react'
 
-const products = [
-  { id: '1', nameAr: 'قميص أبيض', nameEn: 'White Shirt', price: 180, stock: 45, category: 'uniform', icon: '👕' },
-  { id: '2', nameAr: 'بنطلون كحلي', nameEn: 'Navy Pants', price: 220, stock: 32, category: 'uniform', icon: '👖' },
-  { id: '3', nameAr: 'كتاب الرياضيات', nameEn: 'Math Book', price: 85, stock: 120, category: 'academic', icon: '📚' },
-  { id: '4', nameAr: 'كتاب العلوم', nameEn: 'Science Book', price: 85, stock: 98, category: 'academic', icon: '🔬' },
-  { id: '5', nameAr: 'ساندوتش فراخ', nameEn: 'Chicken Sandwich', price: 35, stock: 50, category: 'canteen', icon: '🥪' },
-  { id: '6', nameAr: 'عصير برتقال', nameEn: 'Orange Juice', price: 15, stock: 100, category: 'canteen', icon: '🧃' },
+interface CatalogItem {
+  id: string
+  nameAr: string
+  nameEn: string
+  price: number
+  icon: string
+}
+
+interface Supplier {
+  id: string
+  nameAr: string
+  nameEn: string
+  icon: LucideIcon
+  color: { bg: string; text: string; light: string }
+  items: CatalogItem[]
+  revenue: number
+}
+
+const suppliers: Supplier[] = [
+  {
+    id: 'school-fees',
+    nameAr: 'الرسوم المدرسية',
+    nameEn: 'School Fees',
+    icon: Banknote,
+    color: { bg: 'bg-emerald-600', text: 'text-emerald-600', light: 'bg-emerald-50' },
+    revenue: 320000,
+    items: [
+      { id: 'f1', nameAr: 'الرسوم الدراسية - الفصل الثاني', nameEn: 'Tuition - Term 2', price: 12500, icon: '🎓' },
+      { id: 'f2', nameAr: 'رسوم الأنشطة', nameEn: 'Activities Fee', price: 1500, icon: '🏆' },
+      { id: 'f3', nameAr: 'رسوم النقل المدرسي', nameEn: 'School Transport', price: 3000, icon: '🚌' },
+      { id: 'f4', nameAr: 'رسوم التأمين الصحي', nameEn: 'Health Insurance Fee', price: 800, icon: '🏥' },
+    ],
+  },
+  {
+    id: 'uniform-supplier',
+    nameAr: 'شركة الزي المدرسي',
+    nameEn: 'School Uniform Co.',
+    icon: Shirt,
+    color: { bg: 'bg-violet-600', text: 'text-violet-600', light: 'bg-violet-50' },
+    revenue: 42000,
+    items: [
+      { id: 'u1', nameAr: 'قميص أبيض', nameEn: 'White Shirt', price: 180, icon: '👕' },
+      { id: 'u2', nameAr: 'بنطلون كحلي', nameEn: 'Navy Pants', price: 220, icon: '👖' },
+      { id: 'u3', nameAr: 'حذاء مدرسي', nameEn: 'School Shoes', price: 350, icon: '👟' },
+    ],
+  },
+  {
+    id: 'academic-supplier',
+    nameAr: 'دار المعرفة للنشر',
+    nameEn: 'Knowledge Books',
+    icon: BookOpen,
+    color: { bg: 'bg-blue-600', text: 'text-blue-600', light: 'bg-blue-50' },
+    revenue: 13200,
+    items: [
+      { id: 'a1', nameAr: 'كتاب العلوم', nameEn: 'Science Book', price: 85, icon: '🔬' },
+      { id: 'a2', nameAr: 'كتاب الرياضيات', nameEn: 'Math Book', price: 75, icon: '📐' },
+      { id: 'a3', nameAr: 'قاموس إنجليزي', nameEn: 'English Dictionary', price: 120, icon: '📚' },
+    ],
+  },
+  {
+    id: 'canteen-supplier',
+    nameAr: 'مطبخ المدرسة',
+    nameEn: 'School Kitchen',
+    icon: UtensilsCrossed,
+    color: { bg: 'bg-orange-600', text: 'text-orange-600', light: 'bg-orange-50' },
+    revenue: 8500,
+    items: [
+      { id: 'c1', nameAr: 'ساندويتش جبنة', nameEn: 'Cheese Sandwich', price: 25, icon: '🥪' },
+      { id: 'c2', nameAr: 'عصير برتقال', nameEn: 'Orange Juice', price: 15, icon: '🧃' },
+      { id: 'c3', nameAr: 'فطيرة بالجبن', nameEn: 'Cheese Pastry', price: 30, icon: '🥐' },
+      { id: 'c4', nameAr: 'تفاحة', nameEn: 'Apple', price: 12, icon: '🍎' },
+    ],
+  },
 ]
 
-const categories = [
-  { id: 'all', labelAr: 'الكل', labelEn: 'All' },
-  { id: 'uniform', labelAr: 'الزي', labelEn: 'Uniform' },
-  { id: 'academic', labelAr: 'أكاديمي', labelEn: 'Academic' },
-  { id: 'canteen', labelAr: 'كانتين', labelEn: 'Canteen' },
-]
-
-export default function SchoolProducts({ params }: { params: { locale: string } }) {
+export default function SchoolCatalog({ params }: { params: { locale: string } }) {
   const locale = params.locale as Locale
   const isAr = locale === 'ar'
-  const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [expandedSuppliers, setExpandedSuppliers] = useState<Set<string>>(new Set(['school-fees']))
   const { buildHref } = useSchool()
 
   const t = {
-    title: isAr ? 'المنتجات' : 'Products',
-    search: isAr ? 'بحث عن منتج...' : 'Search products...',
-    addProduct: isAr ? 'إضافة منتج' : 'Add Product',
-    inStock: isAr ? 'في المخزون' : 'in stock',
-    noProducts: isAr ? 'لا توجد منتجات' : 'No products found',
+    title: isAr ? 'الكتالوج' : 'Catalog',
+    search: isAr ? 'بحث...' : 'Search...',
+    items: isAr ? 'عناصر' : 'items',
+    revenue: isAr ? 'ج.م إيرادات' : 'EGP revenue',
+    noResults: isAr ? 'لا توجد نتائج' : 'No results found',
   }
 
-  const filteredProducts = products.filter(product => {
-    const matchesCategory = activeCategory === 'all' || product.category === activeCategory
-    const matchesSearch = (isAr ? product.nameAr : product.nameEn).toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
-  })
+  const toggleSupplier = (id: string) => {
+    setExpandedSuppliers(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+      }
+      return next
+    })
+  }
+
+  const filteredSuppliers = searchQuery
+    ? suppliers.map(s => ({
+        ...s,
+        items: s.items.filter(item =>
+          (isAr ? item.nameAr : item.nameEn).toLowerCase().includes(searchQuery.toLowerCase())
+        ),
+      })).filter(s => s.items.length > 0)
+    : suppliers
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -53,77 +128,76 @@ export default function SchoolProducts({ params }: { params: { locale: string } 
         backHref={`/${locale}/school`}
       />
 
-      {/* Search & Add */}
+      {/* Search */}
       <div className="px-4 pt-4 pb-2">
-        <div className="flex gap-2">
-          <div className="flex-1 relative">
-            <Search size={18} className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder={t.search}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-colors"
-            />
-          </div>
-          <button className="bg-emerald-600 text-white px-4 rounded-xl flex items-center gap-2 hover:bg-emerald-700 transition-colors">
-            <Plus size={18} />
-          </button>
+        <div className="relative">
+          <Search size={18} className="absolute start-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder={t.search}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-gray-200 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-colors"
+          />
         </div>
       </div>
 
-      {/* Categories */}
-      <div className="px-4 py-2">
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                activeCategory === cat.id
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:border-emerald-300'
-              }`}
-            >
-              {isAr ? cat.labelAr : cat.labelEn}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Products List */}
-      <div className="px-4 pb-24">
-        {filteredProducts.length === 0 ? (
+      {/* Supplier Sections */}
+      <div className="px-4 py-2 pb-24 space-y-3">
+        {filteredSuppliers.length === 0 ? (
           <div className="text-center py-12">
-            <Package size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500">{t.noProducts}</p>
+            <p className="text-gray-500">{t.noResults}</p>
           </div>
         ) : (
-          <div className="space-y-3">
-            {filteredProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-2xl">
-                    {product.icon}
+          filteredSuppliers.map((supplier) => {
+            const Icon = supplier.icon
+            const isExpanded = expandedSuppliers.has(supplier.id) || !!searchQuery
+            return (
+              <div key={supplier.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                {/* Supplier Header */}
+                <button
+                  onClick={() => toggleSupplier(supplier.id)}
+                  className="w-full flex items-center gap-3 p-4 text-start hover:bg-gray-50 transition-colors"
+                >
+                  <div className={`w-10 h-10 rounded-xl ${supplier.color.light} flex items-center justify-center`}>
+                    <Icon size={20} className={supplier.color.text} />
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-gray-800">{isAr ? product.nameAr : product.nameEn}</p>
-                    <p className="text-sm text-gray-500">
-                      {product.price} {isAr ? 'ج.م' : 'EGP'} • {product.stock} {t.inStock}
+                    <p className="font-semibold text-gray-800">
+                      {isAr ? supplier.nameAr : supplier.nameEn}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {supplier.items.length} {t.items} &bull; {supplier.revenue.toLocaleString()} {t.revenue}
                     </p>
                   </div>
-                  <div className="flex gap-2">
-                    <button className="p-2 text-gray-400 hover:text-emerald-600 transition-colors">
-                      <Edit2 size={18} />
-                    </button>
-                    <button className="p-2 text-gray-400 hover:text-red-600 transition-colors">
-                      <Trash2 size={18} />
-                    </button>
+                  {isExpanded ? (
+                    <ChevronUp size={18} className="text-gray-400" />
+                  ) : (
+                    <ChevronDown size={18} className="text-gray-400" />
+                  )}
+                </button>
+
+                {/* Items */}
+                {isExpanded && (
+                  <div className="border-t border-gray-100 divide-y divide-gray-50">
+                    {supplier.items.map((item) => (
+                      <div key={item.id} className="flex items-center gap-3 px-4 py-3">
+                        <span className="text-xl w-8 text-center">{item.icon}</span>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium text-gray-800">
+                            {isAr ? item.nameAr : item.nameEn}
+                          </p>
+                        </div>
+                        <span className="text-sm font-semibold text-gray-700">
+                          {item.price.toLocaleString()} {isAr ? 'ج.م' : 'EGP'}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                </div>
+                )}
               </div>
-            ))}
-          </div>
+            )
+          })
         )}
       </div>
     </div>

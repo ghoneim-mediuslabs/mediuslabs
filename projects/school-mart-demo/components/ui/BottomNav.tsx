@@ -29,7 +29,7 @@ const navConfigs: Record<string, { items: NavItem[], color: string }> = {
     items: [
       { href: '/settings', icon: Settings, labelAr: 'الإعدادات', labelEn: 'Settings' },
       { href: '/orders', icon: Receipt, labelAr: 'المعاملات', labelEn: 'Transactions' },
-      { href: '/products', icon: Package, labelAr: 'المنتجات', labelEn: 'Products' },
+      { href: '/products', icon: Package, labelAr: 'الكتالوج', labelEn: 'Catalog' },
       { href: '', icon: LayoutDashboard, labelAr: 'الرئيسية', labelEn: 'Dashboard' },
     ]
   },
