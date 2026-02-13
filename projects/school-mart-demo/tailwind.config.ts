@@ -12,7 +12,7 @@ const config: Config = {
         uniforms: '#7c3aed',
         canteen: '#ea580c',
         events: '#0d9488',
-        fees: '#059669',
+        fees: '#dc2626',
       },
     },
   },

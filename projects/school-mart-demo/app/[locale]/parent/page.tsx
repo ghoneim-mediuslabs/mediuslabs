@@ -10,11 +10,11 @@ import AppHeader from '@/components/ui/AppHeader'
 import DemoBanner from '@/components/ui/DemoBanner'
 
 const modules = [
+  { href: '/parent/fees', icon: Banknote, labelAr: 'الرسوم المدرسية', labelEn: 'School Fees', color: 'bg-fees', description: { ar: 'عرض ودفع الرسوم', en: 'View & pay school fees' } },
   { href: '/parent/academic', icon: BookOpen, labelAr: 'الخدمات الأكاديمية', labelEn: 'Academic Services', color: 'bg-academic', description: { ar: 'دروس إضافية ومواد تعليمية', en: 'Extra lessons & materials' } },
   { href: '/parent/uniforms', icon: Shirt, labelAr: 'الزي والمستلزمات', labelEn: 'Uniforms & Supplies', color: 'bg-uniforms', description: { ar: 'زي مدرسي وأدوات', en: 'School uniform & supplies' } },
   { href: '/parent/canteen', icon: UtensilsCrossed, labelAr: 'الكانتين الذكي', labelEn: 'Smart Canteen', color: 'bg-canteen', description: { ar: 'طلب الوجبات مسبقاً', en: 'Pre-order meals' } },
   { href: '/parent/events', icon: Calendar, labelAr: 'الفعاليات والرحلات', labelEn: 'Events & Trips', color: 'bg-events', description: { ar: 'التسجيل والموافقات', en: 'Registration & consent' } },
-  { href: '/parent/fees', icon: Banknote, labelAr: 'الرسوم المدرسية', labelEn: 'School Fees', color: 'bg-fees', description: { ar: 'عرض ودفع الرسوم', en: 'View & pay school fees' } },
 ]
 
 export default function ParentDashboard({ params }: { params: { locale: string } }) {

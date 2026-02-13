@@ -115,10 +115,10 @@ const benefits = [
   },
   {
     icon: Zap,
-    titleAr: 'تواصل فعال',
-    titleEn: 'Better Engagement',
-    descAr: 'إشعارات فورية وتواصل مباشر مع الأهل',
-    descEn: 'Instant notifications and direct parent communication',
+    titleAr: 'تحصيل سهل',
+    titleEn: 'Easy Collection',
+    descAr: 'تحصيل الرسوم والمدفوعات إلكترونياً بدون متابعة يدوية',
+    descEn: 'Collect fees and payments digitally without manual follow-up',
   },
   {
     icon: Shield,
