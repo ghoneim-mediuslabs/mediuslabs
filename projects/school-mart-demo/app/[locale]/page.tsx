@@ -16,8 +16,8 @@ const portals = [
     borderColor: 'border-blue-200',
     labelAr: 'ولي الأمر',
     labelEn: 'Parent Portal',
-    descAr: 'تطبيق واحد لكل احتياجات أبنائك - الزي، الكتب، الوجبات، الرحلات',
-    descEn: 'One app for all your children\'s needs - uniforms, books, meals, trips',
+    descAr: 'تطبيق واحد لكل احتياجات أبنائك - الرسوم، الزي، الكتب، الوجبات',
+    descEn: 'One app for all your children\'s needs - fees, uniforms, books, meals',
   },
   {
     id: 'school',
@@ -29,8 +29,8 @@ const portals = [
     borderColor: 'border-emerald-200',
     labelAr: 'المدرسة',
     labelEn: 'School Portal',
-    descAr: 'لوحة تحكم متكاملة لإدارة الخدمات والموردين والتحليلات',
-    descEn: 'Complete dashboard to manage services, vendors, and analytics',
+    descAr: 'لوحة تحكم متكاملة لإدارة الرسوم والخدمات والموردين والتحليلات',
+    descEn: 'Complete dashboard to manage fees, services, vendors, and analytics',
   },
   {
     id: 'supplier',
@@ -65,8 +65,8 @@ const painPoints = [
     icon: XCircle,
     titleAr: 'أنظمة متفرقة',
     titleEn: 'Fragmented Systems',
-    descAr: 'كل خدمة لها تطبيق أو نظام مختلف - الكانتين، الزي، الكتب، الرحلات',
-    descEn: 'Each service has a different app - canteen, uniforms, books, trips',
+    descAr: 'كل خدمة لها تطبيق أو نظام مختلف - الرسوم، الكانتين، الزي، الكتب',
+    descEn: 'Each service has a different app - fees, canteen, uniforms, books',
   },
   {
     icon: Banknote,
@@ -96,8 +96,8 @@ const benefits = [
     icon: Smartphone,
     titleAr: 'تطبيق واحد للجميع',
     titleEn: 'One App for All',
-    descAr: 'كل الخدمات المدرسية في مكان واحد',
-    descEn: 'All school services in one place',
+    descAr: 'الرسوم وكل الخدمات المدرسية في مكان واحد',
+    descEn: 'Fees and all school services in one place',
   },
   {
     icon: Banknote,
@@ -238,8 +238,8 @@ export default function LandingPage({ params }: { params: { locale: string } }) 
 
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
             {isAr
-              ? 'نربط أولياء الأمور بالمدارس والموردين في منصة متكاملة. زي مدرسي، كتب، وجبات، رحلات - كل شيء بضغطة زر'
-              : 'We connect parents with schools and suppliers in one integrated platform. Uniforms, books, meals, trips - everything with one tap'}
+              ? 'نربط أولياء الأمور بالمدارس والموردين في منصة متكاملة. رسوم، زي مدرسي، كتب، وجبات - كل شيء بضغطة زر'
+              : 'We connect parents with schools and suppliers in one integrated platform. Fees, uniforms, books, meals - everything with one tap'}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
