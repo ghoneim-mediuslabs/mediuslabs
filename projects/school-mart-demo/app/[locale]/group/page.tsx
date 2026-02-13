@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Building2, ShoppingCart, Users, DollarSign, Banknote, ArrowUpRight, ArrowUp, ArrowDown } from 'lucide-react'
+import { Building2, ShoppingCart, Users, DollarSign, ArrowUpRight, ArrowUp, ArrowDown } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool, DemoSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
@@ -60,7 +60,9 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
     totalOrders: isAr ? 'طلب' : 'Orders',
     totalStudents: isAr ? 'طالب' : 'Students',
     schools: isAr ? 'مدرسة' : 'Schools',
-    feesCollected: isAr ? 'رسوم محصلة' : 'Fees Collected',
+    feeCollection: isAr ? 'تحصيل الرسوم' : 'Fee Collection',
+    collected: isAr ? 'محصل' : 'collected',
+    viewDetails: isAr ? 'عرض التفاصيل' : 'View Details',
     students: isAr ? 'طالب' : 'students',
     orders: isAr ? 'طلب' : 'orders',
   }
@@ -71,7 +73,6 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
     revenue: schoolCount * 120000,
     orders: schoolCount * 78,
     students: schoolCount * 620,
-    feesCollected: schoolCount * 850000,
   }
 
   return (
@@ -119,12 +120,20 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
             <span className="text-xs text-gray-500">{t.schools}</span>
           </div>
         </div>
-        <Link href={buildHref(`/${locale}/group/fees`)} className="mt-3 flex items-center justify-between rounded-xl bg-teal-100 p-3 hover:bg-teal-150 transition-colors">
-          <div className="flex items-center gap-2">
-            <Banknote className="h-5 w-5 text-teal-600" />
-            <span className="text-sm font-medium text-teal-700">{t.feesCollected}</span>
+
+        {/* Fee Collection Card */}
+        <Link href={buildHref(`/${locale}/group/fees`)} className="mt-3 block bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-semibold text-gray-800 text-sm">{t.feeCollection}</span>
+            <span className="text-xs text-violet-600 font-medium flex items-center gap-1">
+              {t.viewDetails}
+              <ArrowUpRight size={12} />
+            </span>
           </div>
-          <span className="text-lg font-bold text-teal-600">{(mockStats.feesCollected / 1000000).toFixed(1)}M {isAr ? 'ج.م' : 'EGP'}</span>
+          <div className="w-full bg-gray-100 rounded-full h-2">
+            <div className="bg-violet-500 h-2 rounded-full" style={{ width: '82%' }} />
+          </div>
+          <p className="text-xs text-gray-500 mt-1">82% {t.collected} &bull; {(schoolCount * 2.6).toFixed(1)}M / {(schoolCount * 3.2).toFixed(1)}M {isAr ? 'ج.م' : 'EGP'}</p>
         </Link>
       </div>
 

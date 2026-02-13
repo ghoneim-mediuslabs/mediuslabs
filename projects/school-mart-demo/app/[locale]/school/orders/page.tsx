@@ -7,11 +7,13 @@ import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 
 const orders = [
-  { id: 'ORD-001', parentAr: 'أحمد محمد', parentEn: 'Ahmed Mohamed', itemsAr: '٣ قطع زي مدرسي', itemsEn: '3 Uniform Items', amount: 580, status: 'pending', date: '2024-01-15' },
-  { id: 'ORD-002', parentAr: 'سارة علي', parentEn: 'Sara Ali', itemsAr: 'كتب الفصل الثاني', itemsEn: 'Term 2 Books', amount: 320, status: 'processing', date: '2024-01-14' },
-  { id: 'ORD-003', parentAr: 'محمد حسن', parentEn: 'Mohamed Hassan', itemsAr: 'وجبات أسبوعية', itemsEn: 'Weekly Meals', amount: 150, status: 'completed', date: '2024-01-13' },
-  { id: 'ORD-004', parentAr: 'فاطمة أحمد', parentEn: 'Fatma Ahmed', itemsAr: 'زي رياضي', itemsEn: 'Sports Uniform', amount: 280, status: 'completed', date: '2024-01-12' },
-  { id: 'ORD-005', parentAr: 'خالد محمود', parentEn: 'Khaled Mahmoud', itemsAr: 'أدوات مدرسية', itemsEn: 'School Supplies', amount: 95, status: 'pending', date: '2024-01-11' },
+  { id: 'TXN-001', parentAr: 'أحمد محمد', parentEn: 'Ahmed Mohamed', itemsAr: 'رسوم دراسية - الفصل الثاني', itemsEn: 'Tuition - Term 2', amount: 12500, status: 'completed', date: '2024-01-15' },
+  { id: 'TXN-002', parentAr: 'سارة علي', parentEn: 'Sara Ali', itemsAr: '٣ قطع زي مدرسي', itemsEn: '3 Uniform Items', amount: 580, status: 'pending', date: '2024-01-14' },
+  { id: 'TXN-003', parentAr: 'فاطمة أحمد', parentEn: 'Fatma Ahmed', itemsAr: 'رسوم الأنشطة + النقل', itemsEn: 'Activities + Transport Fee', amount: 4500, status: 'completed', date: '2024-01-14' },
+  { id: 'TXN-004', parentAr: 'محمد حسن', parentEn: 'Mohamed Hassan', itemsAr: 'وجبات أسبوعية', itemsEn: 'Weekly Meals', amount: 150, status: 'completed', date: '2024-01-13' },
+  { id: 'TXN-005', parentAr: 'خالد محمود', parentEn: 'Khaled Mahmoud', itemsAr: 'رسوم التأمين الصحي', itemsEn: 'Health Insurance Fee', amount: 800, status: 'pending', date: '2024-01-12' },
+  { id: 'TXN-006', parentAr: 'نورا سعيد', parentEn: 'Noura Saeed', itemsAr: 'أدوات مدرسية', itemsEn: 'School Supplies', amount: 95, status: 'processing', date: '2024-01-11' },
+  { id: 'TXN-007', parentAr: 'منى علي', parentEn: 'Mona Ali', itemsAr: 'رسوم دراسية - الفصل الثاني', itemsEn: 'Tuition - Term 2', amount: 12500, status: 'pending', date: '2024-01-10' },
 ]
 
 const statusFilters = [
@@ -29,12 +31,12 @@ export default function SchoolOrders({ params }: { params: { locale: string } })
   const { buildHref } = useSchool()
 
   const t = {
-    title: isAr ? 'الطلبات' : 'Orders',
-    search: isAr ? 'بحث بالاسم أو رقم الطلب...' : 'Search by name or order ID...',
+    title: isAr ? 'المعاملات' : 'Transactions',
+    search: isAr ? 'بحث بالاسم أو رقم المعاملة...' : 'Search by name or transaction ID...',
     pending: isAr ? 'قيد الانتظار' : 'Pending',
     processing: isAr ? 'قيد التجهيز' : 'Processing',
     completed: isAr ? 'مكتمل' : 'Completed',
-    noOrders: isAr ? 'لا توجد طلبات' : 'No orders found',
+    noOrders: isAr ? 'لا توجد معاملات' : 'No transactions found',
     markReady: isAr ? 'جاهز للتسليم' : 'Mark Ready',
     markComplete: isAr ? 'تم التسليم' : 'Complete',
   }

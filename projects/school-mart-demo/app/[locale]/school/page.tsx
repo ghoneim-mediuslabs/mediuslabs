@@ -1,16 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { Package, ShoppingCart, Users, DollarSign, Banknote, TrendingUp, Clock, Plus, ArrowUpRight } from 'lucide-react'
+import { Package, ShoppingCart, DollarSign, ArrowUpRight } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
 import DemoBanner from '@/components/ui/DemoBanner'
 
 const recentOrders = [
-  { id: '1', parentAr: 'أحمد محمد', parentEn: 'Ahmed Mohamed', itemsAr: '٣ قطع زي مدرسي', itemsEn: '3 Uniform Items', amount: 580, status: 'pending' },
-  { id: '2', parentAr: 'سارة علي', parentEn: 'Sara Ali', itemsAr: 'كتب الفصل الثاني', itemsEn: 'Term 2 Books', amount: 320, status: 'processing' },
-  { id: '3', parentAr: 'محمد حسن', parentEn: 'Mohamed Hassan', itemsAr: 'وجبات أسبوعية', itemsEn: 'Weekly Meals', amount: 150, status: 'completed' },
+  { id: '1', parentAr: 'أحمد محمد', parentEn: 'Ahmed Mohamed', itemsAr: 'رسوم دراسية - الفصل الثاني', itemsEn: 'Tuition - Term 2', amount: 12500, status: 'completed' },
+  { id: '2', parentAr: 'سارة علي', parentEn: 'Sara Ali', itemsAr: '٣ قطع زي مدرسي', itemsEn: '3 Uniform Items', amount: 580, status: 'pending' },
+  { id: '3', parentAr: 'فاطمة أحمد', parentEn: 'Fatma Ahmed', itemsAr: 'رسوم الأنشطة + النقل', itemsEn: 'Activities + Transport Fee', amount: 4500, status: 'completed' },
 ]
 
 const topProducts = [
@@ -31,7 +31,7 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
   const t = {
     welcome: isAr ? 'مرحباً بك في' : 'Welcome to',
     subtitle: isAr ? 'إدارة المنتجات والطلبات والإيرادات' : 'Manage products, orders, and revenue',
-    recentOrders: isAr ? 'أحدث الطلبات' : 'Recent Orders',
+    recentOrders: isAr ? 'أحدث المعاملات' : 'Recent Transactions',
     topProducts: isAr ? 'الأكثر مبيعاً' : 'Top Selling',
     viewAll: isAr ? 'عرض الكل' : 'View All',
     pending: isAr ? 'قيد الانتظار' : 'Pending',
@@ -39,11 +39,8 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
     completed: isAr ? 'مكتمل' : 'Completed',
     sold: isAr ? 'مبيع' : 'sold',
     revenue: isAr ? 'ج.م إيرادات' : 'EGP Revenue',
-    orders: isAr ? 'طلب' : 'Orders',
+    transactions: isAr ? 'معاملة' : 'Transactions',
     products: isAr ? 'منتج' : 'Products',
-    students: isAr ? 'طالب' : 'Students',
-    feesCollected: isAr ? 'تحصيل رسوم' : 'Fees Collected',
-    feeManagement: isAr ? 'إدارة الرسوم' : 'Fee Management',
   }
 
   const getStatusStyle = (status: string) => {
@@ -84,27 +81,22 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
         <p className="text-sm text-gray-500 mt-1">{t.subtitle}</p>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 gap-3 mt-4">
+        <div className="grid grid-cols-3 gap-3 mt-4">
           <div className="flex flex-col items-center rounded-xl bg-emerald-100 p-3">
             <DollarSign className="mb-1 h-5 w-5 text-emerald-600" />
-            <span className="text-lg font-bold text-emerald-600">45.2K</span>
+            <span className="text-lg font-bold text-emerald-600">365K</span>
             <span className="text-xs text-gray-500">{t.revenue}</span>
           </div>
           <div className="flex flex-col items-center rounded-xl bg-blue-100 p-3">
             <ShoppingCart className="mb-1 h-5 w-5 text-blue-600" />
-            <span className="text-lg font-bold text-blue-600">156</span>
-            <span className="text-xs text-gray-500">{t.orders}</span>
+            <span className="text-lg font-bold text-blue-600">312</span>
+            <span className="text-xs text-gray-500">{t.transactions}</span>
           </div>
           <div className="flex flex-col items-center rounded-xl bg-violet-100 p-3">
             <Package className="mb-1 h-5 w-5 text-violet-600" />
             <span className="text-lg font-bold text-violet-600">89</span>
             <span className="text-xs text-gray-500">{t.products}</span>
           </div>
-          <Link href={buildHref(`/${locale}/school/fees`)} className="flex flex-col items-center rounded-xl bg-teal-100 p-3 hover:bg-teal-150 transition-colors">
-            <Banknote className="mb-1 h-5 w-5 text-teal-600" />
-            <span className="text-lg font-bold text-teal-600">85%</span>
-            <span className="text-xs text-gray-500">{t.feesCollected}</span>
-          </Link>
         </div>
       </div>
 

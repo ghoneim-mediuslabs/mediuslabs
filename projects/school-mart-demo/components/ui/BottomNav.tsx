@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, ShoppingCart, Bell, User, Package, Settings, LayoutDashboard, School, BarChart3, Truck } from 'lucide-react'
+import { Home, ShoppingCart, Receipt, Bell, User, Package, Settings, LayoutDashboard, School, BarChart3, Truck } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import type { LucideIcon } from 'lucide-react'
@@ -28,7 +28,7 @@ const navConfigs: Record<string, { items: NavItem[], color: string }> = {
     color: 'text-emerald-600',
     items: [
       { href: '/settings', icon: Settings, labelAr: 'الإعدادات', labelEn: 'Settings' },
-      { href: '/orders', icon: ShoppingCart, labelAr: 'الطلبات', labelEn: 'Orders' },
+      { href: '/orders', icon: Receipt, labelAr: 'المعاملات', labelEn: 'Transactions' },
       { href: '/products', icon: Package, labelAr: 'المنتجات', labelEn: 'Products' },
       { href: '', icon: LayoutDashboard, labelAr: 'الرئيسية', labelEn: 'Dashboard' },
     ]
