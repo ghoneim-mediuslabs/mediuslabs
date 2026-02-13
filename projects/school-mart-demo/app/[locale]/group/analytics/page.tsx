@@ -14,10 +14,11 @@ const periodFilters = [
 ]
 
 const topCategories = [
-  { nameAr: 'الزي المدرسي', nameEn: 'Uniforms', percentage: 45 },
-  { nameAr: 'الكتب والمستلزمات', nameEn: 'Books & Supplies', percentage: 30 },
-  { nameAr: 'الكانتين', nameEn: 'Canteen', percentage: 15 },
-  { nameAr: 'الأنشطة', nameEn: 'Activities', percentage: 10 },
+  { nameAr: 'الرسوم المدرسية', nameEn: 'School Fees', percentage: 40 },
+  { nameAr: 'الزي المدرسي', nameEn: 'Uniforms', percentage: 28 },
+  { nameAr: 'الكتب والمستلزمات', nameEn: 'Books & Supplies', percentage: 17 },
+  { nameAr: 'الكانتين', nameEn: 'Canteen', percentage: 10 },
+  { nameAr: 'الأنشطة', nameEn: 'Activities', percentage: 5 },
 ]
 
 export default function GroupAnalytics({ params }: { params: { locale: string } }) {

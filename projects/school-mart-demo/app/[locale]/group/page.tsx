@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Building2, ShoppingCart, Users, DollarSign, ArrowUpRight, ArrowUp, ArrowDown } from 'lucide-react'
+import { Building2, ShoppingCart, Users, DollarSign, Banknote, ArrowUpRight, ArrowUp, ArrowDown } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool, DemoSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
@@ -60,6 +60,7 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
     totalOrders: isAr ? 'طلب' : 'Orders',
     totalStudents: isAr ? 'طالب' : 'Students',
     schools: isAr ? 'مدرسة' : 'Schools',
+    feesCollected: isAr ? 'رسوم محصلة' : 'Fees Collected',
     students: isAr ? 'طالب' : 'students',
     orders: isAr ? 'طلب' : 'orders',
   }
@@ -70,6 +71,7 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
     revenue: schoolCount * 120000,
     orders: schoolCount * 78,
     students: schoolCount * 620,
+    feesCollected: schoolCount * 850000,
   }
 
   return (
@@ -117,6 +119,13 @@ export default function GroupDashboard({ params }: { params: { locale: string } 
             <span className="text-xs text-gray-500">{t.schools}</span>
           </div>
         </div>
+        <Link href={buildHref(`/${locale}/group/fees`)} className="mt-3 flex items-center justify-between rounded-xl bg-teal-100 p-3 hover:bg-teal-150 transition-colors">
+          <div className="flex items-center gap-2">
+            <Banknote className="h-5 w-5 text-teal-600" />
+            <span className="text-sm font-medium text-teal-700">{t.feesCollected}</span>
+          </div>
+          <span className="text-lg font-bold text-teal-600">{(mockStats.feesCollected / 1000000).toFixed(1)}M {isAr ? 'ج.م' : 'EGP'}</span>
+        </Link>
       </div>
 
       {/* Schools Overview */}

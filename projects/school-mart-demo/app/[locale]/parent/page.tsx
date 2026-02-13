@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { BookOpen, Shirt, UtensilsCrossed, Calendar, Wallet, ShoppingBag } from 'lucide-react'
+import { BookOpen, Shirt, UtensilsCrossed, Calendar, Banknote, Wallet, ShoppingBag } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import { children, schools as mockSchools, wallet, recentActivity } from '@/lib/mock-data'
@@ -14,6 +14,7 @@ const modules = [
   { href: '/parent/uniforms', icon: Shirt, labelAr: 'الزي والمستلزمات', labelEn: 'Uniforms & Supplies', color: 'bg-uniforms', description: { ar: 'زي مدرسي وأدوات', en: 'School uniform & supplies' } },
   { href: '/parent/canteen', icon: UtensilsCrossed, labelAr: 'الكانتين الذكي', labelEn: 'Smart Canteen', color: 'bg-canteen', description: { ar: 'طلب الوجبات مسبقاً', en: 'Pre-order meals' } },
   { href: '/parent/events', icon: Calendar, labelAr: 'الفعاليات والرحلات', labelEn: 'Events & Trips', color: 'bg-events', description: { ar: 'التسجيل والموافقات', en: 'Registration & consent' } },
+  { href: '/parent/fees', icon: Banknote, labelAr: 'الرسوم المدرسية', labelEn: 'School Fees', color: 'bg-fees', description: { ar: 'عرض ودفع الرسوم', en: 'View & pay school fees' } },
 ]
 
 export default function ParentDashboard({ params }: { params: { locale: string } }) {

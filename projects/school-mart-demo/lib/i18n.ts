@@ -67,4 +67,21 @@ export type Translations = {
     free: string
     details: string
   }
+  fees: {
+    title: string
+    totalFees: string
+    paid: string
+    outstanding: string
+    addToCart: string
+    added: string
+    addAllToCart: string
+    paidStatus: string
+    unpaidStatus: string
+    partialStatus: string
+    dueDate: string
+    tuition: string
+    activities: string
+    transport: string
+    other: string
+  }
 }

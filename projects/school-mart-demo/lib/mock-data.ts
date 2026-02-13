@@ -92,6 +92,14 @@ export const events = [
   },
 ]
 
+export const schoolFees = [
+  { id: '1', type: 'tuition' as const, name: 'الرسوم الدراسية - الفصل الثاني', nameEn: 'Tuition - Term 2', amount: 12500, dueDate: '15 يناير', dueDateEn: 'Jan 15', status: 'unpaid' as const, paidAmount: 0 },
+  { id: '2', type: 'activities' as const, name: 'رسوم الأنشطة', nameEn: 'Activities Fee', amount: 1500, dueDate: '1 فبراير', dueDateEn: 'Feb 1', status: 'unpaid' as const, paidAmount: 0 },
+  { id: '3', type: 'transport' as const, name: 'رسوم النقل المدرسي', nameEn: 'School Transport', amount: 3000, dueDate: '15 يناير', dueDateEn: 'Jan 15', status: 'paid' as const, paidAmount: 3000 },
+  { id: '4', type: 'other' as const, name: 'رسوم التأمين الصحي', nameEn: 'Health Insurance Fee', amount: 800, dueDate: '1 مارس', dueDateEn: 'Mar 1', status: 'partial' as const, paidAmount: 400 },
+  { id: '5', type: 'tuition' as const, name: 'الرسوم الدراسية - الفصل الأول', nameEn: 'Tuition - Term 1', amount: 12500, dueDate: '15 سبتمبر', dueDateEn: 'Sep 15', status: 'paid' as const, paidAmount: 12500 },
+]
+
 export const recentActivity = [
   { id: '1', type: 'canteen', description: 'طلب كانتين', descriptionEn: 'Canteen order', amount: -55, date: 'اليوم', dateEn: 'Today' },
   { id: '2', type: 'wallet', description: 'شحن المحفظة', descriptionEn: 'Wallet top-up', amount: 200, date: 'أمس', dateEn: 'Yesterday' },

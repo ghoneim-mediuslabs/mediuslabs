@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Package, ShoppingCart, Users, DollarSign, TrendingUp, Clock, Plus, ArrowUpRight } from 'lucide-react'
+import { Package, ShoppingCart, Users, DollarSign, Banknote, TrendingUp, Clock, Plus, ArrowUpRight } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
@@ -42,6 +42,8 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
     orders: isAr ? 'طلب' : 'Orders',
     products: isAr ? 'منتج' : 'Products',
     students: isAr ? 'طالب' : 'Students',
+    feesCollected: isAr ? 'تحصيل رسوم' : 'Fees Collected',
+    feeManagement: isAr ? 'إدارة الرسوم' : 'Fee Management',
   }
 
   const getStatusStyle = (status: string) => {
@@ -82,7 +84,7 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
         <p className="text-sm text-gray-500 mt-1">{t.subtitle}</p>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-3 gap-3 mt-4">
+        <div className="grid grid-cols-2 gap-3 mt-4">
           <div className="flex flex-col items-center rounded-xl bg-emerald-100 p-3">
             <DollarSign className="mb-1 h-5 w-5 text-emerald-600" />
             <span className="text-lg font-bold text-emerald-600">45.2K</span>
@@ -98,6 +100,11 @@ export default function SchoolDashboard({ params }: { params: { locale: string }
             <span className="text-lg font-bold text-violet-600">89</span>
             <span className="text-xs text-gray-500">{t.products}</span>
           </div>
+          <Link href={buildHref(`/${locale}/school/fees`)} className="flex flex-col items-center rounded-xl bg-teal-100 p-3 hover:bg-teal-150 transition-colors">
+            <Banknote className="mb-1 h-5 w-5 text-teal-600" />
+            <span className="text-lg font-bold text-teal-600">85%</span>
+            <span className="text-xs text-gray-500">{t.feesCollected}</span>
+          </Link>
         </div>
       </div>
 
