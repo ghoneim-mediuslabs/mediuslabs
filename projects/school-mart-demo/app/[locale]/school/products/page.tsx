@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, Banknote, Shirt, BookOpen, UtensilsCrossed, ChevronDown, ChevronUp } from 'lucide-react'
+import Link from 'next/link'
+import { Search, Banknote, Shirt, BookOpen, UtensilsCrossed, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react'
 import type { Locale } from '@/lib/i18n'
 import { useSchool } from '@/lib/school-context'
 import AppHeader from '@/components/ui/AppHeader'
@@ -23,6 +24,7 @@ interface Supplier {
   color: { bg: string; text: string; light: string }
   items: CatalogItem[]
   revenue: number
+  manageHref?: string
 }
 
 const suppliers: Supplier[] = [
@@ -33,6 +35,7 @@ const suppliers: Supplier[] = [
     icon: Banknote,
     color: { bg: 'bg-emerald-600', text: 'text-emerald-600', light: 'bg-emerald-50' },
     revenue: 320000,
+    manageHref: '/school/fees',
     items: [
       { id: 'f1', nameAr: 'الرسوم الدراسية - الفصل الثاني', nameEn: 'Tuition - Term 2', price: 12500, icon: '🎓' },
       { id: 'f2', nameAr: 'رسوم الأنشطة', nameEn: 'Activities Fee', price: 1500, icon: '🏆' },
@@ -95,6 +98,7 @@ export default function SchoolCatalog({ params }: { params: { locale: string } }
     items: isAr ? 'عناصر' : 'items',
     revenue: isAr ? 'ج.م إيرادات' : 'EGP revenue',
     noResults: isAr ? 'لا توجد نتائج' : 'No results found',
+    manage: isAr ? 'إدارة' : 'Manage',
   }
 
   const toggleSupplier = (id: string) => {
@@ -176,6 +180,17 @@ export default function SchoolCatalog({ params }: { params: { locale: string } }
                     <ChevronDown size={18} className="text-gray-400" />
                   )}
                 </button>
+
+                {/* Manage link for school-managed suppliers */}
+                {supplier.manageHref && isExpanded && (
+                  <Link
+                    href={buildHref(`/${locale}${supplier.manageHref}`)}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-50 text-emerald-700 text-sm font-medium hover:bg-emerald-100 transition-colors border-t border-gray-100"
+                  >
+                    <ExternalLink size={14} />
+                    {t.manage}
+                  </Link>
+                )}
 
                 {/* Items */}
                 {isExpanded && (
