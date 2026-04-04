@@ -47,7 +47,7 @@ A mobile platform for school meal ordering in Egypt. Parents order from their sc
 
 ## Links
 
-- [Website](https://medius.co) *(coming soon)*
+- [Website](https://mediuslabs.io) *(coming soon)*
 
 ## License
 
